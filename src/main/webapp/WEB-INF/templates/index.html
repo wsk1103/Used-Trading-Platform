@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${wsk}">?</h1>
+hello world!! this is templates
+<form method="post" action="/login">
+    <input type="text" name="phone"/>
+    <input type="text" name="password"/>
+    <input type="text" name="token" th:value="${wsk}" />
+    <input type="submit" th:value="${wsk}"/>
+</form>
+</body>
+</html>

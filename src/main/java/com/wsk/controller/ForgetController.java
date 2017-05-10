@@ -5,6 +5,7 @@ import com.wsk.service.UserInformationService;
 import com.wsk.service.UserPasswordService;
 import com.wsk.token.TokenProccessor;
 import com.wsk.tool.empty.Empty;
+import com.wsk.tool.encrypt.Encrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,20 +43,15 @@ public class ForgetController {
         } else {
             request.getSession().removeAttribute("checkCodeToken");
         }
-        //获得token，适用与后续
+        //获得token，适用与后续错误操作
         checkCodeToken = TokenProccessor.getInstance().makeToken();
-//        if (!realPhone.equals(phone)) {
-//            model.addAttribute("phone", realPhone);
-//            request.getSession().setAttribute("checkCodeToken",checkCodeToken);
-//            model.addAttribute("token",checkCodeToken);
-//            return "";
-//        }
         //验证码错误
         if (!checkCodePhone(code, request)) {
             //check the phone`s code,and it is false;
             model.addAttribute("phone", realPhone);
             request.getSession().setAttribute("checkCodeToken",checkCodeToken);
             model.addAttribute("token",checkCodeToken);
+            model.addAttribute("error", "验证码错误");
             return "";
         }
         return "";
@@ -77,18 +73,14 @@ public class ForgetController {
         }
         String realPhone = (String) request.getSession().getAttribute("phone");
         updatePasswordToken = TokenProccessor.getInstance().makeToken();
-//        if (!realPhone.equals(phone)) {
-//            request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);
-//            model.addAttribute("token",updatePasswordToken);
-//            model.addAttribute("phone", realPhone);
-//            return "";
-//        }
         UserPassword userPassword = new UserPassword();
+        String newPassword = Encrypt.getMD5(password);
         int uid = userInformationService.selectIdByPhone(realPhone).getId();
         userPassword.setUid(uid);
         userPassword.setModified(new Date());
-        userPassword.setPassword(password);
+        userPassword.setPassword(newPassword);
         int result = userPasswordService.updateByPrimaryKey(userPassword);
+        //更新失败
         if (result != 1) {
             request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);
             model.addAttribute("token",updatePasswordToken);

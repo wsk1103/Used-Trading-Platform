@@ -75,6 +75,13 @@
       <!--<artifactId>slf4j-api</artifactId>-->
       <!--<version>1.7.21</version>-->
     <!--</dependency>-->
+    <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring4 -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring4</artifactId>
+      <version>2.1.4.RELEASE</version>
+    </dependency>
+
     <!--导入dbcp的jar包，用来在applicationContext.xml中配置数据库-->
     <dependency>
       <groupId>commons-dbcp</groupId>

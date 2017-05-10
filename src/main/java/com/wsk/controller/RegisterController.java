@@ -6,6 +6,7 @@ import com.wsk.service.UserInformationService;
 import com.wsk.service.UserPasswordService;
 import com.wsk.token.TokenProccessor;
 import com.wsk.tool.empty.Empty;
+import com.wsk.tool.encrypt.Encrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,10 +61,11 @@ public class RegisterController {
         int result = userInformationService.insertSelective(userInformation);
         //如果用户基本信息写入成功
         if (result == 1) {
+            String newPassword = Encrypt.getMD5(password);
             UserPassword userPassword = new UserPassword();
             userPassword.setModified(new Date());
             userPassword.setUid(userInformation.getId());
-            userPassword.setPassword(password);
+            userPassword.setPassword(newPassword);
             result = userPasswordService.insertSelective(userPassword);
             //密码写入失败
             if (result != 1) {
