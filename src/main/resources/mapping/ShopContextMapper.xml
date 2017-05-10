@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsk.dao.ShopContextMapper" >
+  <resultMap id="BaseResultMap" type="com.wsk.pojo.ShopContext" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+    <result column="display" property="display" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, modified, sid, context, display
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shopcontext
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shopcontext
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wsk.pojo.ShopContext" >
+    insert into shopcontext (id, modified, sid, 
+      context, display)
+    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER}, 
+      #{context,jdbcType=VARCHAR}, #{display,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wsk.pojo.ShopContext" >
+    insert into shopcontext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modified != null" >
+        modified,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+      <if test="display != null" >
+        display,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="display != null" >
+        #{display,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.ShopContext" >
+    update shopcontext
+    <set >
+      <if test="modified != null" >
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="display != null" >
+        display = #{display,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.ShopContext" >
+    update shopcontext
+    set modified = #{modified,jdbcType=TIMESTAMP},
+      sid = #{sid,jdbcType=INTEGER},
+      context = #{context,jdbcType=VARCHAR},
+      display = #{display,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

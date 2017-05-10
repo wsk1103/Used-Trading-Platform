@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsk.dao.UserInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.wsk.pojo.UserInformation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="clazz" property="clazz" jdbcType="VARCHAR" />
+    <result column="sno" property="sno" jdbcType="CHAR" />
+    <result column="dormitory" property="dormitory" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, modified, username, phone, realname, clazz, sno, dormitory, gender, createtime, 
+    avatar
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinformation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectIdByPhone" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    FROM userinformation
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
+  <select id="getAllForeach" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    FROM userinformation
+    where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from userinformation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wsk.pojo.UserInformation" >
+    insert into userinformation (id, modified, username, 
+      phone, realname, clazz, 
+      sno, dormitory, gender, createtime, 
+      avatar)
+    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=CHAR}, #{realname,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR}, 
+      #{sno,jdbcType=CHAR}, #{dormitory,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{avatar,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wsk.pojo.UserInformation" >
+    insert into userinformation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modified != null" >
+        modified,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="clazz != null" >
+        clazz,
+      </if>
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="dormitory != null" >
+        dormitory,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="clazz != null" >
+        #{clazz,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=CHAR},
+      </if>
+      <if test="dormitory != null" >
+        #{dormitory,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.UserInformation" >
+    update userinformation
+    <set >
+      <if test="modified != null" >
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="clazz != null" >
+        clazz = #{clazz,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null" >
+        sno = #{sno,jdbcType=CHAR},
+      </if>
+      <if test="dormitory != null" >
+        dormitory = #{dormitory,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.UserInformation" >
+    update userinformation
+    set modified = #{modified,jdbcType=TIMESTAMP},
+      username = #{username,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      clazz = #{clazz,jdbcType=VARCHAR},
+      sno = #{sno,jdbcType=CHAR},
+      dormitory = #{dormitory,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      avatar = #{avatar,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
