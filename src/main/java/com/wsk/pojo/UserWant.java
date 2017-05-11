@@ -1,9 +1,10 @@
 package com.wsk.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class UserWant {
+public class UserWant implements Serializable {
     private Integer id;
 
     private Date modified;
@@ -29,11 +30,11 @@ public class UserWant {
     }
 
     public Date getModified() {
-        return modified;
+        return (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = modified;
+        this.modified = (Date) modified.clone();
     }
 
     public Integer getDisplay() {

@@ -23,11 +23,13 @@
     <include refid="Base_Column_List" />
     from userinformation
     where id = #{id,jdbcType=INTEGER}
+    limit 1
   </select>
   <select id="selectIdByPhone" resultMap="BaseResultMap" parameterType="java.lang.String">
     select <include refid="Base_Column_List" />
     FROM userinformation
     where phone = #{phone,jdbcType=VARCHAR}
+    limit 1
   </select>
   <select id="getAllForeach" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>

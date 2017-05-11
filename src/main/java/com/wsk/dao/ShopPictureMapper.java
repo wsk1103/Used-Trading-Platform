@@ -2,6 +2,8 @@ package com.wsk.dao;
 
 import com.wsk.pojo.ShopPicture;
 
+import java.util.List;
+
 public interface ShopPictureMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface ShopPictureMapper {
     int updateByPrimaryKeySelective(ShopPicture record);
 
     int updateByPrimaryKey(ShopPicture record);
+
+    List<ShopPicture> selectBySidOnlyOne(int sid);
+
+    List<ShopPicture> selectBySid(int sid);
 }

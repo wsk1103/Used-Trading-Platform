@@ -1,9 +1,10 @@
 package com.wsk.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class UserState {
+public class UserState implements Serializable {
     private Integer id;
 
     private Integer credit;
@@ -39,11 +40,11 @@ public class UserState {
     }
 
     public Date getModified() {
-        return modified;
+        return (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = modified;
+        this.modified = (Date) modified.clone();
     }
 
     public Integer getUid() {

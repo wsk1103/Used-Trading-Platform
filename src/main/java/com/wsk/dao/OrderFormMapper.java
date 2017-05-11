@@ -2,6 +2,8 @@ package com.wsk.dao;
 
 import com.wsk.pojo.OrderForm;
 
+import java.util.List;
+
 public interface OrderFormMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface OrderFormMapper {
     int updateByPrimaryKeySelective(OrderForm record);
 
     int updateByPrimaryKey(OrderForm record);
+
+    int getCounts(int uid);
+
+    List<OrderForm> selectByUid(int uid, int start);
 }

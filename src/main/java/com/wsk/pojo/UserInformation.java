@@ -1,8 +1,9 @@
 package com.wsk.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInformation {
+public class UserInformation  implements Serializable {
     private Integer id;
 
     private Date modified;
@@ -34,11 +35,11 @@ public class UserInformation {
     }
 
     public Date getModified() {
-        return modified;
+        return (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = modified;
+        this.modified = (Date) modified.clone();
     }
 
     public String getUsername() {
@@ -98,11 +99,11 @@ public class UserInformation {
     }
 
     public Date getCreatetime() {
-        return createtime;
+        return (Date) createtime.clone();
     }
 
     public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+        this.createtime = (Date) createtime.clone();
     }
 
     public String getAvatar() {

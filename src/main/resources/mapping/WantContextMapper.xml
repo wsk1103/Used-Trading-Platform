@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wsk.dao.ShopContextMapper" >
-  <resultMap id="BaseResultMap" type="com.wsk.pojo.ShopContext" >
+<mapper namespace="com.wsk.dao.WantContextMapper" >
+  <resultMap id="BaseResultMap" type="com.wsk.pojo.WantContext" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="modified" property="modified" jdbcType="TIMESTAMP" />
-    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="uwid" property="uwid" jdbcType="INTEGER" />
     <result column="context" property="context" jdbcType="VARCHAR" />
     <result column="display" property="display" jdbcType="INTEGER" />
   </resultMap>
   <sql id="all" >
-    id, modified, sid, context, display
+    id, modified, uwid, context, display
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="all" />
-    from shopcontext
+    from wantcontext
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="getCounts" resultMap="java.lang.Integer" parameterMap="java.lang.Integer">
-    select count(id) from shopcontext where sid = #{sid,jdbcType=INTEGER} and display != 0
-  </select>
-  <select id="selectBySid" resultMap="BaseResultMap">
+  <select id="selectByUWid" resultMap="BaseResultMap">
     select
-    <include refid="all" />
-    from shopcontext
-    where sid = #{0} and display =1
+    <include refid="all"/>
+    from wantcontext
+    where uwid = #{0}
     limit #{1},10
   </select>
+  <select id="getCounts" resultMap="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(id)
+    from wantcontext
+    where uwid=#{uwid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from shopcontext
+    delete from wantcontext
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wsk.pojo.ShopContext" >
-    insert into shopcontext (id, modified, sid, 
+  <insert id="insert" parameterType="com.wsk.pojo.WantContext" >
+    insert into wantcontext (id, modified, uwid, 
       context, display)
-    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{uwid,jdbcType=INTEGER}, 
       #{context,jdbcType=VARCHAR}, #{display,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.wsk.pojo.ShopContext" >
-    insert into shopcontext
+  <insert id="insertSelective" parameterType="com.wsk.pojo.WantContext" >
+    insert into wantcontext
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -46,8 +48,8 @@
       <if test="modified != null" >
         modified,
       </if>
-      <if test="sid != null" >
-        sid,
+      <if test="uwid != null" >
+        uwid,
       </if>
       <if test="context != null" >
         context,
@@ -63,8 +65,8 @@
       <if test="modified != null" >
         #{modified,jdbcType=TIMESTAMP},
       </if>
-      <if test="sid != null" >
-        #{sid,jdbcType=INTEGER},
+      <if test="uwid != null" >
+        #{uwid,jdbcType=INTEGER},
       </if>
       <if test="context != null" >
         #{context,jdbcType=VARCHAR},
@@ -74,14 +76,14 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.ShopContext" >
-    update shopcontext
+  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.WantContext" >
+    update wantcontext
     <set >
       <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
       </if>
-      <if test="sid != null" >
-        sid = #{sid,jdbcType=INTEGER},
+      <if test="uwid != null" >
+        uwid = #{uwid,jdbcType=INTEGER},
       </if>
       <if test="context != null" >
         context = #{context,jdbcType=VARCHAR},
@@ -92,10 +94,10 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.ShopContext" >
-    update shopcontext
+  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.WantContext" >
+    update wantcontext
     set modified = #{modified,jdbcType=TIMESTAMP},
-      sid = #{sid,jdbcType=INTEGER},
+      uwid = #{uwid,jdbcType=INTEGER},
       context = #{context,jdbcType=VARCHAR},
       display = #{display,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

@@ -17,6 +17,19 @@
     from shoppicture
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectBySidOnlyOne" resultMap="BaseResultMap" parameterMap="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from shoppicture
+    where sid = #{sid,jdbcType=INTEGER} and display != 0
+    limit 1
+  </select>
+  <select id="selectBySid" resultMap="BaseResultMap" parameterMap="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from shoppicture
+    where sid = #{sid,jdbcType=INTEGER} and display != 0
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shoppicture
     where id = #{id,jdbcType=INTEGER}

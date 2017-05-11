@@ -9,14 +9,20 @@
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="display" property="display" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="all" >
     id, ofid, sid, modified, quantity, display
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+    <include refid="all" />
     from goodsoforderform
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByOFid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="all"/>
+    from goodsoforderform
+    where ofid = #{ofid,jdbcType=INTEGER} and display=1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goodsoforderform

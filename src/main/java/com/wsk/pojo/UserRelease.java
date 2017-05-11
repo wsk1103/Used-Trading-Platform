@@ -1,8 +1,9 @@
 package com.wsk.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserRelease {
+public class UserRelease implements Serializable {
     private Integer id;
 
     private Date modified;
@@ -22,11 +23,11 @@ public class UserRelease {
     }
 
     public Date getModified() {
-        return modified;
+        return (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = modified;
+        this.modified = (Date) modified.clone();
     }
 
     public Integer getDisplay() {

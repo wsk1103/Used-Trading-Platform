@@ -2,6 +2,8 @@ package com.wsk.dao;
 
 import com.wsk.pojo.GoodsCar;
 
+import java.util.List;
+
 public interface GoodsCarMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface GoodsCarMapper {
     int updateByPrimaryKeySelective(GoodsCar record);
 
     int updateByPrimaryKey(GoodsCar record);
+
+    List<GoodsCar> selectBySCid(int scid);
 }

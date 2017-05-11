@@ -14,4 +14,6 @@ public interface SpecificMapper {
     int updateByPrimaryKeySelective(Specific record);
 
     int updateByPrimaryKey(Specific record);
+
+    Specific selectByCid(int cid);
 }

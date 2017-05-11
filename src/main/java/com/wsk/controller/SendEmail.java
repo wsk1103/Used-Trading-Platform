@@ -113,12 +113,12 @@ public class SendEmail {
     // get the random phone`s code
     private void getRandomForCodePhone(HttpServletRequest req) {
         Random random = new Random();
-        String r = "";
+        StringBuffer sb = new StringBuffer();
         for (int i = 0; i < 4; i++) {
-            r += random.nextInt(10);
+            sb.append(random.nextInt(10));
         }
-        System.out.println(r);
-        req.getSession().setAttribute("codePhone", r);
+        System.out.println(sb.toString());
+        req.getSession().setAttribute("codePhone", sb.toString());
     }
 
 //    //检验验证码

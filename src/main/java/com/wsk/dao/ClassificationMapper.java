@@ -14,4 +14,5 @@ public interface ClassificationMapper {
     int updateByPrimaryKeySelective(Classification record);
 
     int updateByPrimaryKey(Classification record);
+
 }

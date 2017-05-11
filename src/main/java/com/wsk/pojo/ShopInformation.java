@@ -1,9 +1,10 @@
 package com.wsk.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ShopInformation {
+public class ShopInformation implements Serializable {
     private Integer id;
 
     private Date modified;
@@ -16,13 +17,15 @@ public class ShopInformation {
 
     private BigDecimal price;
 
-    private String sort;
+    private Integer sort;
 
     private Integer display;
 
     private Integer quantity;
 
     private Integer transaction;
+
+    private Integer uid;
 
     public Integer getId() {
         return id;
@@ -33,11 +36,11 @@ public class ShopInformation {
     }
 
     public Date getModified() {
-        return modified;
+        return (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = modified;
+        this.modified = (Date) modified.clone();
     }
 
     public String getName() {
@@ -72,12 +75,12 @@ public class ShopInformation {
         this.price = price;
     }
 
-    public String getSort() {
+    public Integer getSort() {
         return sort;
     }
 
-    public void setSort(String sort) {
-        this.sort = sort == null ? null : sort.trim();
+    public void setSort(Integer sort) {
+        this.sort = sort ;
     }
 
     public Integer getDisplay() {
@@ -102,5 +105,13 @@ public class ShopInformation {
 
     public void setTransaction(Integer transaction) {
         this.transaction = transaction;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 }

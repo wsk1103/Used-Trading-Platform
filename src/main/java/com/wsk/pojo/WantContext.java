@@ -3,14 +3,14 @@ package com.wsk.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserCollection implements Serializable {
+public class WantContext implements Serializable{
     private Integer id;
 
     private Date modified;
 
-    private Integer uid;
+    private Integer uwid;
 
-    private Integer sid;
+    private String context;
 
     private Integer display;
 
@@ -30,20 +30,20 @@ public class UserCollection implements Serializable {
         this.modified = (Date) modified.clone();
     }
 
-    public Integer getUid() {
-        return uid;
+    public Integer getUwid() {
+        return uwid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUwid(Integer uwid) {
+        this.uwid = uwid;
     }
 
-    public Integer getSid() {
-        return sid;
+    public String getContext() {
+        return context;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setContext(String context) {
+        this.context = context == null ? null : context.trim();
     }
 
     public Integer getDisplay() {

@@ -1,8 +1,9 @@
 package com.wsk.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AllKinds {
+public class AllKinds implements Serializable {
     private Integer id;
 
     private String name;
@@ -26,10 +27,10 @@ public class AllKinds {
     }
 
     public Date getModified() {
-        return modified;
+        return (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = modified;
+        this.modified = (Date) modified.clone();
     }
 }

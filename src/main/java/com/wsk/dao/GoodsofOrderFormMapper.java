@@ -2,6 +2,8 @@ package com.wsk.dao;
 
 import com.wsk.pojo.GoodsofOrderForm;
 
+import java.util.List;
+
 public interface GoodsofOrderFormMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface GoodsofOrderFormMapper {
     int updateByPrimaryKeySelective(GoodsofOrderForm record);
 
     int updateByPrimaryKey(GoodsofOrderForm record);
+
+    List<GoodsofOrderForm> selectByOFid(int ofid);
 }

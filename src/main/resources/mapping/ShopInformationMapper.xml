@@ -8,19 +8,39 @@
     <result column="level" property="level" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="sort" property="sort" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="display" property="display" jdbcType="INTEGER" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="transaction" property="transaction" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, modified, name, level, remark, price, sort, display, quantity, transaction
+  <sql id="all" >
+    id, modified, name, level, remark, price, sort, display, quantity, transaction,uid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+    <include refid="all" />
     from shopinformation
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectTen" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="all" />
+    FROM shopinformation
+    where display = 1
+    limit #{start,jdbcType=INTEGER} , 10
+  </select>
+  <select id="selectOffShelf" resultMap="BaseResultMap">
+    select
+    <include refid="all" />
+    from shopinformation
+    where uid = #{0} and display = 0
+    limit #{1},10
+  </select>
+  <select id="getCountsOfShelf" resultMap="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(id)
+    from shopinformation
+    where uid = #{uid,jdbcType=INTEGER} and display =0
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shopinformation
@@ -33,7 +53,7 @@
       transaction)
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, 
       #{level,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{sort,jdbcType=VARCHAR}, #{display,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{display,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER},
       #{transaction,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.ShopInformation" >
@@ -90,7 +110,7 @@
         #{price,jdbcType=DECIMAL},
       </if>
       <if test="sort != null" >
-        #{sort,jdbcType=VARCHAR},
+        #{sort,jdbcType=INTEGER},
       </if>
       <if test="display != null" >
         #{display,jdbcType=INTEGER},
@@ -122,7 +142,7 @@
         price = #{price,jdbcType=DECIMAL},
       </if>
       <if test="sort != null" >
-        sort = #{sort,jdbcType=VARCHAR},
+        sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="display != null" >
         display = #{display,jdbcType=INTEGER},
@@ -143,7 +163,7 @@
       level = #{level,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
-      sort = #{sort,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
       display = #{display,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
       transaction = #{transaction,jdbcType=INTEGER}

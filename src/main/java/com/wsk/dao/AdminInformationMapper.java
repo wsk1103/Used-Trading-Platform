@@ -14,4 +14,6 @@ public interface AdminInformationMapper {
     int updateByPrimaryKeySelective(AdminInformation record);
 
     int updateByPrimaryKey(AdminInformation record);
+
+    AdminInformation selectByNo(int ano);
 }

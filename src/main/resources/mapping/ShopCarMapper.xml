@@ -7,14 +7,27 @@
     <result column="display" property="display" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="all" >
     id, modified, display, uid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+    <include refid="all" />
     from shopcar
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getCounts" resultMap="java.lang.Integer" parameterType="java.lang.Integer">
+    select
+    count(id)
+    from shopcar
+    where uid = #{uid,jdbcType=INTEGER} and display = 1
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap">
+    SELECT
+    <include refid="all"/>
+    from shopcar
+    where uid = #{0} and display = 1
+    limit #{1},10
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shopcar

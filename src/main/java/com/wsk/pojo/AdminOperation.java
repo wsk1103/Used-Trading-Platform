@@ -1,8 +1,9 @@
 package com.wsk.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AdminOperation {
+public class AdminOperation implements Serializable{
     private Integer id;
 
     private Integer aid;
@@ -28,11 +29,11 @@ public class AdminOperation {
     }
 
     public Date getModified() {
-        return modified;
+        return (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = modified;
+        this.modified = (Date) modified.clone();
     }
 
     public String getOperation() {
