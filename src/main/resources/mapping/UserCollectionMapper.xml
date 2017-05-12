@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsk.dao.UserCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.wsk.pojo.UserCollection" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="display" property="display" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="all" >
+    id, modified, uid, sid, display
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="all" />
+    from usercollection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getCounts" resultType="java.lang.Integer">
+    select
+    count(id)
+    from usercollection
+    where uid = #{uid} and display =1
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap">
+    SELECT
+    <include refid="all" />
+    from usercollection
+    where uid =#{0} and display =1
+    limit #{1},10
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from usercollection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wsk.pojo.UserCollection" >
+    insert into usercollection (id, modified, uid, 
+      sid, display)
+    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}, 
+      #{sid,jdbcType=INTEGER}, #{display,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wsk.pojo.UserCollection" >
+    insert into usercollection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modified != null" >
+        modified,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="display != null" >
+        display,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        #{display,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.UserCollection" >
+    update usercollection
+    <set >
+      <if test="modified != null" >
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        display = #{display,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.UserCollection" >
+    update usercollection
+    set modified = #{modified,jdbcType=TIMESTAMP},
+      uid = #{uid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      display = #{display,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
