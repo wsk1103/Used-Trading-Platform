@@ -23,24 +23,29 @@
     from shopinformation
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectTen" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectTen" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="all" />
     FROM shopinformation
-    where display = 1
+    where display = 1 order by id desc
     limit #{start,jdbcType=INTEGER} , 10
   </select>
   <select id="selectOffShelf" resultMap="BaseResultMap">
     select
     <include refid="all" />
     from shopinformation
-    where uid = #{0} and display = 0
+    where uid = #{0} and display = 0 order by id desc
     limit #{1},10
   </select>
-  <select id="getCountsOfShelf" resultMap="java.lang.Integer" parameterType="java.lang.Integer">
+  <select id="getCountsOfShelf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     select count(id)
     from shopinformation
     where uid = #{uid,jdbcType=INTEGER} and display =0
+  </select>
+  <select id="getCounts" resultType="java.lang.Integer">
+    select count(id)
+    from shopinformation
+    where display =1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shopinformation

@@ -1,10 +1,13 @@
-package com.wsk.dao;
+package com.wsk.service;
 
 import com.wsk.pojo.ShopPicture;
 
 import java.util.List;
 
-public interface ShopPictureMapper {
+/**
+ * Created by wsk1103 on 2017/5/12.
+ */
+public interface ShopPictureService {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ShopPicture record);

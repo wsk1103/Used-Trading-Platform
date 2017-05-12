@@ -1,10 +1,13 @@
-package com.wsk.dao;
+package com.wsk.service;
 
 import com.wsk.pojo.ShopInformation;
 
 import java.util.List;
 
-public interface ShopInformationMapper {
+/**
+ * Created by wsk1103 on 2017/5/12.
+ */
+public interface ShopInformationService {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ShopInformation record);

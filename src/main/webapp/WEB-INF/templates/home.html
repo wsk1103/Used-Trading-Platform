@@ -1,0 +1,37 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>home</title>
+</head>
+<style>
+    td {
+        width: 100px;
+        border:1px solid black;
+    }
+</style>
+<body>
+<table>
+    <tr>
+        <td>id</td>
+        <td>名称</td>
+        <td>成色</td>
+        <td>备注</td>
+        <td>价格</td>
+        <td>分类</td>
+        <td>数量</td>
+        <td>交易方式</td>
+    </tr>
+    <tr th:each="shopInformation:${shopInformations}">
+        <td th:text="${shopInformation.id}" ></td>
+        <td th:text="${shopInformation.name}" ></td>
+        <td th:text="${shopInformation.level}" ></td>
+        <td th:text="${shopInformation.remark}" ></td>
+        <td th:text="${shopInformation.price}" ></td>
+        <td th:text="${shopInformation.sort}" ></td>
+        <td th:text="${shopInformation.quantity}" ></td>
+        <td th:text="${shopInformation.transaction}" ></td>
+    </tr>
+</table>
+</body>
+</html>

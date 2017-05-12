@@ -16,7 +16,7 @@
     from shopcar
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="getCounts" resultMap="java.lang.Integer" parameterType="java.lang.Integer">
+  <select id="getCounts" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     select
     count(id)
     from shopcar

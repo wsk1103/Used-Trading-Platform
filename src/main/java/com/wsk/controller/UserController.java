@@ -43,7 +43,7 @@ public class UserController {
     }
 
     //验证登录
-    @RequestMapping(value = "login",method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(HttpServletRequest request, Model model,
                         @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
         String loginToken = (String) request.getSession().getAttribute("loginToken");
@@ -65,7 +65,7 @@ public class UserController {
     }
 
     //判断该手机号码及其密码是否一一对应
-    private boolean getId(String phone,String password,HttpServletRequest request) {
+    private boolean getId(String phone, String password, HttpServletRequest request) {
         UserInformation userInformation = userInformationService.selectIdByPhone(phone);
         if (Empty.isNullOrEmpty(userInformation)) {
             return false;
@@ -75,7 +75,7 @@ public class UserController {
             return false;
         }
         //如果密码账号对应正确，将userInformation存储到session中
-        request.getSession().setAttribute("userInformation",userInformation);
+        request.getSession().setAttribute("userInformation", userInformation);
         return true;
     }
 }

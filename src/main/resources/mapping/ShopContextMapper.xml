@@ -12,13 +12,16 @@
     id, modified, sid, context, display
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="all" />
     from shopcontext
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="getCounts" resultMap="java.lang.Integer" parameterMap="java.lang.Integer">
-    select count(id) from shopcontext where sid = #{sid,jdbcType=INTEGER} and display != 0
+  <select id="getCounts" resultType="java.lang.Integer">
+    select
+    count(id)
+    from shopcontext
+    where sid = #{sid} and display = 1
   </select>
   <select id="selectBySid" resultMap="BaseResultMap">
     select
@@ -32,9 +35,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.ShopContext" >
-    insert into shopcontext (id, modified, sid, 
+    insert into shopcontext (id, modified, sid,
       context, display)
-    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER},
       #{context,jdbcType=VARCHAR}, #{display,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.ShopContext" >
