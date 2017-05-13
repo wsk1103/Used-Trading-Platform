@@ -23,12 +23,12 @@ public class ShopInformationServiceImpl implements ShopInformationService{
 
     @Override
     public int insert(ShopInformation record) {
-        return 0;
+        return shopInformationMapper.insert(record);
     }
 
     @Override
     public int insertSelective(ShopInformation record) {
-        return 0;
+        return shopInformationMapper.insertSelective(record);
     }
 
     @Override
@@ -38,12 +38,12 @@ public class ShopInformationServiceImpl implements ShopInformationService{
 
     @Override
     public int updateByPrimaryKeySelective(ShopInformation record) {
-        return 0;
+        return shopInformationMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(ShopInformation record) {
-        return 0;
+        return shopInformationMapper.updateByPrimaryKey(record);
     }
 
     @Override
@@ -53,12 +53,12 @@ public class ShopInformationServiceImpl implements ShopInformationService{
 
     @Override
     public List<ShopInformation> selectOffShelf(Integer uid, Integer start) {
-        return null;
+        return shopInformationMapper.selectOffShelf(uid,start);
     }
 
     @Override
     public int getCountsOffShelf(Integer uid) {
-        return 0;
+        return shopInformationMapper.getCountsOffShelf(uid);
     }
 
     @Override

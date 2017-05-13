@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wsk.dao.GoodsofOrderFormMapper" >
-  <resultMap id="BaseResultMap" type="com.wsk.pojo.GoodsofOrderForm" >
+<mapper namespace="com.wsk.dao.GoodsOfOrderFormMapper" >
+  <resultMap id="BaseResultMap" type="com.wsk.pojo.GoodsOfOrderForm" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="ofid" property="ofid" jdbcType="INTEGER" />
     <result column="sid" property="sid" jdbcType="INTEGER" />
@@ -28,7 +28,7 @@
     delete from goodsoforderform
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wsk.pojo.GoodsofOrderForm" >
+  <insert id="insert" parameterType="com.wsk.pojo.GoodsOfOrderForm" >
     insert into goodsoforderform (id, ofid, sid, 
       modified, quantity, display
       )
@@ -36,7 +36,7 @@
       #{modified,jdbcType=TIMESTAMP}, #{quantity,jdbcType=INTEGER}, #{display,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.wsk.pojo.GoodsofOrderForm" >
+  <insert id="insertSelective" parameterType="com.wsk.pojo.GoodsOfOrderForm" >
     insert into goodsoforderform
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -79,7 +79,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.GoodsofOrderForm" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.GoodsOfOrderForm" >
     update goodsoforderform
     <set >
       <if test="ofid != null" >
@@ -100,7 +100,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.GoodsofOrderForm" >
+  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.GoodsOfOrderForm" >
     update goodsoforderform
     set ofid = #{ofid,jdbcType=INTEGER},
       sid = #{sid,jdbcType=INTEGER},

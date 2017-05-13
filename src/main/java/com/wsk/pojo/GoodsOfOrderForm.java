@@ -3,7 +3,7 @@ package com.wsk.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class GoodsofOrderForm implements Serializable {
+public class GoodsOfOrderForm implements Serializable {
     private Integer id;
 
     private Integer ofid;

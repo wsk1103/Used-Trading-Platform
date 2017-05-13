@@ -22,27 +22,27 @@ public class ShopPictureServiceImpl implements ShopPictureService {
 
     @Override
     public int insert(ShopPicture record) {
-        return 0;
+        return shopPictureMapper.insert(record);
     }
 
     @Override
     public int insertSelective(ShopPicture record) {
-        return 0;
+        return shopPictureMapper.insertSelective(record);
     }
 
     @Override
     public ShopPicture selectByPrimaryKey(Integer id) {
-        return null;
+        return shopPictureMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public int updateByPrimaryKeySelective(ShopPicture record) {
-        return 0;
+        return shopPictureMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(ShopPicture record) {
-        return 0;
+        return shopPictureMapper.updateByPrimaryKey(record);
     }
 
     @Override

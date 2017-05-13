@@ -1,10 +1,13 @@
-package com.wsk.dao;
+package com.wsk.service;
 
 import com.wsk.pojo.Classification;
 
 import java.util.List;
 
-public interface ClassificationMapper {
+/**
+ * Created by wsk1103 on 2017/5/13.
+ */
+public interface ClassificationService {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Classification record);
@@ -16,5 +19,6 @@ public interface ClassificationMapper {
     int updateByPrimaryKeySelective(Classification record);
 
     int updateByPrimaryKey(Classification record);
+
     List<Classification> selectByAid(int aid);
 }

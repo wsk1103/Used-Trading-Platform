@@ -6,14 +6,19 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="modified" property="modified" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="all" >
     id, name, modified
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+    <include refid="all" />
     from allkinds
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="all" />
+    from allkinds
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from allkinds

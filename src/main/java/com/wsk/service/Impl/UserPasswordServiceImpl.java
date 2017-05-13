@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 @Service("userPasswordService")
 public class UserPasswordServiceImpl implements UserPasswordService{
     @Resource
+    private
     UserPasswordMapper userPasswordMapper;
 
     @Override
@@ -22,27 +23,27 @@ public class UserPasswordServiceImpl implements UserPasswordService{
 
     @Override
     public int insert(UserPassword record) {
-        return 0;
+        return userPasswordMapper.insert(record);
     }
 
     @Override
     public int insertSelective(UserPassword record) {
-        return 0;
+        return userPasswordMapper.insertSelective(record);
     }
 
     @Override
     public UserPassword selectByPrimaryKey(Integer id) {
-        return null;
+        return userPasswordMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public int updateByPrimaryKeySelective(UserPassword record) {
-        return 0;
+        return userPasswordMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(UserPassword record) {
-        return 0;
+        return userPasswordMapper.updateByPrimaryKey(record);
     }
 
     @Override

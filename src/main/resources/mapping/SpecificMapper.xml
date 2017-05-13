@@ -13,28 +13,27 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="all" />
-    from specific
+    from specifickinds
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByCid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="all"/>
-    from specific
+    from specifickinds
     where cid=#{cid,jdbcType=INTEGER}
-    limit 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from specific
+    delete from specifickinds
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.Specific" >
-    insert into specific (id, name, modified, 
+    insert into specifickinds (id, name, modified,
       cid)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{modified,jdbcType=TIMESTAMP}, 
       #{cid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.Specific" >
-    insert into specific
+    insert into specifickinds
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -65,7 +64,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.Specific" >
-    update specific
+    update specifickinds
     <set >
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -80,7 +79,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.Specific" >
-    update specific
+    update specifickinds
     set name = #{name,jdbcType=VARCHAR},
       modified = #{modified,jdbcType=TIMESTAMP},
       cid = #{cid,jdbcType=INTEGER}
