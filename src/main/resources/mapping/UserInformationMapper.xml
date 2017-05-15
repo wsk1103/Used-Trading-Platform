@@ -14,25 +14,25 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="all" >
     id, modified, username, phone, realname, clazz, sno, dormitory, gender, createtime, 
     avatar
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+    <include refid="all" />
     from userinformation
     where id = #{id,jdbcType=INTEGER}
     limit 1
   </select>
-  <select id="selectIdByPhone" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select <include refid="Base_Column_List" />
+  <select id="selectIdByPhone" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select id
     FROM userinformation
     where phone = #{phone,jdbcType=VARCHAR}
     limit 1
   </select>
   <select id="getAllForeach" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"/>
+    select <include refid="all"/>
     FROM userinformation
     where id in
     <foreach collection="list" index="index" item="item" open="(" separator="," close=")">

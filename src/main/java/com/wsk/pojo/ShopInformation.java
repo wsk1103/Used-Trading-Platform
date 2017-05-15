@@ -27,6 +27,10 @@ public class ShopInformation implements Serializable {
 
     private Integer uid;
 
+    private String image;
+
+    private Integer sales;
+
     public Integer getId() {
         return id;
     }
@@ -36,11 +40,11 @@ public class ShopInformation implements Serializable {
     }
 
     public Date getModified() {
-        return (Date) modified.clone();
+        return modified == null ? null : (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = (Date) modified.clone();
+        this.modified = modified == null ? null : (Date) modified.clone();
     }
 
     public String getName() {
@@ -113,5 +117,21 @@ public class ShopInformation implements Serializable {
 
     public void setUid(Integer uid) {
         this.uid = uid;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Integer getSales() {
+        return sales;
+    }
+
+    public void setSales(Integer sales) {
+        this.sales = sales;
     }
 }

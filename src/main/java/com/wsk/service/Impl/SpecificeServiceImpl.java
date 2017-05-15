@@ -6,6 +6,7 @@ import com.wsk.service.SpecificeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wsk1103 on 2017/5/13.
@@ -46,7 +47,7 @@ public class SpecificeServiceImpl implements SpecificeService {
     }
 
     @Override
-    public Specific selectByCid(int cid) {
+    public List<Specific> selectByCid(int cid) {
         return specificMapper.selectByCid(cid);
     }
 }

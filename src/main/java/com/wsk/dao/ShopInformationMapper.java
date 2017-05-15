@@ -24,4 +24,8 @@ public interface ShopInformationMapper {
     int getCountsOffShelf(Integer uid);
 
     int getCounts();
+
+    int selectIdByImage(String image);
+
+    List<ShopInformation> selectByName(String name);
 }

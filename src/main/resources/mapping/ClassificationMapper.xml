@@ -21,7 +21,6 @@
     <include refid="all"/>
     from classification
     where aid = #{aid,jdbcType=INTEGER}
-
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from classification

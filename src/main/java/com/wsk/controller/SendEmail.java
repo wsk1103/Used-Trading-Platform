@@ -130,7 +130,8 @@ public class SendEmail {
 
     //To determine whether the user's mobile phone number exists
     private boolean isUserPhoneExists(String phone) {
-        UserInformation userInformation = userInformationService.selectIdByPhone(phone);
+        int id = userInformationService.selectIdByPhone(phone);
+        UserInformation userInformation = userInformationService.selectByPrimaryKey(id);
 
         if (Empty.isNullOrEmpty(userInformation)) {
             return false;

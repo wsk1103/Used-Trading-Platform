@@ -47,22 +47,32 @@ public class ShopInformationServiceImpl implements ShopInformationService{
     }
 
     @Override
-    public List<ShopInformation> selectTen(Integer start) {
+    public List<ShopInformation> selectTen(int start) {
         return shopInformationMapper.selectTen(start);
     }
 
     @Override
-    public List<ShopInformation> selectOffShelf(Integer uid, Integer start) {
+    public List<ShopInformation> selectOffShelf(int uid, int start) {
         return shopInformationMapper.selectOffShelf(uid,start);
     }
 
     @Override
-    public int getCountsOffShelf(Integer uid) {
+    public int getCountsOffShelf(int uid) {
         return shopInformationMapper.getCountsOffShelf(uid);
     }
 
     @Override
     public int getCounts() {
         return shopInformationMapper.getCounts();
+    }
+
+    @Override
+    public int selectIdByImage(String image) {
+        return shopInformationMapper.selectIdByImage(image);
+    }
+
+    @Override
+    public List<ShopInformation> selectByName(String name){
+        return shopInformationMapper.selectByName(name);
     }
 }

@@ -12,18 +12,21 @@
     <result column="display" property="display" jdbcType="INTEGER" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="transaction" property="transaction" jdbcType="INTEGER" />
+    <result column="sales" property="sales" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="all" >
-    id, modified, name, level, remark, price, sort, display, quantity, transaction,uid
+    id, modified, name, level, remark, price, sort, display, quantity, transaction, sales,
+    uid, image
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
     select 
     <include refid="all" />
     from shopinformation
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectTen" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  <select id="selectTen" resultMap="BaseResultMap" >
     select
     <include refid="all" />
     FROM shopinformation
@@ -37,7 +40,7 @@
     where uid = #{0} and display = 0 order by id desc
     limit #{1},10
   </select>
-  <select id="getCountsOfShelf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+  <select id="getCountsOfShelf" resultType="java.lang.Integer" >
     select count(id)
     from shopinformation
     where uid = #{uid,jdbcType=INTEGER} and display =0
@@ -47,6 +50,18 @@
     from shopinformation
     where display =1
   </select>
+  <select id="selectIdByImage" resultType="java.lang.Integer">
+    select id
+    from shopinformation
+    where image = #{image,jdbcType=VARCHAR}
+    limit 1
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="all" />
+    from shopinformation
+    where name LIKE CONCAT('%',#{name},'%')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shopinformation
     where id = #{id,jdbcType=INTEGER}
@@ -55,11 +70,13 @@
     insert into shopinformation (id, modified, name, 
       level, remark, price, 
       sort, display, quantity, 
-      transaction)
-    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, 
-      #{level,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      transaction, sales, uid,
+      image)
+    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR},
+      #{level,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
       #{sort,jdbcType=INTEGER}, #{display,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER},
-      #{transaction,jdbcType=INTEGER})
+      #{transaction,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},
+      #{image,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.ShopInformation" >
     insert into shopinformation
@@ -94,6 +111,15 @@
       <if test="transaction != null" >
         transaction,
       </if>
+      <if test="sales != null" >
+        sales,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -125,6 +151,15 @@
       </if>
       <if test="transaction != null" >
         #{transaction,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -158,6 +193,15 @@
       <if test="transaction != null" >
         transaction = #{transaction,jdbcType=INTEGER},
       </if>
+      <if test="sales != null" >
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -171,7 +215,10 @@
       sort = #{sort,jdbcType=INTEGER},
       display = #{display,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
-      transaction = #{transaction,jdbcType=INTEGER}
+      transaction = #{transaction,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

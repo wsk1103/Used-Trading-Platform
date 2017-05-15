@@ -46,7 +46,7 @@ public class RegisterController {
         }
         insertUserToken = TokenProccessor.getInstance().makeToken();
         //该手机号码已经存在
-        if (!Empty.isNullOrEmpty(userInformationService.selectIdByPhone(realPhone).getPhone())) {
+        if (!Empty.isNullOrEmpty(userInformationService.selectIdByPhone(realPhone))) {
             model.addAttribute("token", insertUserToken);
             model.addAttribute("phone", realPhone);
             return "";
@@ -61,6 +61,7 @@ public class RegisterController {
         int result = userInformationService.insertSelective(userInformation);
         //如果用户基本信息写入成功
         if (result == 1) {
+            int uid = userInformationService.selectIdByPhone(realPhone);
             String newPassword = Encrypt.getMD5(password);
             UserPassword userPassword = new UserPassword();
             userPassword.setModified(new Date());
@@ -69,6 +70,7 @@ public class RegisterController {
             result = userPasswordService.insertSelective(userPassword);
             //密码写入失败
             if (result != 1) {
+                userInformationService.deleteByPrimaryKey(userInformation.getId());
                 model.addAttribute("token", insertUserToken);
                 model.addAttribute("phone", realPhone);
                 return "";

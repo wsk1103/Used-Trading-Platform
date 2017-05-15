@@ -2,6 +2,8 @@ package com.wsk.dao;
 
 import com.wsk.pojo.Specific;
 
+import java.util.List;
+
 public interface SpecificMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -15,5 +17,5 @@ public interface SpecificMapper {
 
     int updateByPrimaryKey(Specific record);
 
-    Specific selectByCid(int cid);
+    List<Specific> selectByCid(int cid);
 }

@@ -1,7 +1,6 @@
 package com.wsk.service.Impl;
 
 import com.wsk.dao.UserWantMapper;
-import com.wsk.pojo.UserRelease;
 import com.wsk.pojo.UserWant;
 import com.wsk.service.UserWantService;
 import org.springframework.stereotype.Service;
@@ -53,7 +52,7 @@ public class UserWantServiceImpl implements UserWantService {
     }
 
     @Override
-    public List<UserRelease> selectByUid(int uid, int start) {
+    public List<UserWant> selectByUid(int uid, int start) {
         return userWantMapper.selectByUid(uid, start);
     }
 }

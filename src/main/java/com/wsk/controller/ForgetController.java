@@ -75,7 +75,7 @@ public class ForgetController {
         updatePasswordToken = TokenProccessor.getInstance().makeToken();
         UserPassword userPassword = new UserPassword();
         String newPassword = Encrypt.getMD5(password);
-        int uid = userInformationService.selectIdByPhone(realPhone).getId();
+        int uid = userInformationService.selectIdByPhone(realPhone);
         userPassword.setUid(uid);
         userPassword.setModified(new Date());
         userPassword.setPassword(newPassword);

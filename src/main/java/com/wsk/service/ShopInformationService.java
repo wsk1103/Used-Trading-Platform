@@ -20,11 +20,15 @@ public interface ShopInformationService {
 
     int updateByPrimaryKey(ShopInformation record);
 
-    List<ShopInformation> selectTen(Integer start);
+    List<ShopInformation> selectTen(int start);
 
-    List<ShopInformation> selectOffShelf(Integer uid, Integer start);
+    List<ShopInformation> selectOffShelf(int uid, int start);
 
-    int getCountsOffShelf(Integer uid);
+    int getCountsOffShelf(int uid);
 
     int getCounts();
+
+    int selectIdByImage(String image);
+
+    List<ShopInformation> selectByName(String name);
 }

@@ -6,6 +6,9 @@ import com.wsk.tool.empty.Empty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -63,12 +66,27 @@ public class HomeController {
                 request.getSession().setAttribute("sort" + sort, stringBuffer.toString());
 //                model.addAttribute("shopPicture" + sid, shopPicture);
 //                model.addAttribute("sort" + sort, stringBuffer.toString());
+                model.addAttribute("allKinds", getAllKinds());
+                model.addAttribute("classification", getClassificationByAid(1));
+                model.addAttribute("specific", getSpecificByCid(1));
             }
 //            model.addAttribute("shopInformation", shopInformation);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "home";
+    }
+    @RequestMapping(value = "/getClassification",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Classification> getClassificationByAid(@RequestParam int id){
+        List<Classification> list = selectAllClassification(id);
+        return list;
+    }
+
+    @RequestMapping(value = "/getSpecific")
+    @ResponseBody
+    public List<Specific> getSpecificByCid(@RequestParam int id) {
+        return selectAllSpecific(id);
     }
 
     //获取商品，分页,一次性获取10个
@@ -90,6 +108,20 @@ public class HomeController {
     //获得第一层分类
     private AllKinds selectAllKindsByAid(int aid) {
         return allKindsService.selectByPrimaryKey(aid);
+    }
+
+    //获得第一层所有
+    private List<AllKinds> getAllKinds(){
+        return allKindsService.selectAll();
+    }
+
+    //根据第一层的id获取该层下的第二层
+    private List<Classification> selectAllClassification(int aid){
+        return classificationService.selectByAid(aid);
+    }
+    //根据第二层的id获取其对应的第三层所有id
+    private List<Specific> selectAllSpecific(int cid){
+        return specificeService.selectByCid(cid);
     }
 
     //获得商品总页数

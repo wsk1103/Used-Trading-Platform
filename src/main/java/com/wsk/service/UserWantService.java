@@ -1,6 +1,5 @@
 package com.wsk.service;
 
-import com.wsk.pojo.UserRelease;
 import com.wsk.pojo.UserWant;
 
 import java.util.List;
@@ -23,5 +22,5 @@ public interface UserWantService {
 
     int getCounts(int uid);
 
-    List<UserRelease> selectByUid(int uid, int start);
+    List<UserWant> selectByUid(int uid, int start);
 }

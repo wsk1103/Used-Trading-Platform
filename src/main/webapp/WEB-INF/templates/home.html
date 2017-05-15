@@ -4,10 +4,11 @@
     <meta charset="UTF-8"/>
     <title>home</title>
 </head>
+<script src="js/jquery-3.0.0.min.js"></script>
 <style>
     td {
         width: 100px;
-        border:1px solid black;
+        border: 1px solid black;
     }
 </style>
 <body>
@@ -24,22 +25,32 @@
         <td>交易方式</td>
     </tr>
     <tr th:each="shopInformation:${shopInformations}">
-        <td th:text="${shopInformation.id}" ></td>
-        <td th:text="${shopInformation.name}" ></td>
-        <td th:text="${shopInformation.level}" ></td>
-        <td th:text="${shopInformation.remark}" ></td>
-        <td th:text="${shopInformation.price}" ></td>
-        <td th:with="sort='sort'+${shopInformation.sort}" th:text="${#httpServletRequest.getSession().getAttribute(sort)}" ></td>
-        <td th:text="${shopInformation.quantity}" ></td>
-        <td  th:with="shopPicture='shopPicture'+${shopInformation.id}">
-            <img th:src="${#httpServletRequest.getSession().getAttribute(shopPicture)}" alt="can`t show!!!" style="width: 80%"/>
+        <td th:text="${shopInformation.id}"></td>
+        <td th:text="${shopInformation.name}"></td>
+        <td th:text="${shopInformation.level}"></td>
+        <td th:text="${shopInformation.remark}"></td>
+        <td th:text="${shopInformation.price}"></td>
+        <td th:with="sort='sort'+${shopInformation.sort}"
+            th:text="${#httpServletRequest.getSession().getAttribute(sort)}"></td>
+        <td th:text="${shopInformation.quantity}"></td>
+        <td th:with="shopPicture='shopPicture'+${shopInformation.id}">
+            <img th:src="${#httpServletRequest.getSession().getAttribute(shopPicture)}" alt="can`t show!!!"
+                 style="width: 80%"/>
         </td>
-        <td th:if="${shopInformation.transaction eq 1}" >在线</td>
-        <td th:if="${shopInformation.transaction eq 0}" >线下</td>
+        <td th:if="${shopInformation.transaction eq 1}">在线</td>
+        <td th:if="${shopInformation.transaction eq 0}">线下</td>
     </tr>
 </table>
-<select>
-    <option th:each="ob : ${shopInformations}" th:value="${ob.id}" th:text="${ob.name}"></option>
+<select class="allKinds">
+    <option th:each="ob : ${allKinds}" th:value="${ob.id}" th:text="${ob.name}"></option>
 </select>
+<select class="classification">
+    <option th:each="ob : ${classification}" th:value="${ob.id}" th:text="${ob.name}"></option>
+</select>
+<select class="specific">
+    <option th:each="ob : ${specific}" th:value="${ob.id}" th:text="${ob.name}"></option>
+</select>
+<script src="js/home.js" />
 </body>
+
 </html>

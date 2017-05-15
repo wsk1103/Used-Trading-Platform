@@ -20,7 +20,7 @@ public interface UserInformationService {
 
     int updateByPrimaryKey(UserInformation record);
 
-    UserInformation selectIdByPhone(String phone);
+    int selectIdByPhone(String phone);
 
     List<UserInformation> getAllForeach(List<Integer> list);
 }

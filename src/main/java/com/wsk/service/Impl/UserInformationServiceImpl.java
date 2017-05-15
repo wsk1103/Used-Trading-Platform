@@ -47,7 +47,7 @@ public class UserInformationServiceImpl implements UserInformationService {
     }
 
     @Override
-    public UserInformation selectIdByPhone(String phone) {
+    public int selectIdByPhone(String phone) {
         return this.userInformationMapper.selectIdByPhone(phone);
     }
 

@@ -30,11 +30,11 @@ public class UserWant implements Serializable {
     }
 
     public Date getModified() {
-        return (Date) modified.clone();
+        return modified == null ? null : (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = (Date) modified.clone();
+        this.modified = modified == null ? null : (Date) modified.clone();
     }
 
     public Integer getDisplay() {

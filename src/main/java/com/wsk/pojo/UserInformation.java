@@ -3,7 +3,7 @@ package com.wsk.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserInformation  implements Serializable {
+public class UserInformation implements Serializable {
     private Integer id;
 
     private Date modified;
@@ -35,11 +35,11 @@ public class UserInformation  implements Serializable {
     }
 
     public Date getModified() {
-        return (Date) modified.clone();
+        return modified == null ? null : (Date) modified.clone();
     }
 
     public void setModified(Date modified) {
-        this.modified = (Date) modified.clone();
+        this.modified = modified == null ? null : (Date) modified.clone();
     }
 
     public String getUsername() {
@@ -99,11 +99,11 @@ public class UserInformation  implements Serializable {
     }
 
     public Date getCreatetime() {
-        return (Date) createtime.clone();
+        return createtime == null ? null : (Date) createtime.clone();
     }
 
     public void setCreatetime(Date createtime) {
-        this.createtime = (Date) createtime.clone();
+        this.createtime = createtime == null ? null : (Date) createtime.clone();
     }
 
     public String getAvatar() {

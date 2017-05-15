@@ -2,6 +2,8 @@ package com.wsk.service;
 
 import com.wsk.pojo.Specific;
 
+import java.util.List;
+
 /**
  * Created by wsk1103 on 2017/5/13.
  */
@@ -18,5 +20,5 @@ public interface SpecificeService {
 
     int updateByPrimaryKey(Specific record);
 
-    Specific selectByCid(int cid);
+    List<Specific> selectByCid(int cid);
 }

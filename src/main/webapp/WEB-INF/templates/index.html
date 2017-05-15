@@ -7,10 +7,11 @@
 <body>
 <h1 th:text="${wsk}">?</h1>
 hello world!! this is templates
-<form method="post" action="/login">
-    <input type="text" name="phone"/>
-    <input type="text" name="password"/>
-    <input type="text" name="token" th:value="${wsk}" />
+<form method="post" action="/registered">
+    手机号码：<input type="text" name="phone"/><br/>
+    用户名：<input type="text" name="name"/><br/>
+    密码：<input type="text" name="password"/><br/>
+    <input type="hidden" name="token" th:value="${wsk}" />
     <input type="submit" th:value="${wsk}"/>
 </form>
 </body>
