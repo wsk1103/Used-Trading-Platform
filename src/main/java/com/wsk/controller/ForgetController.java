@@ -75,11 +75,29 @@ public class ForgetController {
         updatePasswordToken = TokenProccessor.getInstance().makeToken();
         UserPassword userPassword = new UserPassword();
         String newPassword = Encrypt.getMD5(password);
-        int uid = userInformationService.selectIdByPhone(realPhone);
+        int uid;
+        try {
+            uid = userInformationService.selectIdByPhone(realPhone);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);
+            model.addAttribute("token",updatePasswordToken);
+            model.addAttribute("phone", realPhone);
+            return "";
+        }
         userPassword.setUid(uid);
         userPassword.setModified(new Date());
         userPassword.setPassword(newPassword);
-        int result = userPasswordService.updateByPrimaryKey(userPassword);
+        int result;
+        try {
+            result = userPasswordService.updateByPrimaryKeySelective(userPassword);
+        } catch (Exception e) {
+            request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);
+            model.addAttribute("token",updatePasswordToken);
+            model.addAttribute("phone", realPhone);
+            e.printStackTrace();
+            return "";
+        }
         //更新失败
         if (result != 1) {
             request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);

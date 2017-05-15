@@ -6,7 +6,7 @@
     <result column="modified" property="modified" jdbcType="TIMESTAMP" />
     <result column="display" property="display" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="sort" property="sort" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="DECIMAL" />
@@ -41,10 +41,10 @@
   <insert id="insert" parameterType="com.wsk.pojo.UserWant" >
     insert into userwant (id, modified, display, 
       name, sort, quantity, 
-      price, remark)
+      price, remark,uid)
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{display,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR}, #{sort,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
-      #{price,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR})
+      #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER},
+      #{price,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}),#{uid,jdbcType=INTEGER}
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.UserWant" >
     insert into userwant
@@ -73,6 +73,9 @@
       <if test="remark != null" >
         remark,
       </if>
+      <if test="uid != null">
+        uid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -88,7 +91,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="sort != null" >
-        #{sort,jdbcType=VARCHAR},
+        #{sort,jdbcType=INTEGER},
       </if>
       <if test="quantity != null" >
         #{quantity,jdbcType=INTEGER},
@@ -98,6 +101,9 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+          #{uid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -114,7 +120,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="sort != null" >
-        sort = #{sort,jdbcType=VARCHAR},
+        sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="quantity != null" >
         quantity = #{quantity,jdbcType=INTEGER},
@@ -125,6 +131,9 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -133,10 +142,11 @@
     set modified = #{modified,jdbcType=TIMESTAMP},
       display = #{display,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
       remark = #{remark,jdbcType=VARCHAR}
+      uid = #{uid,jdbcType=INTEGER},
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

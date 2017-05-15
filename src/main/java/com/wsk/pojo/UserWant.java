@@ -13,7 +13,9 @@ public class UserWant implements Serializable {
 
     private String name;
 
-    private String sort;
+    private Integer sort;
+
+    private Integer uid;
 
     private Integer quantity;
 
@@ -53,12 +55,12 @@ public class UserWant implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getSort() {
+    public Integer getSort() {
         return sort;
     }
 
-    public void setSort(String sort) {
-        this.sort = sort == null ? null : sort.trim();
+    public void setSort(Integer sort) {
+        this.sort = sort ;
     }
 
     public Integer getQuantity() {
@@ -83,5 +85,13 @@ public class UserWant implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 }

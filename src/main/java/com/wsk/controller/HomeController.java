@@ -2,17 +2,17 @@ package com.wsk.controller;
 
 import com.wsk.pojo.*;
 import com.wsk.service.*;
-import com.wsk.tool.empty.Empty;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wsk1103 on 2017/5/11.
@@ -32,6 +32,7 @@ public class HomeController {
     @Resource
     private ShopContextService shopContextService;
 
+    /*
     @RequestMapping("home")
     public String home(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -76,22 +77,90 @@ public class HomeController {
         }
         return "home";
     }
+    */
+    //进入首页获得的商品
+    @RequestMapping(value = "/home")
+    @ResponseBody
+    public List home(){
+        //        List<ShopInformation> newShops = new ArrayList<>();
+        return selectTen(1);
+    }
+
+    //通过分类的第三层id获取全名
+    @RequestMapping(value = "/getSortName")
+    @ResponseBody
+    public Map getSortName(@RequestParam int sort){
+        Map<String, String> map = new HashMap<>();
+        StringBuilder stringBuffer = new StringBuilder();
+        Specific specific = selectSpecificBySort(sort);
+        int cid = specific.getCid();
+        Classification classification = selectClassificationByCid(cid);
+        int aid = classification.getAid();
+        AllKinds allKinds = selectAllKindsByAid(aid);
+        stringBuffer.append(allKinds.getName());
+        stringBuffer.append("-");
+        stringBuffer.append(classification.getName());
+        stringBuffer.append("-");
+        stringBuffer.append(specific.getName());
+        map.put("sortName", stringBuffer.toString());
+        return map;
+    }
+
+    //获得分类中的第一层
+    @RequestMapping(value = "/getAllKinds")
+    @ResponseBody
+    public List<AllKinds> getAllKind(){
+        return getAllKinds();
+    }
+
+    //获得分类中的第二层，通过第一层的id
     @RequestMapping(value = "/getClassification",method = RequestMethod.POST)
     @ResponseBody
     public List<Classification> getClassificationByAid(@RequestParam int id){
-        List<Classification> list = selectAllClassification(id);
-        return list;
+        return selectAllClassification(id);
     }
-
+    //通过第二层的id获取对应的第三层
     @RequestMapping(value = "/getSpecific")
     @ResponseBody
     public List<Specific> getSpecificByCid(@RequestParam int id) {
         return selectAllSpecific(id);
     }
 
+    //get the shops counts
+    @RequestMapping(value = "/getShopsCounts")
+    @ResponseBody
+    public Map getShopsCounts(){
+        Map<String, Integer> map = new HashMap<>();
+        int counts = 0;
+        try {
+            counts = shopInformationService.getCounts();
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("counts", counts);
+            return map;
+        }
+        map.put("counts", counts);
+        return map;
+    }
+    //getShops,10
+    @RequestMapping(value = "/getShops")
+    @ResponseBody
+    public List getShops(@RequestParam int start){
+        List<ShopInformation> list = new ArrayList<>();
+        try {
+            list = selectTen(start);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return list;
+        }
+        return list;
+    }
+
+
+
     //获取商品，分页,一次性获取10个
     private List<ShopInformation> selectTen(int start) {
-        List<ShopInformation> list = shopInformationService.selectTen(start);
+        List<ShopInformation> list = shopInformationService.selectTen((start-1)*10);
         return list;
     }
 
@@ -136,7 +205,7 @@ public class HomeController {
 
     //获得商品留言，10条
     private List<ShopContext> selectShopContextBySid(int sid, int start) {
-        return shopContextService.selectBySid(sid, start);
+        return shopContextService.selectBySid(sid, (start-1)*10);
     }
 
     //获取商品首页图片

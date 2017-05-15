@@ -46,6 +46,7 @@ public class RegisterController {
         }
         insertUserToken = TokenProccessor.getInstance().makeToken();
         //该手机号码已经存在
+//        int uid = ;
         if (!Empty.isNullOrEmpty(userInformationService.selectIdByPhone(realPhone))) {
             model.addAttribute("token", insertUserToken);
             model.addAttribute("phone", realPhone);
@@ -57,20 +58,35 @@ public class RegisterController {
         userInformation.setCreatetime(new Date());
         userInformation.setUsername(username);
         userInformation.setModified(new Date());
-
-        int result = userInformationService.insertSelective(userInformation);
+        int result;
+        try {
+            result = userInformationService.insertSelective(userInformation);
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("token", insertUserToken);
+            model.addAttribute("phone", realPhone);
+            return "";
+        }
         //如果用户基本信息写入成功
         if (result == 1) {
             int uid = userInformationService.selectIdByPhone(realPhone);
             String newPassword = Encrypt.getMD5(password);
             UserPassword userPassword = new UserPassword();
             userPassword.setModified(new Date());
-            userPassword.setUid(userInformation.getId());
+            userPassword.setUid(uid);
             userPassword.setPassword(newPassword);
-            result = userPasswordService.insertSelective(userPassword);
+            try {
+                result = userPasswordService.insertSelective(userPassword);
+            } catch (Exception e){
+                userInformationService.deleteByPrimaryKey(uid);
+                model.addAttribute("token", insertUserToken);
+                model.addAttribute("phone", realPhone);
+                e.printStackTrace();
+                return "";
+            }
             //密码写入失败
             if (result != 1) {
-                userInformationService.deleteByPrimaryKey(userInformation.getId());
+                userInformationService.deleteByPrimaryKey(uid);
                 model.addAttribute("token", insertUserToken);
                 model.addAttribute("phone", realPhone);
                 return "";
