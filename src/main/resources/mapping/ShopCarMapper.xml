@@ -22,12 +22,20 @@
     from shopcar
     where uid = #{uid,jdbcType=INTEGER} and display = 1
   </select>
+  <!--<select id="selectByUid" resultMap="BaseResultMap">-->
+    <!--SELECT-->
+    <!--<include refid="all"/>-->
+    <!--from shopcar-->
+    <!--where uid = #{uid,jdbcType=INTEGER}-->
+    <!--limit 1-->
+  <!--</select>-->
   <select id="selectByUid" resultMap="BaseResultMap">
     SELECT
     <include refid="all"/>
     from shopcar
-    where uid = #{0} and display = 1
-    limit #{1},10
+    where uid = #{uid,jdbcType=INTEGER} and display = 1
+    limit 1
+--     limit #{1},10
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shopcar

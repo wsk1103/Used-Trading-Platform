@@ -6,7 +6,6 @@ import com.wsk.service.ShopCarService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by wsk1103 on 2017/5/13.
@@ -51,8 +50,13 @@ public class ShopCarServiceImpl implements ShopCarService {
         return shopCarMapper.getCounts(uid);
     }
 
+//    @Override
+//    public List<ShopCar> selectByUid(int uid, int start) {
+//        return shopCarMapper.selectByUid(uid, start);
+//    }
+
     @Override
-    public List<ShopCar> selectByUid(int uid, int start) {
-        return shopCarMapper.selectByUid(uid, start);
+    public ShopCar selectByUid(int uid) {
+        return shopCarMapper.selectByUid(uid);
     }
 }

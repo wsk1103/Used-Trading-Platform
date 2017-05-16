@@ -2,8 +2,6 @@ package com.wsk.dao;
 
 import com.wsk.pojo.ShopCar;
 
-import java.util.List;
-
 public interface ShopCarMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -19,5 +17,7 @@ public interface ShopCarMapper {
 
     int getCounts(int uid);
 
-    List<ShopCar> selectByUid(int uid, int start);
+//    List<ShopCar> selectByUid(int uid, int start);
+
+    ShopCar selectByUid(int uid);
 }

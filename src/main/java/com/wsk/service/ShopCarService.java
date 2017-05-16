@@ -2,8 +2,6 @@ package com.wsk.service;
 
 import com.wsk.pojo.ShopCar;
 
-import java.util.List;
-
 /**
  * Created by wsk1103 on 2017/5/13.
  */
@@ -22,5 +20,7 @@ public interface ShopCarService {
 
     int getCounts(int uid);
 
-    List<ShopCar> selectByUid(int uid, int start);
+//    List<ShopCar> selectByUid(int uid, int start);
+
+    ShopCar selectByUid(int uid);
 }

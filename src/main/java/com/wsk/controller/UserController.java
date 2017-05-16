@@ -48,6 +48,8 @@ public class UserController {
     private UserStateService userStateService;
     @Resource
     private ShopInformationService shopInformationService;
+    @Resource
+    private GoodsCarService goodsCarService;
 
     @RequestMapping("/")
     public String wsk(Model model) {
@@ -99,7 +101,7 @@ public class UserController {
 //    }
 
     //验证登录
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request, Model model,
                         @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
         String loginToken = (String) request.getSession().getAttribute("loginToken");
@@ -121,7 +123,7 @@ public class UserController {
     }
 
     //完善用户基本信息，认证
-    @RequestMapping(value = "certification", method = RequestMethod.POST)
+    @RequestMapping(value = "/certification", method = RequestMethod.POST)
     public String certification(HttpServletRequest request, Model model,
                                 @RequestParam String realName, @RequestParam String clazz, @RequestParam String token,
                                 @RequestParam String sno, @RequestParam String dormitory, @RequestParam String gender) {
@@ -257,7 +259,7 @@ public class UserController {
             map.put("counts", counts);
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("counts", 0);
+            map.put("counts", -1);
         }
         return map;
     }
@@ -369,35 +371,109 @@ public class UserController {
         return map;
     }
 
-    //check the shopping cart,10,查看购物车
+    //check the shopping cart,查看购物车
     @RequestMapping(value = "/selectShopCar")
     @ResponseBody
-    public List<ShopCar> selectShopCar(HttpServletRequest request, @RequestParam int start) {
-        List<ShopCar> list = new ArrayList<>();
+    public ShopCar selectShopCar(HttpServletRequest request) {
+//        List<ShopCar> list = new ArrayList<>();
         if (Empty.isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
             ShopCar shopCar = new ShopCar();
-            list.add(shopCar);
-            return list;
+//            list.add(shopCar);
+            return shopCar;
         }
         int uid = (int) request.getSession().getAttribute("uid");
-        return selectShopCarByUid(uid, start);
+        return selectShopCarByUid(uid);
     }
 
-    //删除购物车
-    @RequestMapping(value = "deleteShopCar")
+    //通过购物车的id获取购物车里面的商品
+    @RequestMapping(value = "/selectGoodsOfShopCar")
     @ResponseBody
-    public Map deleteShopCar(HttpServletRequest request, @RequestParam int scid) {
+    public List<GoodsCar> selectGoodsCar(HttpServletRequest request) {
+        List<GoodsCar> list = new ArrayList<>();
+        GoodsCar goodsCar = new GoodsCar();
+        if (Empty.isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
+            list.add(goodsCar);
+            return list;
+        }
+        try {
+            int scid = shopCarService.selectByUid((Integer) request.getSession().getAttribute("uid")).getId();
+            list = goodsCarService.selectBySCid(scid);
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return list;
+        }
+    }
+
+    //添加到购物车
+    @RequestMapping(value = "/insertGoodsCar")
+    @ResponseBody
+    public Map insertGoodsCar(HttpServletRequest request, @RequestParam int id) {
         Map<String, Integer> map = new HashMap<>();
         if (Empty.isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
             map.put("result", 2);
             return map;
         }
-        ShopCar shopCar = new ShopCar();
-        shopCar.setDisplay(0);
-        shopCar.setId(scid);
-        shopCar.setModified(new Date());
         try {
-            int result = shopCarService.updateByPrimaryKeySelective(shopCar);
+            int uid = (int) request.getSession().getAttribute("uid");
+            //获取购物车
+            ShopCar shopCar = shopCarService.selectByUid(uid);
+            if (Empty.isNullOrEmpty(shopCar)) {
+                shopCar.setModified(new Date());
+                shopCar.setDisplay(1);
+                shopCar.setUid(uid);
+                try {
+                    shopCarService.insertSelective(shopCar);
+                    shopCar = shopCarService.selectByUid(uid);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    map.put("result", 0);
+                    return map;
+                }
+            }
+            GoodsCar goodsCar = new GoodsCar();
+            goodsCar.setDisplay(1);
+            goodsCar.setModified(new Date());
+            goodsCar.setQuantity(1);
+            goodsCar.setScid(shopCar.getId());
+            goodsCar.setSid(id);
+            try {
+                int result = goodsCarService.insertSelective(goodsCar);
+                map.put("result", result);
+                return map;
+            } catch (Exception e) {
+                e.printStackTrace();
+                map.put("result", 0);
+                return map;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("result", 0);
+            return map;
+        }
+    }
+
+    //删除购物车的商品
+    @RequestMapping(value = "/deleteShopCar")
+    @ResponseBody
+    public Map deleteShopCar(HttpServletRequest request, @RequestParam int sid) {
+        Map<String, Integer> map = new HashMap<>();
+        if (Empty.isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
+            map.put("result", 2);
+            return map;
+        }
+//        ShopCar shopCar = new ShopCar();
+//        shopCar.setDisplay(0);
+//        shopCar.setId(gcid);
+//        shopCar.setModified(new Date());
+        //获得用户购物车的id
+        int scid = shopCarService.selectByUid((Integer) request.getSession().getAttribute("uid")).getId();
+        GoodsCar goodsCar = new GoodsCar();
+        goodsCar.setDisplay(0);
+        goodsCar.setSid(sid);
+        goodsCar.setScid(scid);
+        try {
+            int result = goodsCarService.updateByPrimaryKey(goodsCar);
             if (result != 1) {
                 map.put("result", result);
                 return map;
@@ -546,13 +622,14 @@ public class UserController {
         }
         return map;
     }
+
     //查看发布的所有商品总数
     @RequestMapping(value = "/getReleaseShopCounts")
     @ResponseBody
     public Map getReleaseShopCounts(HttpServletRequest request) {
         Map<String, Integer> map = new HashMap<>();
         if (Empty.isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
-            map.put("counts",-1);
+            map.put("counts", -1);
             return map;
         }
         int counts = getReleaseCounts((Integer) request.getSession().getAttribute("uid"));
@@ -563,7 +640,7 @@ public class UserController {
     //查看我的发布的商品
     @RequestMapping(value = "/getReleaseShop")
     @ResponseBody
-    public List getReleaseShop(HttpServletRequest request,@RequestParam int start) {
+    public List getReleaseShop(HttpServletRequest request, @RequestParam int start) {
         List<UserRelease> list = new ArrayList<>();
         if (Empty.isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
             UserRelease userRelease = new UserRelease();
@@ -674,14 +751,13 @@ public class UserController {
     }
 
     //购物车列表  10
-    private List<ShopCar> selectShopCarByUid(int uid, int start) {
+    private ShopCar selectShopCarByUid(int uid) {
         try {
-            return shopCarService.selectByUid(uid, (start - 1) * 10);
+            return shopCarService.selectByUid(uid);
         } catch (Exception e) {
             e.printStackTrace();
-            List<ShopCar> list = new ArrayList<>();
-            list.add(new ShopCar());
-            return list;
+//            List<ShopCar> list
+            return new ShopCar();
         }
     }
 
@@ -706,6 +782,7 @@ public class UserController {
             return list;
         }
     }
+
     //订单中的商品
     private List<GoodsOfOrderForm> selectGoodsOfOrderFormByOFid(int ofid) {
         try {
