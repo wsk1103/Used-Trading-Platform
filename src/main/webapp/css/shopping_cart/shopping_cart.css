@@ -1,0 +1,184 @@
+.top_content {
+    width: 99%;
+    height: auto;
+    position: absolute;
+    display: block;
+}
+
+.publish_product_div {
+    margin-left: 15%;
+    margin-top: 12%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 70%;
+    height: auto;
+    margin-bottom: 2%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+}
+
+.shipping_address {
+    margin-left: 1%;
+    width: 20%;
+    padding: 0.5em;
+    border: 2px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    display: inline-block;
+    float: left;
+    line-height: 1.3em;
+}
+
+.shipping_address:hover {
+    cursor: pointer;
+}
+
+span.name_info {
+    float: left;
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.67);
+}
+
+img.pencil_icon {
+    float: left;
+    width: 1em;
+    margin-left: 65%;
+}
+
+img.delete_icon {
+    width: 1em;
+    margin-left: 60%;
+}
+
+span.address_info {
+    clear: left;
+    font-size: 0.9em;
+}
+
+span.phone_info {
+    font-size: 0.9em;
+}
+
+.cart_content {
+    margin-left: 15%;
+    margin-top: 0%;
+    padding-top: 0.5%;
+    padding-bottom: 1%;
+    width: 70%;
+    height: auto;
+    margin-bottom: 10%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    display: block;
+}
+table {
+    width: 100%;
+    padding-bottom: 3%;
+}
+.table_head{
+    background-color: rgba(0,0,0,0.55);
+    color: white;
+    border-collapse:collapse;
+    height: 40px;
+    font-size: 0.9em;
+    border-bottom: 1px solid slateblue;
+}
+.table_head th {
+    margin-right: 0%;
+    width: 10%;
+}
+
+.table_content td {
+    width: 10%;
+    height: 6.5em;
+}
+.table_content td.input_checkbox {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0%;
+    width: 5%;
+}
+.table_content td.show_img img {
+    width: 100%;
+}
+.table_content td.title {
+    vertical-align: top;
+    padding-top: 2%;
+    width: 30%;
+}
+.table_content td.cost {
+    text-align: center;
+}
+.table_content td.count {
+    text-align: center;
+}
+.table_content td.count span.number {
+    background-color: gray;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 1.3em;
+    font-size: 1em;
+    margin: 0 0.5em;
+}
+.table_content td.per_sum {
+    text-align: center;
+    color: rebeccapurple;
+}
+.table_content td.delete_img {
+    text-align: center;
+}
+.table_content td.delete_img img {
+    width: 20%;
+}
+.table_content td.delete_img img:hover {
+    cursor: pointer;
+}
+.end_pay .is_all {
+    width: 10%;
+    text-align: center;
+}
+.space {
+    width: 45%;
+}
+.count span.minus:hover {
+    cursor: pointer;
+}
+.count span.add:hover {
+    cursor: pointer;
+}
+.pay_button_div {
+    width: 20%;
+    text-align: center;
+}
+.pay_button {
+    width: 70%;
+    background-color: slateblue;
+    height: 45px;
+    border: none;
+    font-size: 1.1em;
+    color: white;
+    border-radius: 5px;
+}
+.pay_button:hover {
+    cursor: pointer;
+}
+.all_sum {
+    text-align: right;
+}
+footer {
+    width: 96%;
+    background-color: slateblue;
+    box-shadow: 4px 2px 10px #888888;
+    border-radius: 10px;
+    height: 80px;
+    margin-left: 2%;
+}
+footer p {
+    padding-top: 35px;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+}

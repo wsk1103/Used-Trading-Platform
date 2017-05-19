@@ -37,7 +37,7 @@ public class Encrypt {
     }
 
     public static void main(String[] args) {
-        System.out.println(getMD5("qq12345"));
+        System.out.println(getMD5("1"));
 
     }
 }

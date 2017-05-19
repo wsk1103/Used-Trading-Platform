@@ -1,0 +1,84 @@
+.my_slider {
+    top: 23%;
+    left: 4%;
+    width: 92%;
+    height: 480px;
+    position: absolute;
+    overflow: hidden;
+    background-color: rebeccapurple;
+    box-shadow: 5px 5px 10px #888888;;
+    display: block;
+    border-radius: 10px;
+}
+.my_slide {
+    display: block;
+    width: 80%;
+    left: 10%;
+    top:0;
+    height: 100%;
+    position: absolute;
+    float: left;
+    opacity: 0;
+    color: white;
+}
+.my_slide h1{
+    position: absolute;
+    left: 10%;
+    top: 30%;
+    width: 30%;
+}
+.my_slide p {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    width: 30%;
+    overflow: inherit;
+}
+.slide_img{
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    width: 60%;
+}
+.left_border {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    width: 50px;
+    height: 90px;
+    border-radius: 6px;
+    background-color: rgba(0,0,0,0.3);
+}
+.left_turn {
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 34px;
+    height: 80px;
+    background-image: url("../../img/home/arrows.png");
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.right_border {
+    position: absolute;
+    left: 92%;
+    top: 50%;
+    width: 50px;
+    height: 90px;
+    border-radius: 6px;
+    background-color: rgba(0,0,0,0.3);
+}
+.right_turn {
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 34px;
+    height: 80px;
+    background-image: url("../../img/home/arrows.png");
+    background-repeat: no-repeat;
+    background-position: -34px 0;
+    cursor: pointer;
+}
+.current {
+    opacity: 1;
+}

@@ -1,0 +1,72 @@
+.top_content {
+    width: 99%;
+    height: auto;
+    /*background-color: aquamarine;*/
+    position: absolute;
+    display: block;
+}
+.publish_product_div {
+    width: 60%;
+    height: auto;
+    margin-left: 20%;
+    margin-top: 12%;
+    /*background-color: red;*/
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+}
+#accordion {
+    width: 100%;
+}
+.first_info {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 30%;
+}
+.first_info span {
+    color: slateblue;
+    font-weight: 600;
+}
+.first_info input {
+    border: 1px solid slateblue;
+    border-radius: 5px;
+    padding: 0.3em;
+    font-size: 1.1em;
+}
+.update_button {
+    margin: 5% 40%;
+    width: 15%;
+    height: 20%;
+    border: none;
+    background-color: slateblue;
+    border-radius: 5px;
+    color: white;
+}
+.sex_info{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 38%;
+}
+.update_button:hover {
+    cursor: pointer;
+}
+span.reqiure_enter {
+    display: none;
+}
+footer {
+    margin-top: 10%;
+    width: 96%;
+    background-color: slateblue;
+    box-shadow: 4px 2px 10px #888888;
+    border-radius: 10px;
+    height: 80px;
+    margin-left: 2%;
+}
+footer p {
+    padding-top: 35px;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+}

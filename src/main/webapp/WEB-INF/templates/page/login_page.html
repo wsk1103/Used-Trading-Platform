@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>C2C平台</title>
+    <script src="/js/jquery-1.3.2.min.js">
+    </script>
+    <script src="/js/login/init_login.js"></script>
+    <link rel="icon" href="/img/page_icon.png"/>
+    <link rel="stylesheet" href="/css/login_and_register/login_back.css"/>
+    <link rel="stylesheet" href="/css/login_and_register/register_page.css"/>
+    <link rel="stylesheet" href="/css/login_and_register/confirm_password.css"/>
+    <link rel="stylesheet" href="/css/login_and_register/forget_password.css"/>
+</head>
+<body>
+<!--顶级的content是用来充当3D旋转的容器-->
+<div class=".stage">
+    <div class="content">
+        <!--登陆界面-->
+        <div class="login">
+            <div class="check_mark">
+                <div class="left_mark">
+                </div>
+                <div class="right_mark">
+                </div>
+            </div>
+            <div class="login_form">
+                <div class="login_username">
+                    <!--svg就很溜-->
+                    <svg class="login_icon" viewBox="0 0 20 20">
+                        <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
+                    </svg>
+                    <input type="hidden" th:value="${loginToken}" class="login_token"/>
+                    <input type="text" placeholder="手机号码" class="input_username"/>
+                </div>
+                <div class="login_password">
+                    <svg class="password_icon" viewBox="0 0 20 20">
+                        <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
+                    </svg>
+                    <input type="password" placeholder="密码" class="input_password" name="password"/>
+                </div>
+                <div class="go_forget_password">
+                    <a class="go_to_forget" href="#">忘记密码?</a>
+                </div>
+                <div class="login_button_div">
+                    <button class="login_button" onclick="return false;">登录</button>
+                </div>
+                <div class="register_info">
+                    <span>还没有账号 ? <a class="flip_to_register" href="#">注册</a></span>
+                </div>
+            </div>
+        </div>
+        <!--右侧的第二个页面-->
+        <div class="register_page">
+            <div class="top_icon">
+                <svg class="circle_icon">
+                    <circle cx="50%" cy="55%" r="25%" stroke="white" stroke-width="20" fill="none"/>
+                </svg>
+            </div>
+            <div class="get_vcode">
+                <div class="nickname_div">
+                    <span class="n_span">N</span>
+                    <input class="input_nickname" type="text" placeholder="用户名"/>
+                </div>
+                <div class="register_phone_div">
+                    <!--svg就很溜-->
+                    <svg class="register_phone_svg" viewBox="0 0 20 20">
+                        <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
+                    </svg>
+                    <input type="hidden" th:value="${registerToken}" class="register_token"/>
+                    <input type="text" placeholder="手机号码" class="register_input_phone"/>
+                </div>
+                <div class="register_vcode_div">
+                    <input type="text" placeholder="验证码" class="register_input_vcode"/>
+                    <button class="get_vcode_button">获取验证码</button>
+                </div>
+                <button class="go_enter_password_button">下一步</button>
+                <div class="go_back_login_div">
+                    <a class="go_back_login" href="#">返回</a>
+                </div>
+            </div>
+            <!--<p>12345679</p>-->
+            <!--<button class="next_step">next</button>-->
+        </div>
+        <!--第三个页面-->
+        <div class="enter_password">
+            <!--            <p>12345679</p>
+                        <button class="second">next</button>-->
+            <div class="check_mark">
+                <div class="left_mark">
+                </div>
+                <div class="right_mark">
+                </div>
+            </div>
+            <div class="confirm_password_content">
+                <div class="confirm_password_div">
+                    <svg class="first_enter_password_icon" viewBox="0 0 20 20">
+                        <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
+                    </svg>
+                    <input type="password" placeholder="密码" class="first_enter_password_input"/>
+                </div>
+                <div class="confirm_password_div">
+                    <svg class="confirm_password_icon" viewBox="0 0 20 20">
+                        <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
+                    </svg>
+                    <input type="password" placeholder="确认密码" class="confirm_password_input"/>
+                </div>
+                <div class="login_button_div">
+                    <button class="confirm_register_button" onclick="return false;">注册</button>
+                </div>
+                <div class="go_back_up_div">
+                    <a class="go_back_up" href="#">上一步</a>
+                </div>
+            </div>
+        </div>
+        <!--第4个页面-->
+        <div class="forget_password">
+            <div class="top_icon">
+                <svg class="circle_icon">
+                    <circle cx="50%" cy="55%" r="25%" stroke="white" stroke-width="20" fill="none"/>
+                </svg>
+            </div>
+            <div class="forget_get_vcode">
+                <div class="forget_phone_div">
+                    <!--svg就很溜-->
+                    <svg class="register_phone_svg" viewBox="0 0 20 20">
+                        <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
+                    </svg>
+                    <input type="hidden" th:value="${forgetToken}" class="forget_token"/>
+                    <input type="text" placeholder="手机号码" class="forget_input_phone"/>
+                </div>
+                <div class="forget_get_vcode_div">
+                    <input type="text" placeholder="验证码" class="forget_input_vcode"/>
+                    <button class="forget_get_vcode_button">获取验证码</button>
+                </div>
+                <button class="forget_password_button">下一步</button>
+                <div class="go_back_login_div">
+                    <a class="go_back_login_from_forget" href="#">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+header {
+    width: 99%;
+    max-height: 80px;
+    background-color: blueviolet;
+    box-shadow: 5px 5px 10px #888888;
+    position: fixed;
+    margin-top: -10px;
+    display: block;
+    z-index: 30;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+span.short_nav {
+    float: left;
+    background-image: url("../../img/home/nav_icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 2.5em;
+    padding-top: 2.5em;
+    margin-top: 1.1%;
+    margin-left: 1%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    opacity: 0;
+}
+
+span.short_nav:hover, span.search_icon:hover,
+.home_icon:hover {
+    cursor: pointer;
+}
+
+header .home_icon {
+    width: 5%;
+    height: 80%;
+    font-size: 2em;
+    padding: 1%;
+    float: left;
+    margin-left: 7%;
+    color: white;
+    font-weight: 100;
+    font-family: cursive;
+}
+
+header .login_or_register_string {
+    font-size: 1.3em;
+    padding: 1%;
+    float: left;
+    color: black;
+    font-weight: 100;
+    margin-top: 0.5%;
+    font-family: cursive;
+    width: 6em;
+    height: 0.55em;
+    display: inline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.login_or_register_string a {
+    color: white;
+    text-decoration: none;
+}
+
+header .search_icon {
+    float: left;
+    background-color: white;
+    background-image: url("../../img/home/search_icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 2.5em;
+    padding-top: 2.5em;
+    margin-top: 1.1%;
+    margin-left: 1%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
+    background-size: 80%;
+}
+
+header .user_icon {
+    float: left;
+    background-color: white;
+    background-image: url("../../img/home/user_icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 2.5em;
+    padding-top: 2.5em;
+    margin-top: 1.1%;
+    margin-left: 28%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
+    background-size: 80%;
+}
+
+.nav_search_input {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    width: 5em;
+    background-color: transparent;
+    font-size: 1.3em;
+    color: white;
+    margin-top: 1.2%;
+    margin-left: 25%;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    display: block;
+    float: left;
+    border-radius: 10px;
+    padding: 0.3em;
+}
+.nav_search_input:focus,.nav_search_input:active {
+    border: none;
+}
+nav.my_nav {
+    background-color: white;
+    width: 98%;
+    height: 8%;
+    min-height: 70px;
+    display: inline;
+    position: absolute;
+    left: 1%;
+    top: 12%;
+    border-radius: 10px;
+    box-shadow: 5px 10px 6px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+}
+
+nav.my_nav ul {
+    color: slateblue;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 18%;
+}
+
+nav.my_nav ul li {
+    margin-top: 1.5%;
+    float: left;
+    margin-left: 3%;
+    padding-right: 3%;
+    border-right: 3px solid slateblue;
+    font-size: 1em;
+}
+nav.my_nav ul li a{
+    text-decoration: none;
+    font-size: 1em;
+    color: slateblue;
+}
+nav.my_nav ul li:last-child {
+    border-right: none;
+}
+.short_nav_show {
+    width: 10%;
+    height: 39%;
+    position: fixed;
+    border-radius: 10px;
+    z-index: 30;
+    background-color: white;
+    margin-top: 3.8%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.short_nav_show ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.short_nav_show ul li {
+    margin-bottom: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.short_nav_show ul li:last-child {
+    border-bottom: none;
+}
+.short_nav_show ul li a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 1em;
+}
+.short_nav_show ul li:hover {
+    cursor: pointer;
+    background-color: slateblue;
+}
+.personal_nav {
+    position: fixed;
+    margin-left: 85%;
+    width: 10%;
+    height: 18%;
+    border-radius: 10px;
+    z-index: 30;
+    background-color: white;
+    margin-top: 3.8%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+.personal_nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10%;
+}
+.personal_nav ul li {
+    margin-bottom: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.personal_nav ul li:last-child {
+    border-bottom: none;
+}
+.personal_nav ul li a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 1em;
+}
+.personal_nav ul li:hover {
+    cursor: pointer;
+    background-color: slateblue;
+}
+

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>求购的商品</title>
+    <link rel="icon" href="/img/page_icon.png"/>
+    <link rel="stylesheet" href="/css/home_page/header_and_nav.css"/>
+    <script src="/js/jquery-1.3.2.min.js"></script>
+    <script src="/js/home/header_model_js.js"></script>
+    <script>
+        $(function () {
+            $('.delete_and_update .delete_publish').click(function () {
+                var id = $(this).parent().parent().attr("id");
+                alert(id);
+            });
+            $('.delete_and_update .update_publish').click(function () {
+                var id = $(this).parent().parent().attr("id");
+                alert(id);
+            });
+        });
+    </script>
+    <style>
+        .temp_content {
+            width: 99%;
+            position: absolute;
+            display: block;
+            top: 20%;
+            padding: 0;
+        }
+
+        .require_content_div {
+            width: 90%;
+            margin-top: 3%;
+            margin-left: 10%;
+            display: block;
+        }
+
+        .require_one_part {
+            width: 20%;
+            width: 18%;
+            float: left;
+            margin: 5% 4%;
+            background-color: white;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            padding: 2%;
+            line-height: 3em;
+            text-align: left;
+        }
+
+        .require_one_part .what_info {
+            font-size: 1.2em;
+        }
+
+        .require_content_div .require_one_part .delete_and_update {
+            width: 100%;
+            display: block;
+            padding-bottom: 0%;
+            position: relative;
+            text-align: inherit;
+        }
+
+        .require_content_div .require_one_part .delete_and_update img.update_publish {
+            width: 8%;
+            padding-bottom: 0;
+            position: relative;
+            margin-right: 30%;
+        }
+
+        .require_content_div .require_one_part .delete_and_update img.delete_publish {
+            width: 8%;
+            padding-bottom: 0;
+            margin-left: 43%;
+        }
+
+        .require_content_div .require_one_part .delete_and_update img:hover {
+            cursor: pointer;
+        }
+
+        div.pagination_div {
+            display: block;
+            width: 40%;
+            height: 36px;
+            clear: both;
+            margin-bottom: 10%;
+            margin-left: 35%;
+        }
+
+        .pagination_div ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination_div ul li {
+            float: left;
+        }
+
+        .pagination_div .pagination_lt, .pagination_div .pagination_gt {
+            float: left;
+        }
+
+        .pagination_div .pagination_lt, .pagination_div ul li,
+        .pagination_div .pagination_gt {
+            width: 6%;
+            height: 36px;
+            background-color: white;
+            margin-left: 4%;
+            font-size: 1.5em;
+            color: rgba(0, 0, 0, 0.54);
+            text-align: center;
+            vertical-align: middle;
+            padding-top: 0.3em;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .pagination_div .pagination_lt:hover, .pagination_div ul li:hover,
+        .pagination_div .pagination_gt:hover {
+            cursor: pointer;
+            background-color: slateblue;
+        }
+
+        footer {
+            width: 96%;
+            background-color: slateblue;
+            box-shadow: 4px 2px 10px #888888;
+            border-radius: 10px;
+            height: 80px;
+            margin-left: 2%;
+        }
+
+        footer p {
+            padding-top: 35px;
+            vertical-align: middle;
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <span class="short_nav"></span>
+    <div class="home_icon">
+        <a href="/home" style="text-decoration: none;color: white">C2C</a>
+    </div>
+    <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
+    <span class="search_icon"></span>
+    <span class="user_icon"></span>
+    <!--修改为用户名-->
+    <span class="login_or_register_string">
+                <a href="/" th:if="${userInformation.username}==null">登陆</a>
+        <a href="/" th:if="${userInformation.username}==null">注册</a>
+        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}"
+           th:text="${userInformation.username}"></a>
+    </span>
+</header>
+<div class="short_nav_show">
+    <ul>
+        <li><a href="/home">首页</a></li>
+        <li><a href="/mall_page">商城</a></li>
+        <li><a href="/publish_product.html">发布商品</a></li>
+        <li><a href="/require_product.html">求购商品</a></li>
+        <li><a href="/shopping_cart.html">我的购物车</a></li>
+        <li><a href="#">反馈与意见</a></li>
+        <li><a href="#">联系我们</a></li>
+    </ul>
+</div>
+<div class="personal_nav">
+    <ul>
+        <li><a href="personal_info">个人信息</a></li>
+        <li><a href="/my_publish_product_page">我发布的商品</a></li>
+        <li><a href="/my_require_product_page">我求购的商品</a></li>
+    </ul>
+</div>
+<nav class="my_nav">
+    <ul>
+        <li><a href="/home">首页</a></li>
+        <li><a href="/mall_page">商城</a></li>
+        <li><a href="/publish_product.html">发布商品</a></li>
+        <li><a href="/require_product.html">求购商品</a></li>
+        <li><a href="/shopping_cart.html">我的购物车</a></li>
+        <li><a href="#">反馈与意见</a></li>
+        <li><a href="#">联系我们</a></li>
+    </ul>
+</nav>
+<div class="temp_content">
+    <div class="require_content_div">
+        <div class="require_one_part" id="1">
+            <span class="what_info">商品名：</span>
+            <span class="info_content">苹果6s</span><br/>
+            <span class="what_info">数量：</span>
+            <span class="info_content">3</span><br/>
+            <span class="what_info">单价：</span>
+            <span class="info_content">20.00</span><br/>
+            <span class="what_info">详情：</span>
+            <span class="info_content">这是一个商品，联系电话1111111111</span><br/>
+            <span class="what_info">分类：</span>
+            <span class="info_content">数码科技-手机-苹果</span><br/>
+            <div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>
+                <img src="/img/delete_icon.jpg" class="delete_publish"/></div>
+        </div>
+        <div class="require_one_part" id="2">
+            <span class="what_info">商品名：</span>
+            <span class="info_content">苹果6s</span><br/>
+            <span class="what_info">数量：</span>
+            <span class="info_content">3</span><br/>
+            <span class="what_info">单价：</span>
+            <span class="info_content">20.00</span><br/>
+            <span class="what_info">详情：</span>
+            <span class="info_content">这是一个商品，联系电话1111111111</span><br/>
+            <span class="what_info">分类：</span>
+            <span class="info_content">数码科技-手机-苹果</span><br/>
+            <div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>
+                <img src="/img/delete_icon.jpg" class="delete_publish"/></div>
+        </div>
+        <div class="require_one_part" id="3">
+            <span class="what_info">商品名：</span>
+            <span class="info_content">苹果6s</span><br/>
+            <span class="what_info">数量：</span>
+            <span class="info_content">3</span><br/>
+            <span class="what_info">单价：</span>
+            <span class="info_content">20.00</span><br/>
+            <span class="what_info">详情：</span>
+            <span class="info_content">这是一个商品，联系电话1111111111</span><br/>
+            <span class="what_info">分类：</span>
+            <span class="info_content">数码科技-手机-苹果</span><br/>
+            <div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>
+                <img src="/img/delete_icon.jpg" class="delete_publish"/></div>
+        </div>
+        <div class="require_one_part" id="4">
+            <span class="what_info">商品名：</span>
+            <span class="info_content">苹果6s</span><br/>
+            <span class="what_info">数量：</span>
+            <span class="info_content">3</span><br/>
+            <span class="what_info">单价：</span>
+            <span class="info_content">20.00</span><br/>
+            <span class="what_info">详情：</span>
+            <span class="info_content">这是一个商品，联系电话1111111111</span><br/>
+            <span class="what_info">分类：</span>
+            <span class="info_content">数码科技-手机-苹果</span><br/>
+            <div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>
+                <img src="/img/delete_icon.jpg" class="delete_publish"/></div>
+        </div>
+        <div class="require_one_part" id="5">
+            <span class="what_info">商品名：</span>
+            <span class="info_content">苹果6s</span><br/>
+            <span class="what_info">数量：</span>
+            <span class="info_content">3</span><br/>
+            <span class="what_info">单价：</span>
+            <span class="info_content">20.00</span><br/>
+            <span class="what_info">详情：</span>
+            <span class="info_content">这是一个商品，联系电话1111111111</span><br/>
+            <span class="what_info">分类：</span>
+            <span class="info_content">数码科技-手机-苹果</span><br/>
+            <div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>
+                <img src="/img/delete_icon.jpg" class="delete_publish"/></div>
+        </div>
+    </div>
+    <div class="pagination_div">
+        <a class="pagination_lt">&lt;</a>
+        <ul>
+            <li><a>1</a></li>
+            <li><a>2</a></li>
+            <li><a>4</a></li>
+            <li><a>3</a></li>
+            <li><a>5</a></li>
+        </ul>
+        <a class="pagination_gt">&gt;</a>
+    </div>
+    <footer>
+        <p>Copyright © 2014.Company name All rights reserved.</p>
+    </footer>
+</div>
+</body>
+</html>

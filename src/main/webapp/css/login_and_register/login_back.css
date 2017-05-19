@@ -1,0 +1,293 @@
+html, body {
+
+}
+
+body {
+    background-image: url("../../img/login_back.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*媒体查询，修改大小*/
+@media (max-height: 1000px) {
+    .content {
+        width: 300px;
+        height: 550px;
+        left: 40%;
+        top: 15%;
+        position: absolute;
+        -webkit-transform-style:preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transition: transform 1s;
+        -moz-transition: transform 1s;
+        -o-transition: transform 1s;
+        transition: transform 1s;
+        -webkit-transform-origin:50% 50% -150px;
+        transform-origin: 50% 50% -150px;
+    }
+}
+
+@media (max-width: 800px) {
+    .content {
+        width: 270px;
+        height: 495px;
+        left: 40%;
+        top: 5%;
+        position: absolute;
+        -webkit-transform-style:preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transition: transform 1s;
+        -moz-transition: transform 1s;
+        -o-transition: transform 1s;
+        transition: transform 1s;
+        -webkit-transform-origin:50% 50% -150px;
+        transform-origin: 50% 50% -150px;
+    }
+}
+
+@media (max-width: 500px) {
+    .content {
+        width: 240px;
+        height: 440px;
+        left: 40%;
+        top: 5%;
+        position: absolute;
+        -webkit-transform-style:preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transition: transform 1s;
+        -moz-transition: transform 1s;
+        -o-transition: transform 1s;
+        transition: transform 1s;
+        -webkit-transform-origin:50% 50% -150px;
+        transform-origin: 50% 50% -150px;
+    }
+}
+
+@media (max-height: 650px) {
+    .content {
+        width: 270px;
+        height: 495px;
+        left: 40%;
+        top: 5%;
+        position: absolute;
+        -webkit-transform-style:preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transition: transform 1s;
+        -moz-transition: transform 1s;
+        -o-transition: transform 1s;
+        transition: transform 1s;
+        -webkit-transform-origin:50% 50% -150px;
+        transform-origin: 50% 50% -150px;
+    }
+}
+
+@media (max-height: 520px) {
+    .content {
+        width: 240px;
+        height: 440px;
+        left: 40%;
+        top: 5%;
+        position: absolute;
+        -webkit-transform-style:preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transition: transform 1s;
+        -moz-transition: transform 1s;
+        -o-transition: transform 1s;
+        transition: transform 1s;
+        -webkit-transform-origin:50% 50% -150px;
+        transform-origin: 50% 50% -150px;
+    }
+}
+
+@media (max-height: 470px) {
+    .content {
+        width: 210px;
+        height: 385px;
+        left: 40%;
+        top: 5%;
+        position: absolute;
+        -webkit-transform-style:preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transition: transform 1s;
+        -moz-transition: transform 1s;
+        -o-transition: transform 1s;
+        transition: transform 1s;
+        -webkit-transform-origin:50% 50% -150px;
+        transform-origin: 50% 50% -150px;
+    }
+}
+.stage {
+    perspective: 800px;
+}
+/*注意，要实现3D翻转，需要指定绝对位置，然后将几张图片都叠在一起，之后再进行相应的翻转和移动*/
+.login {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%); /* Firefox 3.6 - 15 */
+    background: linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%); /* 标准的语法（必须放在最后） */
+}
+
+.check_mark {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+}
+
+.left_mark {
+    position: absolute;
+    width: 22%;
+    height: 10%;
+    background: -webkit-linear-gradient(left, white, rgba(12, 6, 6, 0.05)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(left, white, rgba(12, 6, 6, 0.05)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(left, white, rgba(12, 6, 6, 0.05)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(left, white, rgba(12, 6, 6, 0.05)); /* 标准的语法（必须放在最后） */
+    left: 26%;
+    top: 52%;
+    transform: rotate(57grad);
+}
+
+.right_mark {
+    position: absolute;
+    width: 50%;
+    height: 10%;
+    background-color: white;
+    left: 33%;
+    top: 45%;
+    transform: rotate(-45grad);
+}
+
+.login_form {
+    position: absolute;
+    top: 50%;
+    width: 80%;
+    height: 50%;
+    margin: 0 5%;
+}
+
+.login_username {
+    margin-left: 5%;
+    padding-top: 3%;
+    width: 100%;
+    height: 13%;
+    border-bottom: 1px solid gray;
+}
+
+svg.login_icon {
+    margin-top: 1%;
+    float: left;
+    width: 10%;
+    height: 70%;
+    padding-top: 1%;
+    margin-right: 6%;
+}
+
+svg.login_icon path {
+    stroke: rgba(255, 255, 255, 0.9);
+    fill: none;
+}
+
+input.input_username {
+    font-size: 1em;
+    width: 80%;
+    height: 90%;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.login_password {
+    margin-top: 3%;
+    margin-left: 5%;
+    padding-top: 3%;
+    width: 100%;
+    height: 14%;
+    border-bottom: 1px solid gray;
+}
+
+svg.password_icon {
+    margin-top: 1%;
+    float: left;
+    width: 10%;
+    height: 70%;
+    padding-top: 1%;
+    margin-right: 6%;
+}
+
+svg.password_icon path {
+    stroke: rgba(255, 255, 255, 0.9);
+    fill: none;
+}
+
+input.input_password {
+    font-size: 1em;
+    width: 80%;
+    height: 90%;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.login_button_div {
+    margin-left: 4%;
+    padding-top: 3%;
+    width: 100%;
+    height: 14%;
+    margin-top: 2%;
+}
+
+.login_button {
+    width: 100%;
+    height: 100%;
+    background-color: mediumvioletred;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+.login_button:active {
+    border: none;
+}
+div.go_forget_password {
+    margin-top: 5%;
+    margin-left: 4%;
+    padding-top: 3%;
+    width: 100%;
+    height: 14%;
+    text-align: right;
+}
+a.go_to_forget{
+    color: white;
+    text-decoration: none;
+}
+.register_info {
+    margin-left: 4%;
+    width: 100%;
+    height: 14%;
+    text-align: center;
+    margin-top: 8%;
+    font-size: 16px;
+    color: gray;
+}
+
+.register_info a {
+    color: white;
+    text-decoration: none;
+}
+
+input {
+    outline: none;
+}
+
+button {
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}

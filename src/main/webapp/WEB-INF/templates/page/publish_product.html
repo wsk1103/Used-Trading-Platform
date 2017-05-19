@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>发布商品</title>
+    <link href="/css/home_page/header_and_nav.css" rel="stylesheet"/>
+    <link rel="icon" href="/img/page_icon.png"/>
+    <link href="/css/product/publish_product.css" rel="stylesheet"/>
+    <script src="/js/jquery-1.3.2.min.js"></script>
+    <script src="/js/home/header_model_js.js"></script>
+    <script src="/js/mall/type_list_obj.js"></script>
+    <script src="/js/publish/publish_product.js"></script>
+</head>
+<body>
+<header>
+    <span class="short_nav"></span>
+    <div class="home_icon">
+        <a href="/home" style="text-decoration: none;color: white">C2C</a>
+    </div>
+    <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
+    <span class="search_icon"></span>
+    <span class="user_icon"></span>
+    <!--修改为用户名-->
+    <span class="login_or_register_string">
+                        <!--判断是否有登陆，两者相互替换-->
+        <a href="/" th:if="${userInformation.username}==null">登陆</a>
+        <a href="/"  th:if="${userInformation.username}==null">注册</a>
+        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}" th:text="${userInformation.username}"></a>
+    </span>
+</header>
+<div class="short_nav_show">
+    <ul>
+        <li><a href="/home">首页</a></li>
+        <li><a href="/mall_page">商城</a></li>
+        <li><a href="#">发布商品</a></li>
+        <li><a href="require_product.html">求购商品</a></li>
+        <li><a href="shopping_cart.html">我的购物车</a></li>
+        <li><a href="#">反馈与意见</a></li>
+        <li><a href="#">联系我们</a></li>
+    </ul>
+</div>
+<div class="personal_nav">
+    <ul>
+        <li><a href="personal_info">个人信息</a></li>
+        <li><a href="/my_publish_product_page">我发布的商品</a></li>
+        <li><a href="/my_require_product_page">我求购的商品</a></li>
+    </ul>
+</div>
+<nav class="my_nav">
+    <ul>
+        <li><a href="/home">首页</a></li>
+        <li><a href="mall_page">商城</a></li>
+        <li><a href="#">发布商品</a></li>
+        <li><a href="require_product.html">求购商品</a></li>
+        <li><a href="shopping_cart.html">我的购物车</a></li>
+        <li><a href="#">反馈与意见</a></li>
+        <li><a href="#">联系我们</a></li>
+    </ul>
+</nav>
+<div class="top_content">
+    <div class="publish_product_div">
+        <!--@TODO表单还未填写 --->
+        <form>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>商品名</h3>
+                </div>
+                <div class="publish_content">
+                    <input type="text" class="title_input" name="name" required="required" />
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>成色</h3>
+                </div>
+                <div class="publish_content">
+                    <select class="choose_chengse" name="level">
+                            <option value="3">三成</option>
+                            <option value="4">四成</option>
+                            <option value="5">五成</option>
+                            <option value="6">六成</option>
+                            <option value="7" selected >七成</option>
+                            <option value="8">八成</option>
+                            <option value="9">九成</option>
+                            <option value="10">全新</option>
+                    </select>
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>单价</h3>
+                </div>
+                <div class="publish_content cost_content">
+                    <input type="text" class="cost_input" name="price" required="required" /><span>  RMB(.00)</span>
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>数量</h3>
+                </div>
+                <div class="publish_content">
+                    <input type="text" class="count_input" name="quantity" required="required"/>
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>详情</h3>
+                </div>
+                <div class="publish_content">
+                    <textarea class="detail_textarea" maxlength="122"
+                              placeholder="留下联系方式,方便买家联系" name="remark" required></textarea>
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>分类</h3>
+                </div>
+                <div class="publish_content">
+                    <select class="choose_first_type">
+                        <option id="type_1" selected>数码科技</option>
+                        <option id="type_2">影音家电</option>
+                        <option id="type_3">鞋服配饰</option>
+                        <option id="type_4">运动代步</option>
+                        <option id="type_5">书籍文具</option>
+                        <option id="type_6">其他</option>
+                    </select><span class="to_left">--</span>
+                    <select class="choose_second_type" >
+                        <option >三成</option>
+                        <option >四成</option>
+                        <option >五成</option>
+                        <option >六成</option>
+                        <option  >七成</option>
+                        <option >八成</option>
+                        <option >九成</option>
+                        <option >全新</option>
+                    </select><span class="to_left">--</span>
+                    <select class="choose_third_type" name="sort">
+                        <option>三成</option>
+                        <option>四成</option>
+                        <option>五成</option>
+                        <option>六成</option>
+                        <option >七成</option>
+                        <option>八成</option>
+                        <option>九成</option>
+                        <option>全新</option>
+                    </select>
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>图片</h3>
+                </div>
+                <div class="img_content">
+                    <input class="upload_img_input" type="file" name="image" required="required"/>
+                </div>
+                <img src="" class="show_choose_img" id="show_choose_img"/>
+            </div>
+            <div class="submit_content_div">
+                 <input type="submit" value="提交" class="submit_input"/>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>Copyright © 2014.Company name All rights reserved.</p>
+    </footer>
+</div>
+</body>
+</html>

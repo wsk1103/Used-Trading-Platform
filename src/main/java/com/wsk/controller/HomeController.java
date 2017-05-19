@@ -1,14 +1,18 @@
 package com.wsk.controller;
 
+import com.wsk.bean.ShopInformationBean;
 import com.wsk.pojo.*;
 import com.wsk.service.*;
+import com.wsk.tool.empty.Empty;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,25 +36,34 @@ public class HomeController {
     @Resource
     private ShopContextService shopContextService;
 
-    /*
-    @RequestMapping("home")
+
+    @RequestMapping("/home")
     public String home(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
+
         // if user login,the session will have the "userInformation"
         if (!Empty.isNullOrEmpty(userInformation)) {
+            model.addAttribute("userInformation", userInformation);
+        } else {
+            userInformation = new UserInformation();
             model.addAttribute("userInformation", userInformation);
         }
         //一般形式进入首页
         try {
 //            ShopInformation shopInformation = shopInformationService.selectByPrimaryKey(1);
-            List<ShopInformation> shopInformations = selectTen(0);
-            model.addAttribute("shopInformations", shopInformations);
+            List<ShopInformation> shopInformations = selectTen(1);
+            List<ShopInformationBean> list = new ArrayList<>();
             int counts = getShopCounts();
             model.addAttribute("shopInformationCounts", counts);
             StringBuffer stringBuffer;
+            int i=0;
             for (ShopInformation shopInformation : shopInformations) {
+                if (i>=5){
+                    break;
+                }
+                i++;
                 stringBuffer = new StringBuffer();
-                int sid = shopInformation.getId();
+//                int sid = shopInformation.getId();
                 int sort = shopInformation.getSort();
                 Specific specific = selectSpecificBySort(sort);
                 int cid = specific.getCid();
@@ -62,28 +75,96 @@ public class HomeController {
                 stringBuffer.append(classification.getName());
                 stringBuffer.append("-");
                 stringBuffer.append(specific.getName());
-                ShopPicture shopPicture = selectShopPictureOnlyOne(sid);
-                request.getSession().setAttribute("shopPicture" + sid, shopPicture.getPicture());
-                request.getSession().setAttribute("sort" + sort, stringBuffer.toString());
-//                model.addAttribute("shopPicture" + sid, shopPicture);
-//                model.addAttribute("sort" + sort, stringBuffer.toString());
-                model.addAttribute("allKinds", getAllKinds());
-                model.addAttribute("classification", getClassificationByAid(1));
-                model.addAttribute("specific", getSpecificByCid(1));
+                ShopInformationBean shopInformationBean = new ShopInformationBean();
+                shopInformationBean.setId(shopInformation.getId());
+                shopInformationBean.setName(shopInformation.getName());
+                shopInformationBean.setLevel(shopInformation.getLevel());
+                shopInformationBean.setRemark(shopInformation.getRemark());
+                shopInformationBean.setPrice(shopInformation.getPrice().doubleValue());
+                shopInformationBean.setSort(stringBuffer.toString());
+                shopInformationBean.setQuantity(shopInformation.getQuantity());
+                shopInformationBean.setTransaction(shopInformation.getTransaction());
+                shopInformationBean.setUid(shopInformation.getUid());
+                shopInformationBean.setImage(shopInformation.getImage());
+                list.add(shopInformationBean);
+//                ShopPicture shopPicture = selectShopPictureOnlyOne(sid);
+//                request.getSession().setAttribute("shopPicture" + sid, shopPicture.getPicture());
+//                request.getSession().setAttribute("sort" + sort, stringBuffer.toString());
+////                model.addAttribute("shopPicture" + sid, shopPicture);
+////                model.addAttribute("sort" + sort, stringBuffer.toString());
+//                model.addAttribute("allKinds", getAllKinds());
+//                model.addAttribute("classification", getClassificationByAid(1));
+//                model.addAttribute("specific", getSpecificByCid(1));
             }
+            model.addAttribute("shopInformationBean", list);
 //            model.addAttribute("shopInformation", shopInformation);
         } catch (Exception e) {
             e.printStackTrace();
+            return "page/login_page";
         }
-        return "home";
+        return "index";
     }
-    */
-    //进入首页获得的商品
-    @RequestMapping(value = "/home")
-    @ResponseBody
-    public List home(){
-        //        List<ShopInformation> newShops = new ArrayList<>();
-        return selectTen(1);
+
+    //    //进入首页获得的商品
+//    @RequestMapping(value = "/home")
+//    @ResponseBody
+//    public List home(){
+//        //        List<ShopInformation> newShops = new ArrayList<>();
+//        return selectTen(1);
+//    }
+    //进入商城
+    @RequestMapping(value = "/mall_page")
+    public String mallPage(HttpServletRequest request, Model model) {
+        UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
+        if (Empty.isNullOrEmpty(userInformation)) {
+            userInformation = new UserInformation();
+            model.addAttribute("userInformation", userInformation);
+        } else {
+            model.addAttribute("userInformation", userInformation);
+        }
+        try {
+            List<ShopInformation> shopInformations = selectTen(1);
+            List<ShopInformationBean> list = new ArrayList<>();
+            int counts = getShopCounts();
+            model.addAttribute("shopInformationCounts", counts);
+            StringBuffer stringBuffer;
+//            int i=0;
+            for (ShopInformation shopInformation : shopInformations) {
+//                if (i>=6){
+//                    break;
+//                }
+//                i++;
+                stringBuffer = new StringBuffer();
+                int sort = shopInformation.getSort();
+                Specific specific = selectSpecificBySort(sort);
+                int cid = specific.getCid();
+                Classification classification = selectClassificationByCid(cid);
+                int aid = classification.getAid();
+                AllKinds allKinds = selectAllKindsByAid(aid);
+                stringBuffer.append(allKinds.getName());
+                stringBuffer.append("-");
+                stringBuffer.append(classification.getName());
+                stringBuffer.append("-");
+                stringBuffer.append(specific.getName());
+                ShopInformationBean shopInformationBean = new ShopInformationBean();
+                shopInformationBean.setId(shopInformation.getId());
+                shopInformationBean.setName(shopInformation.getName());
+                shopInformationBean.setLevel(shopInformation.getLevel());
+                shopInformationBean.setRemark(shopInformation.getRemark());
+                shopInformationBean.setPrice(shopInformation.getPrice().doubleValue());
+                shopInformationBean.setSort(stringBuffer.toString());
+                shopInformationBean.setQuantity(shopInformation.getQuantity());
+                shopInformationBean.setTransaction(shopInformation.getTransaction());
+                shopInformationBean.setUid(shopInformation.getUid());
+                shopInformationBean.setImage(shopInformation.getImage());
+                list.add(shopInformationBean);
+            }
+            model.addAttribute("shopInformationBean", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "page/login_page";
+        }
+        return "page/mall_page";
     }
 
     //通过分类的第三层id获取全名
@@ -207,11 +288,4 @@ public class HomeController {
     private List<ShopContext> selectShopContextBySid(int sid, int start) {
         return shopContextService.selectBySid(sid, (start-1)*10);
     }
-
-    //获取商品首页图片
-    private ShopPicture selectShopPictureOnlyOne(int sid) {
-        return shopPictureService.selectBySidOnlyOne(sid);
-    }
-
-
 }

@@ -51,19 +51,25 @@ public class UserController {
     @Resource
     private GoodsCarService goodsCarService;
 
-    @RequestMapping("/")
-    public String wsk(Model model) {
-        model.addAttribute("wsk", "wsk");
-        return "/index";
-    }
+//    @RequestMapping("/")
+//    public String wsk(Model model) {
+//        model.addAttribute("wsk", "wsk");
+//        return "/index";
+//    }
 
     //进入登录界面
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login(HttpServletRequest request, Model model) {
         String loginToken = TokenProccessor.getInstance().makeToken();
+        String registerToken = TokenProccessor.getInstance().makeToken();
+        String forgetToken = TokenProccessor.getInstance().makeToken();
         request.getSession().setAttribute("loginToken", loginToken);
-        model.addAttribute("token", loginToken);
-        return "login";
+        request.getSession().setAttribute("registerToken", registerToken);
+        request.getSession().setAttribute("forgetToken", forgetToken);
+        model.addAttribute("registerToken", registerToken);
+        model.addAttribute("loginToken", loginToken);
+        model.addAttribute("forgetToken", forgetToken);
+        return "page/login_page";
     }
 
     //用户注册,拥有插入数据而已，没什么用的
@@ -102,25 +108,45 @@ public class UserController {
 
     //验证登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(HttpServletRequest request, Model model,
+    @ResponseBody
+    public Map login(HttpServletRequest request, Model model,
                         @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
         String loginToken = (String) request.getSession().getAttribute("loginToken");
+        Map<String, Integer> map = new HashMap<>();
+        if (Empty.isNullOrEmpty(phone)||Empty.isNullOrEmpty(password)){
+            map.put("wsk", 2);
+            return map;
+        }
         //防止重复提交
         if (Empty.isNullOrEmpty(loginToken) || !token.equals(loginToken)) {
-            return "index";
+            map.put("wsk", 1);
+            return map;
         } else {
             request.getSession().removeAttribute("loginToken");
         }
         boolean b = getId(phone, password, request);
         //失败，不存在该手机号码
         if (!b) {
-            model.addAttribute("error", "手机号码或者密码错误");
-            model.addAttribute("phone", phone);
-            return "";
+//            model.addAttribute("error", "手机号码或者密码错误");
+//            model.addAttribute("phone", phone);
+            map.put("wsk",2);
+            return map;
         }
-
-        return "index";
+        map.put("wsk",3);
+        return map;
     }
+
+    //查看用户基本信息
+    @RequestMapping(value = "/personal_info")
+    public String personalInfo(HttpServletRequest request, Model model) {
+        UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
+        if (Empty.isNullOrEmpty(userInformation)) {
+            return "login";
+        }
+        model.addAttribute("userInformation", userInformation);
+        return "page/personal/personal_info";
+    }
+
 
     //完善用户基本信息，认证
     @RequestMapping(value = "/certification", method = RequestMethod.POST)
@@ -813,7 +839,8 @@ public class UserController {
         }
         UserInformation userInformation = userInformationService.selectByPrimaryKey(uid);
         password = Encrypt.getMD5(password);
-        if (!password.equals(userPasswordService.selectByUid(userInformation.getId()).getPassword())) {
+        String password2=userPasswordService.selectByUid(userInformation.getId()).getPassword();
+        if (!password.equals(password2)) {
             return false;
         }
         //如果密码账号对应正确，将userInformation存储到session中

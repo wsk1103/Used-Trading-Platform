@@ -1,0 +1,148 @@
+/* transform是将当前元素进行一定的位移和翻转，将它们存放到指定的长方体的位置。
+比如：左侧的页面，先往x的反方向移动一半的位置，之后，将z轴移动到不让他出头，之后就将它翻转90度，
+注意，x和y就可以根据元素的百分比移动，而z不可以。
+/注意，这些都是根据指定的翻转轴进行翻转的。记得xyz轴的位置即可。
+逆时针是负数，切记。
+ */
+.register_page {
+    -webkit-transform: translateX(50%) translateZ(-150px) rotateY(90deg);
+    -moz-transform: translateX(50%) translateZ(-150px) rotateY(90deg);
+    -ms-transform: translateX(50%) translateZ(-150px) rotateY(90deg);
+    -o-transform: translateX(50%) translateZ(-150px) rotateY(90deg);
+    transform: translateX(50%) translateZ(-150px) rotateY(90deg);
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(top, rgba(186, 87, 239, 0.34) 0%, rgba(0, 0, 0, 0.5) 100%); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top, rgba(186, 87, 239, 0.34) 0%, rgba(0, 0, 0, 0.5) 100%); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top, rgba(186, 87, 239, 0.34) 0%, rgba(0, 0, 0, 0.5) 100%); /* Firefox 3.6 - 15 */
+    background: linear-gradient(top, rgba(186, 87, 239, 0.34) 0%, rgba(0, 0, 0, 0.5) 100%); /* 标准的语法（必须放在最后） */
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.top_icon {
+    width: 100%;
+    height: 41%;
+}
+
+.circle_icon {
+    width: 100%;
+    height: 100%;
+}
+div.get_vcode {
+    margin-top: 10%;
+    width: 100%;
+    height: 49%;
+}
+
+div.nickname_div {
+    margin-left: 5%;
+    margin-right: 10%;
+    width: 90%;
+    height: 13%;
+    border-bottom: 1px solid gray;
+    padding-top: 1%;
+}
+
+span.n_span {
+    margin-top: 1%;
+    float: left;
+    width: 9%;
+    height: 70%;
+    padding-top: 1%;
+    padding-left: 2%;
+    font-size: 1.7em;
+    color: white;
+}
+
+input.input_nickname {
+    margin-top: 1.5%;
+    width: 80%;
+    height: 90%;
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    color: azure;
+}
+
+div.register_phone_div{
+    margin-left: 5%;
+    padding-top: 3%;
+    width: 90%;
+    height: 13%;
+    border-bottom: 1px solid gray;
+}
+
+svg.register_phone_svg {
+    margin-top: 1%;
+    float: left;
+    width: 9%;
+    height: 70%;
+    padding-top: 1%;
+    margin-right: 2.5%;
+}
+
+svg.register_phone_svg path {
+    stroke: rgba(255, 255, 255, 0.9);
+    fill: none;
+}
+
+input.register_input_phone {
+    font-size: 1em;
+    width: 80%;
+    height: 90%;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+div.register_vcode_div {
+    margin-top: 3%;
+    margin-left: 5%;
+    padding-top: 3%;
+    width: 90%;
+    height: 14%;
+    border-bottom: 1px solid gray;
+}
+
+input.register_input_vcode {
+    font-size: 1em;
+    width: 38%;
+    height: 90%;
+    margin-right: 5%;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+button.get_vcode_button {
+    background-color: rebeccapurple;
+    border-radius: 15px;
+    color: white;
+    font-size: 1em;
+    width: 50%;
+    height: 90%;
+    border: none;
+}
+button.go_enter_password_button {
+    margin-left: 15%;
+    margin-top: 15%;
+    margin-right: 15%;
+    width: 70%;
+    height: 14%;
+    background-color: rebeccapurple;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+div.go_back_login_div {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 7%;
+    width: 70%;
+    height: 15%;
+    text-align: center;
+}
+div.go_back_login_div a.go_back_login{
+    color: white;
+    text-decoration: none;
+}
