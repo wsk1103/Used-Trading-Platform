@@ -13,6 +13,9 @@
                 var value = $('.comment_textarea').val();
 
             });
+            $('.buy_button').click(function () {
+
+            });
         });
     </script>
     <style>
@@ -50,7 +53,7 @@
             width: 100%;
         }
         .product_info_div {
-            width: 60%;
+            width: 40%;
             display: block;
             float: left;
             margin-left: 5%;
@@ -115,6 +118,17 @@
             text-indent: 2em;
             color: rgba(0,0,0,0.62);
         }
+        .buy_button {
+            width: 40%;
+            padding: 0.3em;
+            font-size: 1.5em;
+            background-color: slateblue;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            margin-top: 5em;
+            margin-left: 15%;
+        }
         footer {
             width: 96%;
             background-color: slateblue;
@@ -142,9 +156,10 @@
     <span class="search_icon"></span>
     <span class="user_icon"></span>
     <span class="login_or_register_string">
-        <!--判断是否有登陆，两者相互替换-->
-        <a href="page/login_page.html">登陆</a> ， <a href="page/login_page.html">注册</a>
-        <!--<a href="page/personal/personal_info.html" class="user_name_a">这是一个用户名这是一个用户名这是一个用户名</a>-->
+                        <!--判断是否有登陆，两者相互替换-->
+        <a href="/" th:if="${userInformation.username}==null">登陆</a>
+        <a href="/"  th:if="${userInformation.username}==null">注册</a>
+        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}" th:text="${userInformation.username}"></a>
     </span>
 </header>
 <div class="short_nav_show">
@@ -194,6 +209,7 @@
             <span class="info_content">这是一个商品，联系电话1111111111</span><br/>
             <span class="what_info">分类：</span>
             <span class="info_content">数码科技-手机-苹果</span><br/>
+            <button class="buy_button">加入购物车</button>
         </div>
         <div class="publish_comment">
             <span>留言：</span><br/><br/>

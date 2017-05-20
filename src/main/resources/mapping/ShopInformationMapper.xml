@@ -31,7 +31,7 @@
     <include refid="all" />
     FROM shopinformation
     where display = 1 order by id desc
-    limit #{start,jdbcType=INTEGER} , 10
+    limit #{start} , #{end}
   </select>
   <select id="selectOffShelf" resultMap="BaseResultMap">
     select

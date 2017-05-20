@@ -50,6 +50,12 @@ public class UserController {
     private ShopInformationService shopInformationService;
     @Resource
     private GoodsCarService goodsCarService;
+    @Resource
+    private SpecificeService specificeService;
+    @Resource
+    private ClassificationService classificationService;
+    @Resource
+    private AllKindsService allKindsService;
 
 //    @RequestMapping("/")
 //    public String wsk(Model model) {
@@ -110,10 +116,10 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Map login(HttpServletRequest request, Model model,
-                        @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
+                     @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
         String loginToken = (String) request.getSession().getAttribute("loginToken");
         Map<String, Integer> map = new HashMap<>();
-        if (Empty.isNullOrEmpty(phone)||Empty.isNullOrEmpty(password)){
+        if (Empty.isNullOrEmpty(phone) || Empty.isNullOrEmpty(password)) {
             map.put("wsk", 2);
             return map;
         }
@@ -129,10 +135,10 @@ public class UserController {
         if (!b) {
 //            model.addAttribute("error", "手机号码或者密码错误");
 //            model.addAttribute("phone", phone);
-            map.put("wsk",2);
+            map.put("wsk", 2);
             return map;
         }
-        map.put("wsk",3);
+        map.put("wsk", 3);
         return map;
     }
 
@@ -141,8 +147,11 @@ public class UserController {
     public String personalInfo(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (Empty.isNullOrEmpty(userInformation)) {
-            return "login";
+            return "";
         }
+        String personalInfoToken = TokenProccessor.getInstance().makeToken();
+        request.getSession().setAttribute("personalInfoToken", personalInfoToken);
+        model.addAttribute("token", personalInfoToken);
         model.addAttribute("userInformation", userInformation);
         return "page/personal/personal_info";
     }
@@ -151,25 +160,33 @@ public class UserController {
     //完善用户基本信息，认证
     @RequestMapping(value = "/certification", method = RequestMethod.POST)
     public String certification(HttpServletRequest request, Model model,
-                                @RequestParam String realName, @RequestParam String clazz, @RequestParam String token,
-                                @RequestParam String sno, @RequestParam String dormitory, @RequestParam String gender) {
-        String certificationToken = (String) request.getSession().getAttribute("certificationToken");
-        //防止重复提交
-        if (Empty.isNullOrEmpty(certificationToken) || !certificationToken.equals(token)) {
-            return "";
-        } else {
-            request.getSession().removeAttribute("certificationToken");
-        }
+                                @RequestParam(required = false) String realName,
+                                @RequestParam(required = false) String clazz, @RequestParam String token,
+                                @RequestParam(required = false) String sno, @RequestParam(required = false) String dormitory,
+                                @RequestParam(required = false) String gender) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         //该用户还没有登录
         if (Empty.isNullOrEmpty(userInformation)) {
             return "";
         }
-        realName = StringUtils.replaceBlank(realName);
-        clazz = StringUtils.replaceBlank(clazz);
-        sno = StringUtils.replaceBlank(sno);
-        dormitory = StringUtils.replaceBlank(dormitory);
-        gender = StringUtils.replaceBlank(gender);
+        String certificationToken = (String) request.getSession().getAttribute("personalInfoToken");
+        //防止重复提交
+        if (Empty.isNullOrEmpty(certificationToken) || !certificationToken.equals(token)) {
+            return "";
+        }
+//        else {
+//            request.getSession().removeAttribute("certificationToken");
+//        }
+        if (realName != null)
+            realName = StringUtils.replaceBlank(realName);
+        if (clazz != null)
+            clazz = StringUtils.replaceBlank(clazz);
+        if (sno != null)
+            sno = StringUtils.replaceBlank(sno);
+        if (dormitory != null)
+            dormitory = StringUtils.replaceBlank(dormitory);
+        if (gender != null)
+            gender = StringUtils.replaceBlank(gender);
         //数据格式错误
         if (realName.length() > 25 || clazz.length() > 25 || sno.length() > 12 || dormitory.length() > 25 || gender.length() > 2) {
             return "";
@@ -518,12 +535,15 @@ public class UserController {
     public String insertGoods(@RequestParam String name, @RequestParam int level,
                               @RequestParam String remark, @RequestParam double price,
                               @RequestParam int sort, @RequestParam int quantity,
-                              @RequestParam String token, @RequestParam MultipartFile image,
+                              @RequestParam String token, @RequestParam(required = false) MultipartFile image,
+                              @RequestParam int action,@RequestParam(required = false) int id,
                               HttpServletRequest request, Model model) {
         String goodsToken = (String) request.getSession().getAttribute("goodsToken");
+//        String publishProductToken = TokenProccessor.getInstance().makeToken();
+//        request.getSession().setAttribute("token",publishProductToken);
         //防止重复提交
         if (Empty.isNullOrEmpty(goodsToken) || !goodsToken.equals(token)) {
-            return "";
+            return "/publish_product";
         } else {
             request.getSession().removeAttribute("goodsToken");
         }
@@ -533,93 +553,143 @@ public class UserController {
             //如果用户不存在，
             return "";
         }
-        String path = "D:\\";
-        String random = "image\\" + StringUtils.getRandomChar() + new Date().getTime();
-        String fileName = "\\" + random + ".jpg";
-        File file = new File(path, fileName);
-        if (!file.exists()) {
-            file.mkdir();
-        }
-        try {
-            image.transferTo(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        name = StringUtils.replaceBlank(name);
-        remark = StringUtils.replaceBlank(remark);
-        //judge the data`s format
-        if (Empty.isNullOrEmpty(name) || Empty.isNullOrEmpty(level) || Empty.isNullOrEmpty(remark) || Empty.isNullOrEmpty(price)
-                || Empty.isNullOrEmpty(sort) || Empty.isNullOrEmpty(quantity) || name.length() > 25 || remark.length() > 122) {
-            return "";
-        }
-        //begin insert the shopInformation to the MySQL
-        ShopInformation shopInformation = new ShopInformation();
-        shopInformation.setName(name);
-        shopInformation.setLevel(level);
-        shopInformation.setRemark(remark);
-        shopInformation.setPrice(new BigDecimal(price));
-        shopInformation.setSort(sort);
-        shopInformation.setQuantity(quantity);
-        shopInformation.setModified(new Date());
-        shopInformation.setImage(random);//This is the other uniquely identifies
-        shopInformation.setUid(4);
-        int uid = (int) request.getSession().getAttribute("uid");
-        shopInformation.setUid(uid);
-        try {
-            int result = shopInformationService.insertSelective(shopInformation);
-            //插入失败？？？
-            if (result != 1) {
-                return "";
+        //插入
+        if (action==1) {
+            if (Empty.isNullOrEmpty(image)) {
+                model.addAttribute("message", "请选择图片!!!");
+                return "/publish_product";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-//        //插入商品图片
-//        ShopPicture shopPicture = new ShopPicture();
-//        shopPicture.setModified(new Date());
-//        shopPicture.setPicture(fileName);
-        int sid = shopInformationService.selectIdByImage(random);// get the id which is belongs shopInformation
-//        shopPicture.setSid(sid);
-//        try {
-//            int result = shopPictureService.insertSelective(shopPicture);
-//            if (result != 1) {
-//                //if insert failure,transaction rollback.
-//                shopInformationService.deleteByPrimaryKey(sid);
-//                return "";
-//            }
-//        } catch (Exception e) {
-//            //if insert failure,transaction rollback.
-//            e.printStackTrace();
-//            shopInformationService.deleteByPrimaryKey(sid);
-//            return "";
-//        }
-
-        //将发布的商品的编号插入到用户的发布中
-//        int spid = shopPictureService.selectBySidOnlyOne(sid).getId();// This is the uniquely identifies of the shopPicture
-        UserRelease userRelease = new UserRelease();
-        userRelease.setModified(new Date());
-        userRelease.setSid(sid);
-        userRelease.setUid(uid);
-        try {
-            int result = userReleaseService.insertSelective(userRelease);
-            //如果关联失败，删除对应的商品和商品图片
-            if (result != 1) {
+            String random;
+            String path = "D:\\";
+            random = "image\\" + StringUtils.getRandomChar() + new Date().getTime() + ".jpg";
+//        String fileName = "\\" + random + ".jpg";
+            File file = new File(path, random);
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            try {
+                image.transferTo(file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            name = StringUtils.replaceBlank(name);
+            remark = StringUtils.replaceBlank(remark);
+            //judge the data`s format
+            if (Empty.isNullOrEmpty(name) || Empty.isNullOrEmpty(level) || Empty.isNullOrEmpty(remark) || Empty.isNullOrEmpty(price)
+                    || Empty.isNullOrEmpty(sort) || Empty.isNullOrEmpty(quantity) || name.length() > 25 || remark.length() > 122) {
+                model.addAttribute("message", "请输入正确的格式!!!!!");
+                model.addAttribute("token", goodsToken);
+                return "/publish_product";
+            }
+            //begin insert the shopInformation to the MySQL
+            ShopInformation shopInformation = new ShopInformation();
+            shopInformation.setName(name);
+            shopInformation.setLevel(level);
+            shopInformation.setRemark(remark);
+            shopInformation.setPrice(new BigDecimal(price));
+            shopInformation.setSort(sort);
+            shopInformation.setQuantity(quantity);
+            shopInformation.setModified(new Date());
+            shopInformation.setImage(random);//This is the other uniquely identifies
+//        shopInformation.setUid(4);
+            int uid = (int) request.getSession().getAttribute("uid");
+            shopInformation.setUid(uid);
+            try {
+                int result = shopInformationService.insertSelective(shopInformation);
+                //插入失败？？？
+                if (result != 1) {
+                    model.addAttribute("message", "请输入正确的格式!!!!!");
+                    model.addAttribute("token", goodsToken);
+                    return "/publish_product";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                model.addAttribute("token", goodsToken);
+                model.addAttribute("message", "请输入正确的格式!!!!!");
+                return "/publish_product";
+            }
+            int sid = shopInformationService.selectIdByImage(random);// get the id which is belongs shopInformation
+            //将发布的商品的编号插入到用户的发布中
+            UserRelease userRelease = new UserRelease();
+            userRelease.setModified(new Date());
+            userRelease.setSid(sid);
+            userRelease.setUid(uid);
+            try {
+                int result = userReleaseService.insertSelective(userRelease);
+                //如果关联失败，删除对应的商品和商品图片
+                if (result != 1) {
+                    //if insert failure,transaction rollback.
+                    shopInformationService.deleteByPrimaryKey(sid);
+//                shopPictureService.deleteByPrimaryKey(spid);
+                    model.addAttribute("token", goodsToken);
+                    model.addAttribute("message", "请输入正确的格式!!!!!");
+                    return "/publish_product";
+                }
+            } catch (Exception e) {
                 //if insert failure,transaction rollback.
                 shopInformationService.deleteByPrimaryKey(sid);
-//                shopPictureService.deleteByPrimaryKey(spid);
-            }
-        } catch (Exception e) {
-            //if insert failure,transaction rollback.
-            shopInformationService.deleteByPrimaryKey(sid);
 //            shopPictureService.deleteByPrimaryKey(spid);
-            e.printStackTrace();
-            return "";
-        }
-        //publish success
+                e.printStackTrace();
+                model.addAttribute("token", goodsToken);
+                model.addAttribute("message", "请输入正确的格式!!!!!");
+                return "/publish_product";
+            }
+
+            //publish success
 //        model.addAttribute("shopPicture", shopPicture);
-        model.addAttribute("shopInformation", shopInformation);
-        return "success";
+            shopInformation.setId(sid);
+            goodsToken = TokenProccessor.getInstance().makeToken();
+            request.getSession().setAttribute("goodsToken", goodsToken);
+            model.addAttribute("token", goodsToken);
+            model.addAttribute("shopInformation", shopInformation);
+            model.addAttribute("userInformation", userInformation);
+            String sb = getSort(sort);
+            model.addAttribute("sort", sb);
+            model.addAttribute("action", 2);
+        } else if (action==2){
+            ShopInformation shopInformation = new ShopInformation();
+            shopInformation.setModified(new Date());
+            shopInformation.setQuantity(quantity);
+            shopInformation.setSort(sort);
+            shopInformation.setPrice(new BigDecimal(price));
+            shopInformation.setRemark(remark);
+            shopInformation.setLevel(level);
+            shopInformation.setName(name);
+            shopInformation.setId(id);
+            try {
+                int result = shopInformationService.updateByPrimaryKeySelective(shopInformation);
+                if (result != 1) {
+                    return "/publish_product";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "/publish_product";
+            }
+            goodsToken = TokenProccessor.getInstance().makeToken();
+            request.getSession().setAttribute("goodsToken", goodsToken);
+            model.addAttribute("token", goodsToken);
+            shopInformation = shopInformationService.selectByPrimaryKey(id);
+            model.addAttribute("userInformation", userInformation);
+            model.addAttribute("shopInformation", shopInformation);
+            model.addAttribute("action", 2);
+            model.addAttribute("sort", getSort(sort));
+        }
+        return "page/publish_product";
+    }
+
+    private String getSort(int sort) {
+        StringBuilder sb = new StringBuilder();
+        Specific specific = selectSpecificBySort(sort);
+        int cid = specific.getCid();
+        Classification classification = selectClassificationByCid(cid);
+        int aid = classification.getAid();
+        AllKinds allKinds = selectAllKindsByAid(aid);
+        sb.append(allKinds.getName());
+        sb.append("-");
+        sb.append(classification.getName());
+        sb.append("-");
+        sb.append(specific.getName());
+        return sb.toString();
     }
 
     //下架商品
@@ -676,6 +746,9 @@ public class UserController {
         list = selectReleaseByUid((Integer) request.getSession().getAttribute("uid"), start);
         return list;
     }
+
+    //更新商品信息
+
 
     //查看用户收藏的货物的总数
     private int getCollectionCounts(int uid) {
@@ -839,7 +912,7 @@ public class UserController {
         }
         UserInformation userInformation = userInformationService.selectByPrimaryKey(uid);
         password = Encrypt.getMD5(password);
-        String password2=userPasswordService.selectByUid(userInformation.getId()).getPassword();
+        String password2 = userPasswordService.selectByUid(userInformation.getId()).getPassword();
         if (!password.equals(password2)) {
             return false;
         }
@@ -847,5 +920,20 @@ public class UserController {
         request.getSession().setAttribute("userInformation", userInformation);
         request.getSession().setAttribute("uid", uid);
         return true;
+    }
+
+    //获取最详细的分类，第三层
+    private Specific selectSpecificBySort(int sort) {
+        return specificeService.selectByPrimaryKey(sort);
+    }
+
+    //获得第二层分类
+    private Classification selectClassificationByCid(int cid) {
+        return classificationService.selectByPrimaryKey(cid);
+    }
+
+    //获得第一层分类
+    private AllKinds selectAllKindsByAid(int aid) {
+        return allKindsService.selectByPrimaryKey(aid);
     }
 }

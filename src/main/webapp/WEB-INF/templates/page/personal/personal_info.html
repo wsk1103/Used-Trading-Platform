@@ -57,6 +57,9 @@
         <li><a href="/my_require_product_page">我求购的商品</a></li>
     </ul>
 </div>
+<div style="display: none" th:if="${message}!=null" class="show_tip" th:text="${message}" th:value="${message}">
+</div>
+<input type="hidden" class="token" th:value="${token}"/>
 <div class="top_content">
     <div class="publish_product_div">
         <div id="accordion">

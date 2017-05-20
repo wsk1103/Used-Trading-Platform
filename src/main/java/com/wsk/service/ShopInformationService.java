@@ -3,6 +3,7 @@ package com.wsk.service;
 import com.wsk.pojo.ShopInformation;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wsk1103 on 2017/5/12.
@@ -20,7 +21,7 @@ public interface ShopInformationService {
 
     int updateByPrimaryKey(ShopInformation record);
 
-    List<ShopInformation> selectTen(int start);
+    List<ShopInformation> selectTen(Map map);
 
     List<ShopInformation> selectOffShelf(int uid, int start);
 

@@ -30,13 +30,17 @@ public class GoodsController {
 
 
     //进入到发布商品页面
-    @RequestMapping(value = "/publish", method = RequestMethod.GET)
+    @RequestMapping(value = "/publish_product", method = RequestMethod.GET)
     public String publish(HttpServletRequest request, Model model) {
         //先判断用户有没有登录
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (Empty.isNullOrEmpty(userInformation)) {
             //如果没有登录
+//            userInformation = new UserInformation();
+//            model.addAttribute("userInformation", userInformation);
             return "";
+        } else {
+            model.addAttribute("userInformation", userInformation);
         }
         //如果登录了，判断该用户有没有经过认证
         try {
@@ -46,7 +50,8 @@ public class GoodsController {
             String dormitory = userInformation.getDormitory();
             if (Empty.isNullOrEmpty(realName) || Empty.isNullOrEmpty(clazz) || Empty.isNullOrEmpty(sno) || Empty.isNullOrEmpty(dormitory)) {
                 //没有
-                return "";
+                model.addAttribute("message", "请先认证真实信息");
+                return "page/personal/personal_info";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +60,7 @@ public class GoodsController {
         String goodsToken = TokenProccessor.getInstance().makeToken();
         request.getSession().setAttribute("goodsToken", goodsToken);
         model.addAttribute("token", goodsToken);
-        return "";
+        return "page/publish_product";
     }
 
     //模糊查询商品
@@ -71,5 +76,11 @@ public class GoodsController {
     public ShopInformation findShopById(@RequestParam int id) {
         return shopInformationService.selectByPrimaryKey(id);
     }
+
+//    //通过id查看商品详情
+//    @RequestMapping(value = "/showShop")
+//    public String showShop(@RequestParam int id, HttpServletRequest request, Model model) {
+//        ShopInformation shopInformation =
+//    }
 
 }

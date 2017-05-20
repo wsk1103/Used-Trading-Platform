@@ -87,16 +87,16 @@
     padding: 0;
 }
 .product_content_div {
-    width: 70%;
+    width: 75%;
     margin-top: 3%;
     margin-left: 25%;
     display: block;
     z-index: 25;
 }
 div.detail_product {
-    width: 22%;
+    width: 19%;
     float: left;
-    margin: 5% 12% ;
+    margin: 5% 5% ;
     background-color: white;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
     border-radius: 5px;
@@ -145,7 +145,7 @@ div.pagination_div {
     height: 36px;
     clear: both;
     margin-bottom: 10%;
-    margin-left: 41%;
+    margin-left: 46%;
 }
 
 .pagination_div ul {

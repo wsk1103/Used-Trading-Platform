@@ -112,3 +112,8 @@ $(function () {
         $('.choose_third_type').html(thirdText);
     }
 });
+$(function () {
+   if (($('.show_tip').is(':hidden'))){
+       alert("请输入正确的格式！！！！");
+   }
+});

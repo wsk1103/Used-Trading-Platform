@@ -3,6 +3,7 @@ package com.wsk.dao;
 import com.wsk.pojo.ShopInformation;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ShopInformationMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,7 +18,7 @@ public interface ShopInformationMapper {
 
     int updateByPrimaryKey(ShopInformation record);
 
-    List<ShopInformation> selectTen(Integer start);
+    List<ShopInformation> selectTen(Map map);
 
     List<ShopInformation> selectOffShelf(Integer uid, Integer start);
 

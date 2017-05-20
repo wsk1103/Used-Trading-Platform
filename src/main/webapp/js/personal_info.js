@@ -26,3 +26,9 @@ $( function() {
         }
     });
 } );
+$(function () {
+    if ($('.show_tip').is(':hidden')){
+        var show_tip = $('.show_tip').val();
+        alert('请先认证真实信息！！！！！');
+    }
+});

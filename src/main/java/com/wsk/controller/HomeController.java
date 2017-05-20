@@ -51,17 +51,17 @@ public class HomeController {
         //一般形式进入首页
         try {
 //            ShopInformation shopInformation = shopInformationService.selectByPrimaryKey(1);
-            List<ShopInformation> shopInformations = selectTen(1);
+            List<ShopInformation> shopInformations = selectTen(1,5);
             List<ShopInformationBean> list = new ArrayList<>();
             int counts = getShopCounts();
             model.addAttribute("shopInformationCounts", counts);
             StringBuffer stringBuffer;
-            int i=0;
+//            int i=0;
             for (ShopInformation shopInformation : shopInformations) {
-                if (i>=5){
-                    break;
-                }
-                i++;
+//                if (i>=5){
+//                    break;
+//                }
+//                i++;
                 stringBuffer = new StringBuffer();
 //                int sid = shopInformation.getId();
                 int sort = shopInformation.getSort();
@@ -79,8 +79,8 @@ public class HomeController {
                 shopInformationBean.setId(shopInformation.getId());
                 shopInformationBean.setName(shopInformation.getName());
                 shopInformationBean.setLevel(shopInformation.getLevel());
-                shopInformationBean.setRemark(shopInformation.getRemark());
                 shopInformationBean.setPrice(shopInformation.getPrice().doubleValue());
+                shopInformationBean.setRemark(shopInformation.getRemark());
                 shopInformationBean.setSort(stringBuffer.toString());
                 shopInformationBean.setQuantity(shopInformation.getQuantity());
                 shopInformationBean.setTransaction(shopInformation.getTransaction());
@@ -123,7 +123,7 @@ public class HomeController {
             model.addAttribute("userInformation", userInformation);
         }
         try {
-            List<ShopInformation> shopInformations = selectTen(1);
+            List<ShopInformation> shopInformations = selectTen(1,12);
             List<ShopInformationBean> list = new ArrayList<>();
             int counts = getShopCounts();
             model.addAttribute("shopInformationCounts", counts);
@@ -223,13 +223,14 @@ public class HomeController {
         map.put("counts", counts);
         return map;
     }
-    //getShops,10
+    //getShops,12
     @RequestMapping(value = "/getShops")
     @ResponseBody
     public List getShops(@RequestParam int start){
         List<ShopInformation> list = new ArrayList<>();
         try {
-            list = selectTen(start);
+            int end = 12;
+            list = selectTen(start,end);
         } catch (Exception e) {
             e.printStackTrace();
             return list;
@@ -239,9 +240,12 @@ public class HomeController {
 
 
 
-    //获取商品，分页,一次性获取10个
-    private List<ShopInformation> selectTen(int start) {
-        List<ShopInformation> list = shopInformationService.selectTen((start-1)*10);
+    //获取商品，分页,一次性获取end个
+    private List<ShopInformation> selectTen(int start,int end) {
+        Map map = new HashMap();
+        map.put("start",(start-1)*end);
+        map.put("end", end);
+        List<ShopInformation> list = shopInformationService.selectTen(map);
         return list;
     }
 

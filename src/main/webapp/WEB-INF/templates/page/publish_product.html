@@ -24,8 +24,9 @@
     <span class="login_or_register_string">
                         <!--判断是否有登陆，两者相互替换-->
         <a href="/" th:if="${userInformation.username}==null">登陆</a>
-        <a href="/"  th:if="${userInformation.username}==null">注册</a>
-        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}" th:text="${userInformation.username}"></a>
+        <a href="/" th:if="${userInformation.username}==null">注册</a>
+        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}"
+           th:text="${userInformation.username}"></a>
     </span>
 </header>
 <div class="short_nav_show">
@@ -33,8 +34,8 @@
         <li><a href="/home">首页</a></li>
         <li><a href="/mall_page">商城</a></li>
         <li><a href="#">发布商品</a></li>
-        <li><a href="require_product.html">求购商品</a></li>
-        <li><a href="shopping_cart.html">我的购物车</a></li>
+        <li><a href="require_product">求购商品</a></li>
+        <li><a href="shopping_cart">我的购物车</a></li>
         <li><a href="#">反馈与意见</a></li>
         <li><a href="#">联系我们</a></li>
     </ul>
@@ -51,22 +52,30 @@
         <li><a href="/home">首页</a></li>
         <li><a href="mall_page">商城</a></li>
         <li><a href="#">发布商品</a></li>
-        <li><a href="require_product.html">求购商品</a></li>
-        <li><a href="shopping_cart.html">我的购物车</a></li>
+        <li><a href="require_product">求购商品</a></li>
+        <li><a href="shopping_cart">我的购物车</a></li>
         <li><a href="#">反馈与意见</a></li>
         <li><a href="#">联系我们</a></li>
     </ul>
 </nav>
+<div style="display: none" th:if="${message}==null" th:value="${message}" th:text="${message}" class="show_tip"></div>
 <div class="top_content">
     <div class="publish_product_div">
-        <!--@TODO表单还未填写 --->
-        <form>
+
+        <form action="/insertGoods" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:value="${token}" name="token"/>
+            <input type="hidden" th:value="${action}" value="1" name="action"/>
+            <input type="hidden" th:value="${shopInformation.id}"/>
             <div class="publish_one_par">
                 <div class="publish_title">
                     <h3>商品名</h3>
                 </div>
                 <div class="publish_content">
-                    <input type="text" class="title_input" name="name" required="required" />
+                    <input type="text" class="title_input" name="name" required="required"
+                           th:if="${shopInformation.name}==null"/>
+                    <input type="text" class="title_input" name="name" required="required"
+                           th:if="${shopInformation.name}!=null" th:value="${shopInformation.name}"
+                           th:text="${shopInformation.name}"/>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -75,14 +84,24 @@
                 </div>
                 <div class="publish_content">
                     <select class="choose_chengse" name="level">
-                            <option value="3">三成</option>
-                            <option value="4">四成</option>
-                            <option value="5">五成</option>
-                            <option value="6">六成</option>
-                            <option value="7" selected >七成</option>
-                            <option value="8">八成</option>
-                            <option value="9">九成</option>
-                            <option value="10">全新</option>
+                        <div style="display: none" th:if="${shopInformation.level}!=null" th:switch="${shopInformation.level}">
+                            <option th:case="'3'" value="3">三成</option>
+                            <option th:case="'4'" value="4">四成</option>
+                            <option th:case="5" value="5">五成</option>
+                            <option th:case="5" value="6">六成</option>
+                            <option th:case="7" value="7">七成</option>
+                            <option th:case="8" value="8">八成</option>
+                            <option th:case="9" value="9">九成</option>
+                            <option th:case="10" value="10">全新</option>
+                        </div>
+                        <option value="3">三成</option>
+                        <option value="4">四成</option>
+                        <option value="5">五成</option>
+                        <option value="6">六成</option>
+                        <option value="7" selected="selected">七成</option>
+                        <option value="8">八成</option>
+                        <option value="9">九成</option>
+                        <option value="10">全新</option>
                     </select>
                 </div>
             </div>
@@ -91,7 +110,10 @@
                     <h3>单价</h3>
                 </div>
                 <div class="publish_content cost_content">
-                    <input type="text" class="cost_input" name="price" required="required" /><span>  RMB(.00)</span>
+                    <input type="text" class="cost_input" name="price" required="required" th:if="${shopInformation.price}==null"/><span>  RMB(.00)</span>
+                    <input type="text" class="cost_input" name="price" required="required"
+                           th:if="${shopInformation.price}!=null" th:value="${shopInformation.price}" th:text="${shopInformation.price}"/>
+                    <span>  RMB(.00)</span>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -99,7 +121,9 @@
                     <h3>数量</h3>
                 </div>
                 <div class="publish_content">
-                    <input type="text" class="count_input" name="quantity" required="required"/>
+                    <input type="text" class="count_input" name="quantity" required="required" th:if="${shopInformation.quantity}==null"/>
+                    <input type="text" class="count_input" name="quantity" required="required"
+                           th:if="${shopInformation.quantity}!=null" th:text="${shopInformation.quantity}" th:value="${shopInformation.quantity}"/>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -107,8 +131,9 @@
                     <h3>详情</h3>
                 </div>
                 <div class="publish_content">
-                    <textarea class="detail_textarea" maxlength="122"
-                              placeholder="留下联系方式,方便买家联系" name="remark" required></textarea>
+                    <textarea class="detail_textarea" maxlength="122" placeholder="留下联系方式,方便买家联系" name="remark" required="required" th:if="${shopInformation.remark}==null"></textarea>
+                    <textarea class="detail_textarea" maxlength="122" placeholder="留下联系方式,方便买家联系" name="remark" required="required"
+                              th:if="${shopInformation.remark}!=null" th:value="${shopInformation.remark}" th:text="${shopInformation.remark}"></textarea>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -117,33 +142,34 @@
                 </div>
                 <div class="publish_content">
                     <select class="choose_first_type">
-                        <option id="type_1" selected>数码科技</option>
+                        <option id="type_1" selected="selected">数码科技</option>
                         <option id="type_2">影音家电</option>
                         <option id="type_3">鞋服配饰</option>
                         <option id="type_4">运动代步</option>
                         <option id="type_5">书籍文具</option>
                         <option id="type_6">其他</option>
                     </select><span class="to_left">--</span>
-                    <select class="choose_second_type" >
-                        <option >三成</option>
-                        <option >四成</option>
-                        <option >五成</option>
-                        <option >六成</option>
-                        <option  >七成</option>
-                        <option >八成</option>
-                        <option >九成</option>
-                        <option >全新</option>
+                    <select class="choose_second_type">
+                        <option>三成</option>
+                        <option>四成</option>
+                        <option>五成</option>
+                        <option>六成</option>
+                        <option>七成</option>
+                        <option>八成</option>
+                        <option>九成</option>
+                        <option>全新</option>
                     </select><span class="to_left">--</span>
                     <select class="choose_third_type" name="sort">
                         <option>三成</option>
                         <option>四成</option>
                         <option>五成</option>
                         <option>六成</option>
-                        <option >七成</option>
+                        <option>七成</option>
                         <option>八成</option>
                         <option>九成</option>
                         <option>全新</option>
                     </select>
+                    <span th:text="${sort}" th:value="${sort}"></span>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -154,9 +180,10 @@
                     <input class="upload_img_input" type="file" name="image" required="required"/>
                 </div>
                 <img src="" class="show_choose_img" id="show_choose_img"/>
+                <img src="" class="show_choose_img" th:if="${shopInformation.image}!=null" th:src="${shopInformation.image}"/>
             </div>
             <div class="submit_content_div">
-                 <input type="submit" value="提交" class="submit_input"/>
+                <input type="submit" value="提交" class="submit_input"/>
             </div>
         </form>
     </div>

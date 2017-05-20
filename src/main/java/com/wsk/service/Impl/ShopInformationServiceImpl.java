@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wsk1103 on 2017/5/12.
@@ -47,8 +48,8 @@ public class ShopInformationServiceImpl implements ShopInformationService{
     }
 
     @Override
-    public List<ShopInformation> selectTen(int start) {
-        return shopInformationMapper.selectTen(start);
+    public List<ShopInformation> selectTen(Map map) {
+        return shopInformationMapper.selectTen(map);
     }
 
     @Override
