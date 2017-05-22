@@ -55,4 +55,14 @@ public class UserWantServiceImpl implements UserWantService {
     public List<UserWant> selectByUid(int uid, int start) {
         return userWantMapper.selectByUid(uid, start);
     }
+
+    @Override
+    public List<UserWant> selectMineByUid(int id) {
+        return userWantMapper.selectMineByUid(id);
+    }
+
+    @Override
+    public List<UserWant> selectAll() {
+        return userWantMapper.selectAll();
+    }
 }

@@ -1,6 +1,7 @@
 package com.wsk.dao;
 
 import com.wsk.pojo.ShopInformation;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -29,4 +30,12 @@ public interface ShopInformationMapper {
     int selectIdByImage(String image);
 
     List<ShopInformation> selectByName(String name);
+
+    //通过分类选择
+    @Select("select * from shopinformation where sort=#{sort} and display =1")
+    List<ShopInformation> selectBySort(int sort);
+
+    //选择用户的发布
+    @Select("select * from shopinformation where uid=#{uid} and display=1")
+    List<ShopInformation> selectUserReleaseByUid(int uid);
 }

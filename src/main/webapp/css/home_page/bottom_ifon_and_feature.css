@@ -18,18 +18,17 @@
 
 .featured_products .product {
     position: relative;
-    width: 15%;
-    height: 75%;
     float: left;
     margin-left: 3%;
     margin-right: 2%;
     display: block;
     text-align: center;
     line-height: 2em;
+    width: 14.5%;
 }
 
 .featured_products .product .product_name {
-    color: rgba(0,0,0,0.62);
+    /*color: rgba(0,0,0,0.62);*/
     font-size: 1em;
     display: inline-block;
     overflow-x: hidden;

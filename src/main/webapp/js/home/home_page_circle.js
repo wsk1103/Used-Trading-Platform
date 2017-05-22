@@ -108,4 +108,8 @@ $(function () {
             isMove = false;
         });
     }
+    // $('.product_name').click(function () {
+    //     var id = $(this).attr('value');
+    //     window.location.href='/selectById?id='+id;
+    // });
 });

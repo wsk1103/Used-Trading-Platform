@@ -30,7 +30,7 @@
                     <svg class="login_icon" viewBox="0 0 20 20">
                         <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
                     </svg>
-                    <input type="hidden" th:value="${loginToken}" class="login_token"/>
+                    <input type="hidden" th:value="${token}" class="token"/>
                     <input type="text" placeholder="手机号码" class="input_username"/>
                 </div>
                 <div class="login_password">
@@ -67,7 +67,6 @@
                     <svg class="register_phone_svg" viewBox="0 0 20 20">
                         <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
                     </svg>
-                    <input type="hidden" th:value="${registerToken}" class="register_token"/>
                     <input type="text" placeholder="手机号码" class="register_input_phone"/>
                 </div>
                 <div class="register_vcode_div">
@@ -126,7 +125,6 @@
                     <svg class="register_phone_svg" viewBox="0 0 20 20">
                         <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
                     </svg>
-                    <input type="hidden" th:value="${forgetToken}" class="forget_token"/>
                     <input type="text" placeholder="手机号码" class="forget_input_phone"/>
                 </div>
                 <div class="forget_get_vcode_div">

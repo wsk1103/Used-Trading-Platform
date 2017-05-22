@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>求购商品</title>
+    <title>修改求购商品</title>
     <link rel="icon" href="/img/page_icon.png"/>
     <link rel="stylesheet" href="/css/home_page/header_and_nav.css"/>
     <link rel="stylesheet" href="/css/product/require_product.css"/>
@@ -70,7 +70,7 @@
                     <h3>商品名</h3>
                 </div>
                 <div class="publish_content">
-                    <input type="text" class="title_input" name="name" required="required"/>
+                    <input type="text" class="title_input" name="name" required="required" th:value="${userWant.name}" th:text="${userWant.name}"/>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -78,7 +78,7 @@
                     <h3>数量</h3>
                 </div>
                 <div class="publish_content">
-                    <input type="text" class="count_input" name="quantity" required="required"/>
+                    <input type="text" class="count_input" name="quantity" required="required"th:value="${userWant.quantity}" th:text="${userWant.quantity}"/>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -86,7 +86,8 @@
                     <h3>单价</h3>
                 </div>
                 <div class="publish_content cost_content">
-                    <input type="text" class="cost_input" name="price" required="required"/><span>  RMB(.00)</span>
+                    <input type="text" class="cost_input" name="price" required="required" th:value="${userWant.price}" th:text="${userWant.price}"/>
+                    <span>  RMB(.00)</span>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -95,7 +96,7 @@
                 </div>
                 <div class="publish_content">
                     <textarea class="detail_textarea" maxlength="122"
-                              placeholder="留下联系方式,方便卖家联系" name="remark" required="required"></textarea>
+                              placeholder="留下联系方式,方便卖家联系" name="remark" required="required" th:value="${userWant.remark}" th:text="${userWant.remark}"></textarea>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -132,6 +133,7 @@
                         <option>全新</option>
                     </select>
                 </div>
+                <div th:value="${sort}" th:text="${sort}"></div>
             </div>
             <div class="submit_content_div">
                 <input type="submit" value="提交" class="submit_input"/>

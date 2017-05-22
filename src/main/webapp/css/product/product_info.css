@@ -1,0 +1,130 @@
+
+body{
+    font-family: 'SimSun';
+}
+.top_content {
+    width: 99%;
+    height: auto;
+    /*background-color: aquamarine;*/
+    position: absolute;
+    display: block;
+}
+.publish_product_div {
+    padding-top: 1%;
+    padding-bottom: 5%;
+    width: 70%;
+    height: auto;
+    margin-left: 15%;
+    margin-top: 12%;
+    margin-bottom: 10%;
+    /*background-color: red;*/
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+    display: inline-block;
+}
+.product_img_div {
+    width: 30%;
+    height: auto;
+    float: left;
+    margin-left: 9%;
+}
+.product_img {
+    width: 100%;
+}
+.product_info_div {
+    width: 40%;
+    display: block;
+    float: left;
+    margin-left: 5%;
+    line-height: 2.1em;
+    margin-bottom: 10%;
+    margin-top:3%;
+}
+.product_info_div .what_info {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+.publish_comment {
+    clear: both;
+    margin-left: 5%;
+}
+.publish_comment span {
+    font-size: 1.3em;
+    color: slateblue;
+}
+.publish_comment textarea {
+    width: 90%;
+    resize: none;
+    color: rgba(0,0,0,0.78);
+    border-radius: 5px;
+    border: 1px solid slateblue;
+    padding: 0.3em;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.3em;
+    height: 6.5em;
+}
+.send_comment_button {
+    width: 15%;
+    padding: 0.3em;
+    font-size: 1.5em;
+    background-color: slateblue;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin-top: 2em;
+    margin-left: 75%;
+}
+.send_comment_button:hover {
+    cursor: pointer;
+}
+.one_comment {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+.one_comment .username {
+    font-size: 1.3em;
+    margin-right: 30%;
+    color: rgba(0,0,0,0.82);
+}
+.one_comment .time {
+    margin-left: 20%;
+    font-size: 1.2em;
+    color: rgba(0,0,0,0.62);
+}
+.one_comment .content {
+    font-size: 1.3em;
+    text-indent: 2em;
+    color: rgba(0,0,0,0.62);
+}
+.buy_button {
+    width: 40%;
+    padding: 0.3em;
+    font-size: 1.5em;
+    background-color: slateblue;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5em;
+    margin-left: 15%;
+}
+.buy_button:hover{
+    cursor: pointer;
+}
+footer {
+    width: 96%;
+    background-color: slateblue;
+    box-shadow: 4px 2px 10px #888888;
+    border-radius: 10px;
+    height: 80px;
+    margin-left: 2%;
+}
+footer p {
+    padding-top: 35px;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+}

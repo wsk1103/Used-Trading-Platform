@@ -37,7 +37,7 @@ public class HomeController {
     private ShopContextService shopContextService;
 
 
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public String home(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
 
@@ -55,46 +55,26 @@ public class HomeController {
             List<ShopInformationBean> list = new ArrayList<>();
             int counts = getShopCounts();
             model.addAttribute("shopInformationCounts", counts);
-            StringBuffer stringBuffer;
+            String stringBuffer;
 //            int i=0;
             for (ShopInformation shopInformation : shopInformations) {
 //                if (i>=5){
 //                    break;
 //                }
 //                i++;
-                stringBuffer = new StringBuffer();
-//                int sid = shopInformation.getId();
-                int sort = shopInformation.getSort();
-                Specific specific = selectSpecificBySort(sort);
-                int cid = specific.getCid();
-                Classification classification = selectClassificationByCid(cid);
-                int aid = classification.getAid();
-                AllKinds allKinds = selectAllKindsByAid(aid);
-                stringBuffer.append(allKinds.getName());
-                stringBuffer.append("-");
-                stringBuffer.append(classification.getName());
-                stringBuffer.append("-");
-                stringBuffer.append(specific.getName());
+                stringBuffer = getSortName(shopInformation.getSort());
                 ShopInformationBean shopInformationBean = new ShopInformationBean();
                 shopInformationBean.setId(shopInformation.getId());
                 shopInformationBean.setName(shopInformation.getName());
                 shopInformationBean.setLevel(shopInformation.getLevel());
                 shopInformationBean.setPrice(shopInformation.getPrice().doubleValue());
                 shopInformationBean.setRemark(shopInformation.getRemark());
-                shopInformationBean.setSort(stringBuffer.toString());
+                shopInformationBean.setSort(stringBuffer);
                 shopInformationBean.setQuantity(shopInformation.getQuantity());
                 shopInformationBean.setTransaction(shopInformation.getTransaction());
                 shopInformationBean.setUid(shopInformation.getUid());
                 shopInformationBean.setImage(shopInformation.getImage());
                 list.add(shopInformationBean);
-//                ShopPicture shopPicture = selectShopPictureOnlyOne(sid);
-//                request.getSession().setAttribute("shopPicture" + sid, shopPicture.getPicture());
-//                request.getSession().setAttribute("sort" + sort, stringBuffer.toString());
-////                model.addAttribute("shopPicture" + sid, shopPicture);
-////                model.addAttribute("sort" + sort, stringBuffer.toString());
-//                model.addAttribute("allKinds", getAllKinds());
-//                model.addAttribute("classification", getClassificationByAid(1));
-//                model.addAttribute("specific", getSpecificByCid(1));
             }
             model.addAttribute("shopInformationBean", list);
 //            model.addAttribute("shopInformation", shopInformation);
@@ -127,32 +107,17 @@ public class HomeController {
             List<ShopInformationBean> list = new ArrayList<>();
             int counts = getShopCounts();
             model.addAttribute("shopInformationCounts", counts);
-            StringBuffer stringBuffer;
-//            int i=0;
+            String sortName;
             for (ShopInformation shopInformation : shopInformations) {
-//                if (i>=6){
-//                    break;
-//                }
-//                i++;
-                stringBuffer = new StringBuffer();
                 int sort = shopInformation.getSort();
-                Specific specific = selectSpecificBySort(sort);
-                int cid = specific.getCid();
-                Classification classification = selectClassificationByCid(cid);
-                int aid = classification.getAid();
-                AllKinds allKinds = selectAllKindsByAid(aid);
-                stringBuffer.append(allKinds.getName());
-                stringBuffer.append("-");
-                stringBuffer.append(classification.getName());
-                stringBuffer.append("-");
-                stringBuffer.append(specific.getName());
+                sortName = getSortName(sort);
                 ShopInformationBean shopInformationBean = new ShopInformationBean();
                 shopInformationBean.setId(shopInformation.getId());
                 shopInformationBean.setName(shopInformation.getName());
                 shopInformationBean.setLevel(shopInformation.getLevel());
                 shopInformationBean.setRemark(shopInformation.getRemark());
                 shopInformationBean.setPrice(shopInformation.getPrice().doubleValue());
-                shopInformationBean.setSort(stringBuffer.toString());
+                shopInformationBean.setSort(sortName);
                 shopInformationBean.setQuantity(shopInformation.getQuantity());
                 shopInformationBean.setTransaction(shopInformation.getTransaction());
                 shopInformationBean.setUid(shopInformation.getUid());
@@ -168,10 +133,7 @@ public class HomeController {
     }
 
     //通过分类的第三层id获取全名
-    @RequestMapping(value = "/getSortName")
-    @ResponseBody
-    public Map getSortName(@RequestParam int sort){
-        Map<String, String> map = new HashMap<>();
+    private String getSortName(int sort){
         StringBuilder stringBuffer = new StringBuilder();
         Specific specific = selectSpecificBySort(sort);
         int cid = specific.getCid();
@@ -183,8 +145,8 @@ public class HomeController {
         stringBuffer.append(classification.getName());
         stringBuffer.append("-");
         stringBuffer.append(specific.getName());
-        map.put("sortName", stringBuffer.toString());
-        return map;
+        System.out.println(sort);
+        return stringBuffer.toString();
     }
 
     //获得分类中的第一层
@@ -290,6 +252,6 @@ public class HomeController {
 
     //获得商品留言，10条
     private List<ShopContext> selectShopContextBySid(int sid, int start) {
-        return shopContextService.selectBySid(sid, (start-1)*10);
+        return shopContextService.findById(sid, (start-1)*10);
     }
 }

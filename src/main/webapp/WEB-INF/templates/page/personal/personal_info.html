@@ -17,7 +17,7 @@
 <header>
     <span class="short_nav"></span>
     <div class="home_icon">
-        <a href="/home" style="text-decoration: none;color: white">C2C</a>
+        <a href="/" style="text-decoration: none;color: white">C2C</a>
     </div>
     <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
     <span class="search_icon"></span>
@@ -30,10 +30,11 @@
 </header>
 <div class="short_nav_show">
     <ul>
-        <li><a href="/home">首页</a></li>
+        <li><a href="/">首页</a></li>
         <li><a href="/mall_page">商城</a></li>
+        <li><a href="/require_mall">求购商城</a></li>
         <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">求购商品</a></li>
+        <li><a href="/require_product">发布求购信息</a></li>
         <li><a href="/shopping_cart">我的购物车</a></li>
         <li><a href="#">反馈与意见</a></li>
         <li><a href="#">联系我们</a></li>
@@ -41,10 +42,11 @@
 </div>
 <nav class="my_nav">
     <ul>
-        <li><a href="/home">首页</a></li>
+        <li><a href="/">首页</a></li>
         <li><a href="/mall_page">商城</a></li>
+        <li><a href="/require_mall">求购商城</a></li>
         <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">求购商品</a></li>
+        <li><a href="/require_product">发布求购信息</a></li>
         <li><a href="/shopping_cart">我的购物车</a></li>
         <li><a href="#">反馈与意见</a></li>
         <li><a href="#">联系我们</a></li>
@@ -55,6 +57,7 @@
         <li><a href="personal_info">个人信息</a></li>
         <li><a href="/my_publish_product_page">我发布的商品</a></li>
         <li><a href="/my_require_product_page">我求购的商品</a></li>
+        <li><a class="login_out" href="/logout">退出</a></li>
     </ul>
 </div>
 <div style="display: none" th:if="${message}!=null" class="show_tip" th:text="${message}" th:value="${message}">

@@ -1,6 +1,7 @@
 package com.wsk.dao;
 
 import com.wsk.pojo.UserWant;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -20,4 +21,9 @@ public interface UserWantMapper {
     int getCounts(int uid);
 
     List<UserWant> selectByUid(int uid, int start);
+
+    @Select("select * from userWant where uid=#{id} and display=1")
+    List<UserWant> selectMineByUid(int id);
+
+    List<UserWant> selectAll();
 }

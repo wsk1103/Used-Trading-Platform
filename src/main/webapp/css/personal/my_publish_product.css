@@ -1,5 +1,6 @@
 .temp_content {
     width: 99%;
+    min-width:800px;
     position: absolute;
     display: inline-block;
     top: 20%;
@@ -12,11 +13,12 @@
     display: block;
 }
 div.detail_product {
-    width: 18%;
+    width: 15%;
+    height: 460px;
     float: left;
-    margin: 5% 4% ;
+    margin: 5% 5%;
     background-color: white;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
     border-radius: 5px;
     padding: 2%;
     text-align: center;
@@ -39,6 +41,8 @@ div.detail_product {
 .detail_product img {
     border-bottom: 1px solid rgba(0,0,0,0.15);
     padding-bottom: 2em;
+    width: 100%;
+    max-height: 196px;
 }
 .detail_type {
     color: rgba(0, 0, 0, 0.62);
@@ -49,7 +53,7 @@ div.pagination_div {
     width: 40%;
     height: 36px;
     clear: both;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
     margin-left: 35%;
 }
 

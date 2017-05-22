@@ -51,7 +51,12 @@ public class ShopContextServiceImpl implements ShopContextService {
     }
 
     @Override
-    public List<ShopContext> selectBySid(int sid, int start) {
-        return shopContextMapper.selectBySid(sid,start);
+    public List<ShopContext> findById(int sid, int start) {
+        return shopContextMapper.findById(sid,start);
+    }
+
+    @Override
+    public List<ShopContext> selectById(int id) {
+        return shopContextMapper.selectBySid(id);
     }
 }

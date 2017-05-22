@@ -132,7 +132,7 @@ nav.my_nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    margin-left: 18%;
+    margin-left: 12%;
 }
 
 nav.my_nav ul li {
@@ -196,7 +196,7 @@ nav.my_nav ul li:last-child {
     position: fixed;
     margin-left: 85%;
     width: 10%;
-    height: 18%;
+    height: 23%;
     border-radius: 10px;
     z-index: 30;
     background-color: white;

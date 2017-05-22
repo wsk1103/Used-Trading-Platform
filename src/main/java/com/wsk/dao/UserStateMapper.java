@@ -16,4 +16,5 @@ public interface UserStateMapper {
     int updateByPrimaryKey(UserState record);
 
     UserState selectByUid(int uid);
+
 }

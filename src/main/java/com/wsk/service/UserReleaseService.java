@@ -23,4 +23,6 @@ public interface UserReleaseService {
     int getCounts(int uid);
 
     List<UserRelease> selectByUid(int uid, int start);
+
+    List<UserRelease> selectUserProductByUid(int uid);
 }

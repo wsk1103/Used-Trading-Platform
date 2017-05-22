@@ -22,5 +22,7 @@ public interface ShopContextService {
 
     int getCounts(int sid);
 
-    List<ShopContext> selectBySid(int sid, int start);
+    List<ShopContext> findById(int sid, int start);
+
+    List<ShopContext> selectById(int id);
 }

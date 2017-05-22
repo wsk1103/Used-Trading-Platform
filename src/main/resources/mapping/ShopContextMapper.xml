@@ -7,9 +7,10 @@
     <result column="sid" property="sid" jdbcType="INTEGER" />
     <result column="context" property="context" jdbcType="VARCHAR" />
     <result column="display" property="display" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="all" >
-    id, modified, sid, context, display
+    id, modified, sid, context, display, uid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -23,7 +24,7 @@
     from shopcontext
     where sid = #{sid} and display = 1
   </select>
-  <select id="selectBySid" resultMap="BaseResultMap">
+  <select id="findById" resultMap="BaseResultMap">
     select
     <include refid="all" />
     from shopcontext
@@ -36,9 +37,11 @@
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.ShopContext" >
     insert into shopcontext (id, modified, sid,
-      context, display)
+    context, display, uid
+    )
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER},
-      #{context,jdbcType=VARCHAR}, #{display,jdbcType=INTEGER})
+    #{context,jdbcType=VARCHAR}, #{display,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.ShopContext" >
     insert into shopcontext
@@ -58,6 +61,9 @@
       <if test="display != null" >
         display,
       </if>
+      <if test="uid != null" >
+        uid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -74,6 +80,9 @@
       </if>
       <if test="display != null" >
         #{display,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -92,6 +101,9 @@
       <if test="display != null" >
         display = #{display,jdbcType=INTEGER},
       </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -100,7 +112,8 @@
     set modified = #{modified,jdbcType=TIMESTAMP},
       sid = #{sid,jdbcType=INTEGER},
       context = #{context,jdbcType=VARCHAR},
-      display = #{display,jdbcType=INTEGER}
+      display = #{display,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

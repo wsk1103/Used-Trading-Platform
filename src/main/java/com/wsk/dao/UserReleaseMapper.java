@@ -1,6 +1,7 @@
 package com.wsk.dao;
 
 import com.wsk.pojo.UserRelease;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -20,4 +21,7 @@ public interface UserReleaseMapper {
     int getCounts(int uid);
 
     List<UserRelease> selectByUid(int uid, int start);
+
+    @Select("select * from userRelease where uid=#{uid} and display=1")
+    List<UserRelease> selectUserProductByUid(int uid);
 }

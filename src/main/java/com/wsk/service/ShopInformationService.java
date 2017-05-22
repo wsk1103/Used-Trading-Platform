@@ -32,4 +32,8 @@ public interface ShopInformationService {
     int selectIdByImage(String image);
 
     List<ShopInformation> selectByName(String name);
+
+    List<ShopInformation> selectBySort(int sort);
+
+    List<ShopInformation> selectUserReleaseByUid(int uid);
 }

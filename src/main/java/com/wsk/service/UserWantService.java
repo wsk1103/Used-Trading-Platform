@@ -23,4 +23,8 @@ public interface UserWantService {
     int getCounts(int uid);
 
     List<UserWant> selectByUid(int uid, int start);
+
+    List<UserWant> selectMineByUid(int id);
+
+    List<UserWant> selectAll();
 }

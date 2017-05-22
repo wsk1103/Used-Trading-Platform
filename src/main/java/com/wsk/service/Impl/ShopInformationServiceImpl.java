@@ -76,4 +76,14 @@ public class ShopInformationServiceImpl implements ShopInformationService{
     public List<ShopInformation> selectByName(String name){
         return shopInformationMapper.selectByName(name);
     }
+
+    @Override
+    public List<ShopInformation> selectBySort(int sort) {
+        return shopInformationMapper.selectBySort(sort);
+    }
+
+    @Override
+    public List<ShopInformation> selectUserReleaseByUid(int uid) {
+        return shopInformationMapper.selectUserReleaseByUid(uid);
+    }
 }

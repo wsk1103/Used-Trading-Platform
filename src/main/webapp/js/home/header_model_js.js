@@ -12,6 +12,9 @@ $(function () {
                     $(this).hide(0);
                 });
             }
+            if ($('.personal_nav').is(":visible")){
+                $(this).animate({height: '0%'},300).hide(0);
+            }
         }
     });
     $(window).scroll(function () {
@@ -66,14 +69,14 @@ $(function () {
             } else {
                 $('.short_nav_show').show(0).css({opacity: 0, height: 0}).animate({
                     opacity: 1,
-                    height: "39%"
+                    height: "43%"
                 }, 500).show(0);
             }
         }
     });
     $('.user_name_a').mouseenter(function () {
         if (!$('.personal_nav').is(":visible")) {
-            $('.personal_nav').show(0).animate({height: '18%'},500);
+            $('.personal_nav').show(0).animate({height: '23%'},500);
         }
     });
     $('.personal_nav').mouseleave(function () {
@@ -81,5 +84,8 @@ $(function () {
             $(this).animate({height: '0%'},300).hide(0);
         }
     });
-
+    $('.search_icon').click(function () {
+        var name = $('.nav_search_input').val();
+        window.location.href='/findShopByName?name='+name;
+    });
 });

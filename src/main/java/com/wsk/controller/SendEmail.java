@@ -2,7 +2,6 @@ package com.wsk.controller;
 
 import com.wsk.pojo.UserInformation;
 import com.wsk.service.UserInformationService;
-import com.wsk.token.TokenProccessor;
 import com.wsk.tool.empty.Empty;
 import com.wsk.tool.phone.Phone;
 import org.springframework.stereotype.Controller;
@@ -44,18 +43,19 @@ public class SendEmail {
         map.put("result", "-1");
         res.setContentType("text/html;charset=UTF-8");//编码
 //token，防止重复提交
-        String sendCodeToken = (String) req.getSession().getAttribute("sendCodeToken");
+        String sendCodeToken = (String) req.getSession().getAttribute("token");
         if (Empty.isNullOrEmpty(sendCodeToken) || !sendCodeToken.equals(token)) {
-            sendCodeToken = TokenProccessor.getInstance().makeToken();
-            map.put("token", sendCodeToken);
+//            sendCodeToken = TokenProccessor.getInstance().makeToken();
+//            map.put("token", sendCodeToken);
             return map;
-        } else {
-            req.getSession().removeAttribute("sendCodeToken");
         }
+//        else {
+//            req.getSession().removeAttribute("sendCodeToken");
+//        }
         //判断手机号码是否为正确
         if (!Phone.isPhone(phone)) {
-            sendCodeToken = TokenProccessor.getInstance().makeToken();
-            map.put("token", sendCodeToken);
+//            sendCodeToken = TokenProccessor.getInstance().makeToken();
+//            map.put("token", sendCodeToken);
             return map;
         }
         //如果是忘记密码提交的发送短信
@@ -63,15 +63,15 @@ public class SendEmail {
             if (!isUserPhoneExists(phone)) {
                 //失败
 //            map.put("result", "1");
-                sendCodeToken = TokenProccessor.getInstance().makeToken();
-                map.put("token", sendCodeToken);
+//                sendCodeToken = TokenProccessor.getInstance().makeToken();
+//                map.put("token", sendCodeToken);
                 return map;
             }
         } else if (action.equals("register")) {
             //失败
             if (isUserPhoneExists(phone)) {
-                sendCodeToken = TokenProccessor.getInstance().makeToken();
-                map.put("token", sendCodeToken);
+//                sendCodeToken = TokenProccessor.getInstance().makeToken();
+//                map.put("token", sendCodeToken);
                 return map;
             }
         }
@@ -92,6 +92,7 @@ public class SendEmail {
             ts.connect("smtp.139.com", "18814095631@139.com", "yushi1103");
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("18814095631@139.com"));
+            String realPhone = phone;
             phone += "@139.com";
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(phone));
             message.setSubject("来自WSK的验证码");
@@ -99,12 +100,12 @@ public class SendEmail {
             //这里先不发生信息，以后要开启的
 //            ts.sendMessage(message, message.getAllRecipients());
             ts.close();
-            req.getSession().setAttribute("phone", phone);
+            req.getSession().setAttribute("phone", realPhone);
             map.put("result", "1");
         } catch (MessagingException me) {
             me.printStackTrace();
-            sendCodeToken = TokenProccessor.getInstance().makeToken();
-            map.put("token", sendCodeToken);
+//            sendCodeToken = TokenProccessor.getInstance().makeToken();
+//            map.put("token", sendCodeToken);
             map.put("result", "0");
         }
         return map;
@@ -133,6 +134,9 @@ public class SendEmail {
         boolean result = false;
         try {
             int id = userInformationService.selectIdByPhone(phone);
+            if (id == 0){
+                return result;
+            }
             UserInformation userInformation = userInformationService.selectByPrimaryKey(id);
 
             if (Empty.isNullOrEmpty(userInformation)) {

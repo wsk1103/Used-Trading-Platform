@@ -17,7 +17,7 @@
 <header>
     <span class="short_nav"></span>
     <div class="home_icon">
-        <a href="#" style="text-decoration: none;color: white">C2C</a>
+        <a href="/" style="text-decoration: none;color: white">C2C</a>
     </div>
     <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
 
@@ -25,17 +25,18 @@
     <span class="user_icon"></span>
     <span class="login_or_register_string">
         <!--判断是否有登陆，两者相互替换-->
-        <a href="/" th:if="${userInformation.username}==null">登陆</a>
-        <a href="/"  th:if="${userInformation.username}==null">注册</a>
+        <a href="/login" th:if="${userInformation.username}==null">登录</a>
+        <a href="/login"  th:if="${userInformation.username}==null">注册</a>
         <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}" th:text="${userInformation.username}"></a>
     </span>
 </header>
 <div class="short_nav_show">
     <ul>
-        <li><a href="#">首页</a></li>
+        <li><a href="/">首页</a></li>
         <li><a href="/mall_page">商城</a></li>
+        <li><a href="/require_mall">求购商城</a></li>
         <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">求购商品</a></li>
+        <li><a href="/require_product">发布求购信息</a></li>
         <li><a href="/shopping_cart">我的购物车</a></li>
         <li><a href="#">反馈与意见</a></li>
         <li><a href="#">联系我们</a></li>
@@ -43,10 +44,11 @@
 </div>
 <nav class="my_nav">
     <ul>
-        <li><a href="#">首页</a></li>
+        <li><a href="/">首页</a></li>
         <li><a href="/mall_page">商城</a></li>
+        <li><a href="/require_mall">求购商城</a></li>
         <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">求购商品</a></li>
+        <li><a href="/require_product">发布求购信息</a></li>
         <li><a href="/shopping_cart">我的购物车</a></li>
         <li><a href="#">反馈与意见</a></li>
         <li><a href="#">联系我们</a></li>
@@ -57,6 +59,7 @@
         <li><a href="personal_info">个人信息</a></li>
         <li><a href="/my_publish_product_page">我发布的商品</a></li>
         <li><a href="/my_require_product_page">我求购的商品</a></li>
+        <li><a class="login_out" href="/logout">退出</a></li>
     </ul>
 </div>
 <div class="my_slider">
@@ -87,7 +90,7 @@
             she had a last view back on the skyline of her hometown Bookmarksgrove,
             the headline of Alphabet Village and the subline of her own road, the Line</p>
         <div class="slide_img">
-            <img src="img/home/p5.jpeg" width="60%"/>
+            <img src="/img/home/p5.jpeg" width="60%"/>
         </div>
     </div>
     <div class="my_slide">
@@ -120,9 +123,10 @@
 <div class="featured_products">
     <h2>精选的商品</h2>
     <div class="product" th:each="o:${shopInformationBean}">
-        <img src="/img/home/feature_prodects/cont1.jpg" width="100%" th:src="${o.image}"/>
+        <img src="/img/home/feature_prodects/cont1.jpg" style="max-height:180px;max-width: 100%" th:src="${o.image}"/>
         <input class="product_id" type="hidden" th:value="${o.id}"/>
-        <span class="product_name" th:text="${o.name}">Big block Lether Bag</span><br/>
+        <a class="product_name" th:href="'/selectById?id='+${o.id}" th:text="${o.name}" th:title="${o.name}">wsk1103</a><br/>
+        <!--<span class="product_name" th:text="${o.name}" th:value="${o.id}">Big block Lether Bag</span><br/>-->
         <span class="product_cost" th:text="'$'+${o.price}">$350.00</span><br/><br/>
         <span class="buy product_1">加入购物车</span>
     </div>

@@ -48,7 +48,11 @@ public class UserInformationServiceImpl implements UserInformationService {
 
     @Override
     public int selectIdByPhone(String phone) {
-        return this.userInformationMapper.selectIdByPhone(phone);
+        try {
+            return this.userInformationMapper.selectIdByPhone(phone);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override

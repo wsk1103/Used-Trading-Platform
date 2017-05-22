@@ -82,3 +82,11 @@
 .current {
     opacity: 1;
 }
+.product_name{
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+.product_name:hover{
+    color: #FF0000;
+}

@@ -26,6 +26,12 @@
     from userwant
     where uid = #{uid,jdbcType=INTEGER} and display = 1
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT
+    <include refid="all"/>
+    from userWant
+    where display=1 order by id desc limit 12
+  </select>
   <select id="selectByUid" resultMap="BaseResultMap">
     select
     <include refid="all"/>

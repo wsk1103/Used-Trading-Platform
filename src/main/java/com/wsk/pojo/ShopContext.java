@@ -14,6 +14,8 @@ public class ShopContext implements Serializable {
 
     private Integer display;
 
+    private int uid;
+
     public Integer getId() {
         return id;
     }
@@ -52,5 +54,13 @@ public class ShopContext implements Serializable {
 
     public void setDisplay(Integer display) {
         this.display = display;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 }
