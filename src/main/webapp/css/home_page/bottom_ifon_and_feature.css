@@ -1,13 +1,13 @@
 .featured_products {
     width: 94%;
     padding-bottom: 2em;
-    height: 65%;
+    height: 520px;
     position: absolute;
     left: 4%;
     top: 90%;
     display: inline;
     background-color: white;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
 
@@ -26,7 +26,7 @@
     text-align: center;
     line-height: 2em;
     width: 14.5%;
-    height: 350px;
+    height: 390px;
     border-radius: 6px;
     padding: 1em;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
@@ -75,9 +75,9 @@
     height: 33%;
     position: absolute;
     display: inline-block;
-    top: 160%;
+    top: 170%;
     left: 5%;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
 
@@ -101,9 +101,9 @@ footer {
     width: 88%;
     position: absolute;
     left: 6%;
-    top: 197%;
+    top: 206%;
     background-color: slateblue;
-    box-shadow: 4px 2px 10px #888888;
+    box-shadow: 2px 2px 10px #888888;
     border-radius: 10px;
 }
 

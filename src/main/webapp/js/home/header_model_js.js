@@ -76,7 +76,7 @@ $(function () {
     });
     $('.user_name_a').mouseenter(function () {
         if (!$('.personal_nav').is(":visible")) {
-            $('.personal_nav').show(0).animate({height: '38%'}, 500);
+            $('.personal_nav').show(0).animate({height: '41%'}, 500);
         }
     });
     $('.personal_nav').mouseleave(function () {

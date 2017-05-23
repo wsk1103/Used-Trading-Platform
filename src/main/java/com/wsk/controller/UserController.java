@@ -119,33 +119,23 @@ public class UserController {
 
     //验证登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
-    public Map login(HttpServletRequest request, Model model,
+    public String login(HttpServletRequest request,
                      @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
         String loginToken = (String) request.getSession().getAttribute("token");
-        Map<String, Integer> map = new HashMap<>();
+//        Map<String, Integer> map = new HashMap<>();
         if (StringUtils.getInstance().isNullOrEmpty(phone) || StringUtils.getInstance().isNullOrEmpty(password)) {
-            map.put("wsk", 2);
-            return map;
+            return "redirect:/login";
         }
         //防止重复提交
         if (StringUtils.getInstance().isNullOrEmpty(token) || !token.equals(loginToken)) {
-            map.put("wsk", 1);
-            return map;
+            return "redirect:/login";
         }
-//        else {
-////            request.getSession().removeAttribute("loginToken");
-//        }
         boolean b = getId(phone, password, request);
         //失败，不存在该手机号码
         if (!b) {
-//            model.addAttribute("error", "手机号码或者密码错误");
-//            model.addAttribute("phone", phone);
-            map.put("wsk", 2);
-            return map;
+            return "redirect:/login";
         }
-        map.put("wsk", 3);
-        return map;
+        return "redirect:/";
     }
 
     //查看用户基本信息
@@ -576,7 +566,7 @@ public class UserController {
     //删除购物车的商品
     @RequestMapping(value = "/deleteShopCar")
     @ResponseBody
-    public Map deleteShopCar(HttpServletRequest request, @RequestParam int id) {
+    public Map deleteShopCar(HttpServletRequest request, @RequestParam int id ,@RequestParam int sid) {
         Map<String, Integer> map = new HashMap<>();
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
@@ -586,7 +576,8 @@ public class UserController {
         int uid = userInformation.getId();
         GoodsCar goodsCar = new GoodsCar();
         goodsCar.setDisplay(0);
-        goodsCar.setSid(id);
+        goodsCar.setId(id);
+        goodsCar.setSid(sid);
         goodsCar.setUid(uid);
         try {
             int result = goodsCarService.updateByPrimaryKey(goodsCar);

@@ -18,7 +18,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     //接收文本消息，并发送出去
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) {
-        System.out.println("send....");
+        System.out.println(session.getId()+":send....");
 //        chatTextMessageHandler(message.getPayload());
         try {
 //            super.handleTextMessage(session, message);

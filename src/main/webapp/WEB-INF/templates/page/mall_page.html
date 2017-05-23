@@ -64,7 +64,7 @@
                     </div>
                     <span class="detail_product_name" th:text="${o.name}" th:value="${o.id}">Big block Lether Bag</span><br/>
                     <span class="detail_product_cost" th:text="'￥'+${o.price}+'元'">￥350.00元</span><br/>
-                    <span class="detail_buy product_1">加入购物车</span>
+                    <span class="detail_buy product_1" th:value="${o.id}">加入购物车</span>
                 </div>
         </div>
     </div>

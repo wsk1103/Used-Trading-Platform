@@ -219,27 +219,28 @@ $(function () {
     $('.login_button').click(function () {
         var login_name = $('.input_username').val();
         var login_password = $('.input_password').val();
-        var login_token = $('.token').val();
+        // var login_token = $('.token').val();
         if (login_name===''||login_password===''){
             alert('请填写信息');
             return;
         }
-        $.ajax({
-            url: "/login",
-            type: "POST",
-            dataType: "JSON",
-            data: {phone: login_name, password: login_password, token: login_token},
-            success: function (date) {
-                var result = date.wsk;
-                if (result === 3) {
-                    window.location.href = '/';
-                } else if (result === 2) {
-                    alert('手机或者密码错误!!!!!!');
-                } else if (result === 1) {
-                    window.location.href = '/login';
-                }
-            }
-        });
+        $(this).submit();
+        // $.ajax({
+        //     url: "/login",
+        //     type: "POST",
+        //     dataType: "JSON",
+        //     data: {phone: login_name, password: login_password, token: login_token},
+        //     success: function (date) {
+        //         var result = date.wsk;
+        //         if (result === 3) {
+        //             window.location.href = '/';
+        //         } else if (result === 2) {
+        //             alert('手机或者密码错误!!!!!!');
+        //         } else if (result === 1) {
+        //             window.location.href = '/login';
+        //         }
+        //     }
+        // });
     });
 
 //注册获取验证码

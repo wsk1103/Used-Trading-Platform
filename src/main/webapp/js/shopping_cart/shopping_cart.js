@@ -79,11 +79,13 @@ $(function () {
         var r = confirm('确定删除？？？？');
         if (r == true) {
             var id = $(this).attr('value');
+            var sid = $(this).parent().siblings(".show_img").children().attr("value");
+            // alert(sid);
             $.ajax({
                 url:'deleteShopCar',
                 dataType:'JSON',
                 type:'post',
-                data:{id:id},
+                data:{id:id,sid:sid},
                 success:function (data) {
                     var result = data.result;
                     if (result==2){

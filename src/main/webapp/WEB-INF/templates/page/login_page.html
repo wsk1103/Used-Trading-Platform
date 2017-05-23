@@ -24,31 +24,35 @@
                 <div class="right_mark">
                 </div>
             </div>
+            <form action="/login" method="post">
             <div class="login_form">
-                <div class="login_username">
-                    <!--svg就很溜-->
-                    <svg class="login_icon" viewBox="0 0 20 20">
-                        <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
-                    </svg>
-                    <input type="hidden" th:value="${token}" class="token"/>
-                    <input type="text" placeholder="手机号码" class="input_username"/>
-                </div>
-                <div class="login_password">
-                    <svg class="password_icon" viewBox="0 0 20 20">
-                        <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
-                    </svg>
-                    <input type="password" placeholder="密码" class="input_password" name="password"/>
-                </div>
-                <div class="go_forget_password">
-                    <a class="go_to_forget" href="#">忘记密码?</a>
-                </div>
-                <div class="login_button_div">
-                    <button class="login_button" onclick="return false;">登录</button>
-                </div>
-                <div class="register_info">
-                    <span>还没有账号 ? <a class="flip_to_register" href="#">注册</a></span>
-                </div>
+
+                    <div class="login_username">
+                        <!--svg就很溜-->
+                        <svg class="login_icon" viewBox="0 0 20 20">
+                            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
+                        </svg>
+                        <input type="hidden" th:value="${token}" class="token" name="token"/>
+                        <input type="text" placeholder="手机号码" class="input_username" name="phone"/>
+                    </div>
+                    <div class="login_password">
+                        <svg class="password_icon" viewBox="0 0 20 20">
+                            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
+                        </svg>
+                        <input type="password" placeholder="密码" class="input_password" name="password"/>
+                    </div>
+                    <div class="go_forget_password">
+                        <a class="go_to_forget" href="#">忘记密码?</a>
+                    </div>
+                    <div class="login_button_div">
+                        <button class="login_button">登录</button>
+                    </div>
+                    <div class="register_info">
+                        <span>还没有账号 ? <a class="flip_to_register" href="#">注册</a></span>
+                    </div>
+
             </div>
+            </form>
         </div>
         <!--右侧的第二个页面-->
         <div class="register_page">

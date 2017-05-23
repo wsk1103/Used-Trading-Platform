@@ -40,7 +40,6 @@ public class HomeController {
     @RequestMapping("/")
     public String home(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-
         // if user login,the session will have the "userInformation"
         if (!StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             model.addAttribute("userInformation", userInformation);
