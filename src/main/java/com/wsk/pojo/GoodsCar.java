@@ -10,7 +10,7 @@ public class GoodsCar implements Serializable {
 
     private Integer sid;
 
-    private Integer scid;
+    private Integer uid;
 
     private Integer quantity;
 
@@ -40,14 +40,6 @@ public class GoodsCar implements Serializable {
         this.sid = sid;
     }
 
-    public Integer getScid() {
-        return scid;
-    }
-
-    public void setScid(Integer scid) {
-        this.scid = scid;
-    }
-
     public Integer getQuantity() {
         return quantity;
     }
@@ -62,5 +54,13 @@ public class GoodsCar implements Serializable {
 
     public void setDisplay(Integer display) {
         this.display = display;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 }

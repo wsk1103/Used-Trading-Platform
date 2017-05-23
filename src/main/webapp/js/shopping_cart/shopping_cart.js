@@ -74,4 +74,30 @@ $(function () {
         sum = returnFloat(sum);
         $('.end_pay').children(".all_sum").children("span").html(sum);
     }
+
+    $('.deleteShopCar').click(function () {
+        var r = confirm('确定删除？？？？');
+        if (r == true) {
+            var id = $(this).attr('value');
+            $.ajax({
+                url:'deleteShopCar',
+                dataType:'JSON',
+                type:'post',
+                data:{id:id},
+                success:function (data) {
+                    var result = data.result;
+                    if (result==2){
+                        alert('您还没有登录，请先登录');
+                    }  else if (result==1) {
+                        alert("删除成功");
+                        window.location.href='shopping_cart?result=删除成功';
+                    } else if (result==0){
+                        alert('删除失败，请检测网络');
+                    } else {
+                        alert('删除失败，请检测网络');
+                    }
+                }
+            })
+        }
+    })
 });

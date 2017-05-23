@@ -6,7 +6,6 @@ package com.wsk.token;
 
 import sun.misc.BASE64Encoder;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
@@ -52,20 +51,5 @@ public class TokenProccessor {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public boolean saveToken(HttpServletRequest request, String name) {
-        String token = this.makeToken();
-        request.getSession().setAttribute(name,token);
-        return true;
-    }
-
-    public boolean deleteToken(HttpServletRequest request, String name) {
-        request.getSession().removeAttribute(name);
-        return true;
-    }
-
-    public String getToken(HttpServletRequest request, String name) {
-        return (String) request.getSession().getAttribute(name);
     }
 }

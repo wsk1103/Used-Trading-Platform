@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="copy" th:fragment="copy">
+    <span class="short_nav"></span>
+    <div class="home_icon">
+        <a href="/" style="text-decoration: none;color: white">C2C</a>
+    </div>
+    <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
+    <span class="search_icon"></span>
+    <span class="user_icon"></span>
+    <span class="login_or_register_string">
+        <!--判断是否有登陆，两者相互替换-->
+        <a href="/login" th:if="${userInformation.username}==null" id="user_name_a" th:value="wsk">登录</a>
+        <a href="/login"  th:if="${userInformation.username}==null">注册</a>
+        <a href="/personal_info" class="user_name_a"
+           th:if="${userInformation.username!=null}" th:text="${userInformation.username}" th:value="${userInformation.phone}" id="user_name_a"></a>
+    </span>
+</header>
+</body>
+</html>

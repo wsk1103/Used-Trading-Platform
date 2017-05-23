@@ -17,5 +17,5 @@ public interface GoodsCarMapper {
 
     int updateByPrimaryKey(GoodsCar record);
 
-    List<GoodsCar> selectBySCid(int scid);
+    List<GoodsCar> selectByUid(int uid);
 }

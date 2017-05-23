@@ -2,8 +2,7 @@ package com.wsk.controller;
 
 import com.wsk.pojo.UserInformation;
 import com.wsk.service.UserInformationService;
-import com.wsk.tool.empty.Empty;
-import com.wsk.tool.phone.Phone;
+import com.wsk.tool.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +43,7 @@ public class SendEmail {
         res.setContentType("text/html;charset=UTF-8");//编码
 //token，防止重复提交
         String sendCodeToken = (String) req.getSession().getAttribute("token");
-        if (Empty.isNullOrEmpty(sendCodeToken) || !sendCodeToken.equals(token)) {
+        if (StringUtils.getInstance().isNullOrEmpty(sendCodeToken) || !sendCodeToken.equals(token)) {
 //            sendCodeToken = TokenProccessor.getInstance().makeToken();
 //            map.put("token", sendCodeToken);
             return map;
@@ -53,7 +52,7 @@ public class SendEmail {
 //            req.getSession().removeAttribute("sendCodeToken");
 //        }
         //判断手机号码是否为正确
-        if (!Phone.isPhone(phone)) {
+        if (!StringUtils.getInstance().isPhone(phone)) {
 //            sendCodeToken = TokenProccessor.getInstance().makeToken();
 //            map.put("token", sendCodeToken);
             return map;
@@ -139,7 +138,7 @@ public class SendEmail {
             }
             UserInformation userInformation = userInformationService.selectByPrimaryKey(id);
 
-            if (Empty.isNullOrEmpty(userInformation)) {
+            if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
                 return false;
             }
             String userPhone = userInformation.getPhone();

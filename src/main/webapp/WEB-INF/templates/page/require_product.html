@@ -12,54 +12,10 @@
     <script src="/js/publish/publish_product.js"></script>
 </head>
 <body>
-<header>
-    <span class="short_nav"></span>
-    <div class="home_icon">
-        <a href="/" style="text-decoration: none;color: white">C2C</a>
-    </div>
-    <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
-    <span class="search_icon"></span>
-    <span class="user_icon"></span>
-    <!--修改为用户名-->
-    <span class="login_or_register_string">
-                        <!--判断是否有登陆，两者相互替换-->
-        <a href="/login" th:if="${userInformation.username}==null">登录</a>
-        <a href="/login"  th:if="${userInformation.username}==null">注册</a>
-        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}" th:text="${userInformation.username}"></a>
-    </span>
-</header>
-<div class="short_nav_show">
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="/mall_page">商城</a></li>
-        <li><a href="/require_mall">求购商城</a></li>
-        <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="#">发布求购信息</a></li>
-        <li><a href="/shopping_cart">我的购物车</a></li>
-        <li><a href="#">反馈与意见</a></li>
-        <li><a href="#">联系我们</a></li>
-    </ul>
-</div>
-<div class="personal_nav">
-    <ul>
-        <li><a href="personal_info">个人信息</a></li>
-        <li><a href="/my_publish_product_page">我发布的商品</a></li>
-        <li><a href="/my_require_product_page">我求购的商品</a></li>
-        <li><a class="login_out" href="/logout">退出</a></li>
-    </ul>
-</div>
-<nav class="my_nav">
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="/mall_page">商城</a></li>
-        <li><a href="/require_mall">求购商城</a></li>
-        <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="#">发布求购信息</a></li>
-        <li><a href="/shopping_cart">我的购物车</a></li>
-        <li><a href="#">反馈与意见</a></li>
-        <li><a href="#">联系我们</a></li>
-    </ul>
-</nav>
+<header th:include="header :: copy"></header>
+<div th:include="short_nav_show :: short_nav_show" class="short_nav_show"></div>
+<nav th:include="my_nav :: my_nav" class="my_nav"></nav>
+<div th:include="personal_nav :: personal_nav" class="personal_nav"></div>
 <!--name,sort,quantity,price,remark,token,-->
 <div class="top_content">
     <div class="publish_product_div">
@@ -111,22 +67,22 @@
                         <option id="type_5">书籍文具</option>
                         <option id="type_6">其他</option>
                     </select><span class="to_left">--</span>
-                    <select class="choose_second_type" >
-                        <option >三成</option>
-                        <option >四成</option>
-                        <option >五成</option>
-                        <option >六成</option>
-                        <option  >七成</option>
-                        <option >八成</option>
-                        <option >九成</option>
-                        <option >全新</option>
+                    <select class="choose_second_type">
+                        <option>三成</option>
+                        <option>四成</option>
+                        <option>五成</option>
+                        <option>六成</option>
+                        <option>七成</option>
+                        <option>八成</option>
+                        <option>九成</option>
+                        <option>全新</option>
                     </select><span class="to_left">--</span>
                     <select class="choose_third_type" name="sort">
                         <option>三成</option>
                         <option>四成</option>
                         <option>五成</option>
                         <option>六成</option>
-                        <option >七成</option>
+                        <option>七成</option>
                         <option>八成</option>
                         <option>九成</option>
                         <option>全新</option>
@@ -139,7 +95,7 @@
         </form>
     </div>
     <footer>
-        <p>Copyright © 2014.Company name All rights reserved.</p>
+        <p>Copyright © 2017.Company name All rights reserved.<a href="/"></a></p>
     </footer>
 </div>
 </body>

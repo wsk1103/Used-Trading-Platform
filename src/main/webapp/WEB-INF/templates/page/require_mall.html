@@ -197,6 +197,15 @@
             margin-left: 2%;
         }
 
+        .shop_sort {
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .shop_sort:hover {
+            color: red;
+        }
+
         footer p {
             padding-top: 35px;
             vertical-align: middle;
@@ -212,46 +221,10 @@
     </style>
 </head>
 <body>
-<header>
-    <span class="short_nav"></span>
-    <div class="home_icon">
-        <a href="/" style="text-decoration: none;color: white">C2C</a>
-    </div>
-    <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
-    <span class="search_icon"></span>
-    <span class="user_icon"></span>
-    <span class="login_or_register_string">
-        <!--判断是否有登陆，两者相互替换-->
-        <a href="/login" th:if="${userInformation.username}==null">登录</a>
-        <a href="/login" th:if="${userInformation.username}==null">注册</a>
-        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}"
-           th:text="${userInformation.username}"></a>
-    </span>
-</header>
-<div class="short_nav_show">
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="/mall_page">商城</a></li>
-        <li><a href="/require_mall">求购商城</a></li>
-        <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">发布求购信息</a></li>
-        <li><a href="/shopping_cart">我的购物车</a></li>
-        <li><a href="#">反馈与意见</a></li>
-        <li><a href="#">联系我们</a></li>
-    </ul>
-</div>
-<nav class="my_nav">
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="/mall_page">商城</a></li>
-        <li><a href="/require_mall">求购商城</a></li>
-        <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">发布求购信息</a></li>
-        <li><a href="/shopping_cart">我的购物车</a></li>
-        <li><a href="#">反馈与意见</a></li>
-        <li><a href="#">联系我们</a></li>
-    </ul>
-</nav>
+<header th:include="header :: copy"></header>
+<div th:include="short_nav_show :: short_nav_show" class="short_nav_show"></div>
+<nav th:include="my_nav :: my_nav" class="my_nav"></nav>
+<div th:include="personal_nav :: personal_nav" class="personal_nav"></div>
 <div class="my_type_div">
     <ul>
         <li class="type_1">数码科技</li>
@@ -278,10 +251,11 @@
             <span class="what_info">数量：</span>
             <span class="info_content" th:text="${o.quantity}">3</span><br/>
             <span class="what_info">单价：</span>
-            <span class="info_content" th:text="'$'+${o.price}">20.00</span><br/>
+            <span class="info_content" th:text="'￥'+${o.price}+'元'">20.00</span><br/>
             <span class="what_info" style="float: left">详情：</span>
 
-            <textarea readonly="readonly" class="info_content" style="resize: none;width: 250px;height: 100px" th:text="${o.remark}">这是一哈哈哈哈哈哈哈哈哈打撒打撒个商品，联系电话1111111111</textarea><br/>
+            <textarea readonly="readonly" class="info_content" style="resize: none;width: 250px;height: 100px"
+                      th:text="${o.remark}">这是一哈哈哈哈哈哈哈哈哈打撒打撒个商品，联系电话1111111111</textarea><br/>
 
             <span class="what_info">分类：</span>
             <span class="info_content" th:text="${o.sort}">数码科技-手机-苹果</span><br/>
@@ -370,7 +344,7 @@
         <a class="pagination_gt">&gt;</a>
     </div>
     <footer>
-        <p>Copyright © 2014.Company name All rights reserved.</p>
+        <p>Copyright © 2017.Company name All rights reserved.<a href="/"></a></p>
     </footer>
 </div>
 </body>

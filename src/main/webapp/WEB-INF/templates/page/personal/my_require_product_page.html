@@ -7,15 +7,31 @@
     <link rel="stylesheet" href="/css/home_page/header_and_nav.css"/>
     <script src="/js/jquery-1.3.2.min.js"></script>
     <script src="/js/home/header_model_js.js"></script>
+    <!--<script>-->
+        <!--$(function () {-->
+            <!--$('.delete_and_update .delete_publish').click(function () {-->
+                <!--var id = $(this).parent().parent().attr("id");-->
+                <!--alert(id);-->
+            <!--});-->
+            <!--$('.delete_and_update .update_publish').click(function () {-->
+                <!--var id = $(this).parent().parent().attr("id");-->
+                <!--alert(id);-->
+            <!--});-->
+        <!--});-->
+    <!--</script>-->
     <script>
         $(function () {
-            $('.delete_and_update .delete_publish').click(function () {
-                var id = $(this).parent().parent().attr("id");
-                alert(id);
+            $('.update_publish').click(function () {
+                var id = $(this).attr('value');
+                window.location.href='/modified_require_product?id='+id;
             });
-            $('.delete_and_update .update_publish').click(function () {
-                var id = $(this).parent().parent().attr("id");
-                alert(id);
+            $('.delete_publish').click(function () {
+                var r = confirm("确定删除？？？？")
+                if (r == true) {
+                    var id = $(this).attr('value');
+//                    alert(id);
+                    window.location.href="/deleteUserWant?id="+id;
+                }
             });
         });
     </script>
@@ -142,54 +158,10 @@
     </style>
 </head>
 <body>
-<header>
-    <span class="short_nav"></span>
-    <div class="home_icon">
-        <a href="/" style="text-decoration: none;color: white">C2C</a>
-    </div>
-    <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
-    <span class="search_icon"></span>
-    <span class="user_icon"></span>
-    <!--修改为用户名-->
-    <span class="login_or_register_string">
-        <a href="/login" th:if="${userInformation.username}==null">登录</a>
-        <a href="/login" th:if="${userInformation.username}==null">注册</a>
-        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}"
-           th:text="${userInformation.username}"></a>
-    </span>
-</header>
-<div class="short_nav_show">
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="/mall_page">商城</a></li>
-        <li><a href="/require_mall">求购商城</a></li>
-        <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">发布求购信息</a></li>
-        <li><a href="/shopping_cart">我的购物车</a></li>
-        <li><a href="#">反馈与意见</a></li>
-        <li><a href="#">联系我们</a></li>
-    </ul>
-</div>
-<div class="personal_nav">
-    <ul>
-        <li><a href="personal_info">个人信息</a></li>
-        <li><a href="/my_publish_product_page">我发布的商品</a></li>
-        <li><a href="/my_require_product_page">我求购的商品</a></li>
-        <li><a class="login_out" href="/logout">退出</a></li>
-    </ul>
-</div>
-<nav class="my_nav">
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="/mall_page">商城</a></li>
-        <li><a href="/require_mall">求购商城</a></li>
-        <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">发布求购信息</a></li>
-        <li><a href="/shopping_cart">我的购物车</a></li>
-        <li><a href="#">反馈与意见</a></li>
-        <li><a href="#">联系我们</a></li>
-    </ul>
-</nav>
+<header th:include="header :: copy"></header>
+<div th:include="short_nav_show :: short_nav_show" class="short_nav_show"></div>
+<nav th:include="my_nav :: my_nav" class="my_nav"></nav>
+<div th:include="personal_nav :: personal_nav" class="personal_nav"></div>
 <div class="temp_content">
     <div class="require_content_div">
         <div class="require_one_part" id="1" th:each="o:${userWant}">
@@ -276,7 +248,7 @@
         <a class="pagination_gt">&gt;</a>
     </div>
     <footer>
-        <p>Copyright © 2014.Company name All rights reserved.</p>
+        <p>Copyright © 2017.Company name All rights reserved.<a href="/"></a></p>
     </footer>
 </div>
 </body>

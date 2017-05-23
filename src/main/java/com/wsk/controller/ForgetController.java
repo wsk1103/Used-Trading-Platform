@@ -4,8 +4,7 @@ import com.wsk.pojo.UserInformation;
 import com.wsk.pojo.UserPassword;
 import com.wsk.service.UserInformationService;
 import com.wsk.service.UserPasswordService;
-import com.wsk.tool.empty.Empty;
-import com.wsk.tool.encrypt.Encrypt;
+import com.wsk.tool.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,11 +38,11 @@ public class ForgetController {
 //        String realPhone = (String) request.getSession().getAttribute("phone");
         Map<String, Integer> map = new HashMap<>();
         String name = request.getParameter("name");
-        if (!Empty.isNullOrEmpty(name))
+        if (!StringUtils.getInstance().isNullOrEmpty(name))
             request.getSession().setAttribute("name", name);
         //judge the token 防止重复提交
         String checkCodeToken = (String) request.getSession().getAttribute("token");
-        if (Empty.isNullOrEmpty(checkCodeToken) || !checkCodeToken.equals(token)) {
+        if (StringUtils.getInstance().isNullOrEmpty(checkCodeToken) || !checkCodeToken.equals(token)) {
 //            checkCodeToken = TokenProccessor.getInstance().makeToken();
 //            request.getSession().setAttribute("checkCodeToken",checkCodeToken);
 //            model.addAttribute("token",checkCodeToken);
@@ -77,7 +76,7 @@ public class ForgetController {
         //防止重复提交
         String updatePasswordToken = (String) request.getSession().getAttribute("token");
         Map<String, Integer> map = new HashMap<>();
-        if (Empty.isNullOrEmpty(updatePasswordToken) || !updatePasswordToken.equals(token)) {
+        if (StringUtils.getInstance().isNullOrEmpty(updatePasswordToken) || !updatePasswordToken.equals(token)) {
 //            updatePasswordToken = TokenProccessor.getInstance().makeToken();
 //            request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);
 //            model.addAttribute("token",updatePasswordToken);
@@ -90,7 +89,7 @@ public class ForgetController {
         String realPhone = (String) request.getSession().getAttribute("phone");
 //        updatePasswordToken = TokenProccessor.getInstance().makeToken();
         UserPassword userPassword = new UserPassword();
-        String newPassword = Encrypt.getMD5(password);
+        String newPassword = StringUtils.getInstance().getMD5(password);
         int uid;
         try {
             uid = userInformationService.selectIdByPhone(realPhone);

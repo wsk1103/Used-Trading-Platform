@@ -17,7 +17,7 @@ public class HttpUtils {
      * Function  :   发送Post请求到服务器
      * Param     :   params请求体内容，encode编码格式
      */
-    public static String submitPostData(String strUrlPath,Map<String, String> params, String encode) {
+    static String submitPostData(String strUrlPath, Map<String, String> params, String encode) {
 
         byte[] data = getRequestData(params, encode).toString().getBytes();//获得请求体
         try {
@@ -55,7 +55,7 @@ public class HttpUtils {
      * Function  :   封装请求体信息
      * Param     :   params请求体内容，encode编码格式
      */
-    public static StringBuffer getRequestData(Map<String, String> params, String encode) {
+    private static StringBuffer getRequestData(Map<String, String> params, String encode) {
         StringBuffer stringBuffer = new StringBuffer();        //存储封装好的请求体信息
         try {
             for(Map.Entry<String, String> entry : params.entrySet()) {
@@ -75,7 +75,7 @@ public class HttpUtils {
      * Function  :   处理服务器的响应结果（将输入流转化成字符串）
      * Param     :   inputStream服务器的响应输入流
      */
-    public static String dealResponseResult(InputStream inputStream) {
+    private static String dealResponseResult(InputStream inputStream) {
         String resultData = null;      //存储处理结果
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] data = new byte[1024];

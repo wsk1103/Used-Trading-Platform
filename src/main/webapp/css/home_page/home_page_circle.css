@@ -86,7 +86,8 @@
     cursor: pointer;
     color: black;
     text-decoration: none;
+    margin-top: 2em;
 }
 .product_name:hover{
-    color: #FF0000;
+    color: slateblue;
 }

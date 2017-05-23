@@ -11,54 +11,10 @@
     <script src="/js/shopping_cart/shopping_cart.js"></script>
 </head>
 <body>
-<header>
-    <span class="short_nav"></span>
-    <div class="home_icon">
-        <a href="/" style="text-decoration: none;color: white">C2C</a>
-    </div>
-    <input type="text" placeholder="Search" name="search" class="nav_search_input"/>
-    <span class="search_icon"></span>
-    <span class="user_icon"></span>
-    <!--修改为用户名-->
-    <span class="login_or_register_string">
-                                <!--判断是否有登陆，两者相互替换-->
-        <a href="/login" th:if="${userInformation.username}==null">登录</a>
-        <a href="/login"  th:if="${userInformation.username}==null">注册</a>
-        <a href="/personal_info" class="user_name_a" th:if="${userInformation.username!=null}" th:text="${userInformation.username}"></a>
-    </span>
-</header>
-<div class="short_nav_show">
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="/mall_page">商城</a></li>
-        <li><a href="/require_mall">求购商城</a></li>
-        <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">发布求购信息</a></li>
-        <li><a href="#">我的购物车</a></li>
-        <li><a href="#">反馈与意见</a></li>
-        <li><a href="#">联系我们</a></li>
-    </ul>
-</div>
-<div class="personal_nav">
-    <ul>
-        <li><a href="personal_info">个人信息</a></li>
-        <li><a href="/my_publish_product_page">我发布的商品</a></li>
-        <li><a href="/my_require_product_page">我求购的商品</a></li>
-        <li><a class="login_out" href="/logout">退出</a></li>
-    </ul>
-</div>
-<nav class="my_nav">
-    <ul>
-        <li><a href="/">首页</a></li>
-        <li><a href="/mall_page">商城</a></li>
-        <li><a href="/require_mall">求购商城</a></li>
-        <li><a href="/publish_product">发布商品</a></li>
-        <li><a href="/require_product">发布求购信息</a></li>
-        <li><a href="#">我的购物车</a></li>
-        <li><a href="#">反馈与意见</a></li>
-        <li><a href="#">联系我们</a></li>
-    </ul>
-</nav>
+<header th:include="header :: copy"></header>
+<div th:include="short_nav_show :: short_nav_show" class="short_nav_show"></div>
+<nav th:include="my_nav :: my_nav" class="my_nav"></nav>
+<div th:include="personal_nav :: personal_nav" class="personal_nav"></div>
 <div class="top_content">
     <div class="publish_product_div">
         <div class="shipping_address" id="10001">
@@ -68,7 +24,7 @@
             <span class="is_default">默认地址</span><img src="/img/delete_icon.jpg" class="delete_icon"/>
         </div>
         <div class="shipping_address" id="10002">
-            <span class="name_info">一二三</span><img src="/img/pencil.jpg" class="pencil_icon"/><br/>
+            <span class="name_info">wsk</span><img src="/img/pencil.jpg" class="pencil_icon"/><br/>
             <span class="address_info">广东省广州市白云区钟落潭镇广新路388号</span><br/><br/>
             <span class="phone_info">188****1111</span><br/>
             <span class="is_default">默认地址</span><img src="/img/delete_icon.jpg" class="delete_icon"/>
@@ -83,58 +39,62 @@
                 <th>总金额</th>
                 <th>编辑</th>
             </tr>
-            <tr class="table_content">
-                <td class="input_checkbox"><input id="1" type="checkbox" checked="checked" name="checkbox"/></td>
+            <tr class="table_content" th:each="o:${list}">
+                <td class="input_checkbox">
+                    <input id="1" type="checkbox" checked="checked" name="checkbox" th:value="${o.id}"/></td>
                 <td class="show_img">
-                    <img src="/img/home/feature_prodects/cont1.jpg"/></td>
-                <td class="title" colspan="2"><span>这是一个商品</span></td>
-                <td class="cost">￥<span>20.00</span>元</td>
-                <td class="count"><span class="minus">-</span><span class="number">2</span><span class="add">+</span></td>
-                <td class="per_sum">￥<span>40.00</span>元</td>
-                <td class="delete_img"><img src="/img/delete_icon.jpg"/></td>
+                    <img src="/img/home/feature_prodects/cont1.jpg" th:src="${o.image}" th:value="${o.id}"
+                         th:title="${o.name}"/></td>
+                <td class="title" colspan="2"><span th:text="${o.name}">这是一个商品</span></td>
+                <td class="cost">￥<span th:text="${o.price}">20.00</span>元</td>
+                <td class="count"><span class="minus">-</span><span class="number">2</span><span class="add">+</span>
+                </td>
+                <td class="per_sum">￥<span th:with="sum=${o.price}*${o.quantity}">40.00</span>元</td>
+                <td class="delete_img"><img src="/img/delete_icon.jpg" th:value="${o.id}" class="deleteShopCar"/></td>
             </tr>
-            <tr class="table_content">
-                <td class="input_checkbox"><input id="2" type="checkbox" checked="checked" name="checkbox"/></td>
-                <td class="show_img">
-                    <img src="/img/home/feature_prodects/cont1.jpg"/></td>
-                <td class="title" colspan="2"><span>这是一个商品</span></td>
-                <td class="cost">￥<span class="single_cost">20.00</span>元</td>
-                <td class="count"><span class="minus">-</span><span class="number">2</span>
-                    <span class="add">+</span></td>
-                <td class="per_sum">￥<span class="one_sum_cost">40.00</span>元</td>
-                <td class="delete_img"><img src="/img/delete_icon.jpg"/></td>
-            </tr>
-            <tr class="table_content">
-                <td class="input_checkbox"><input id="3" type="checkbox" checked="checked" name="checkbox"/></td>
-                <td class="show_img">
-                    <img src="/img/home/feature_prodects/cont1.jpg"/></td>
-                <td class="title" colspan="2"><span>这是一个商品</span></td>
-                <td class="cost">￥<span>20.00</span>元</td>
-                <td class="count"><span class="minus">-</span><span class="number">2</span><span class="add">+</span></td>
-                <td class="per_sum">￥<span>40.00</span>元</td>
-                <td class="delete_img"><img src="/img/delete_icon.jpg"/></td>
-            </tr>
-            <tr class="table_content">
-                <td class="input_checkbox"><input id="4" type="checkbox" checked="checked" name="checkbox"/></td>
-                <td class="show_img">
-                    <img src="/img/home/feature_prodects/cont1.jpg"/></td>
-                <td class="title" colspan="2"><span>这是一个商品</span></td>
-                <td class="cost">￥<span>20.00</span>元</td>
-                <td class="count"><span class="minus">-</span><span class="number">2</span><span class="add">+</span></td>
-                <td class="per_sum">￥<span>40.00</span>元</td>
-                <td class="delete_img"><img src="/img/delete_icon.jpg"/></td>
-            </tr>
+            <!--<tr class="table_content">-->
+            <!--<td class="input_checkbox"><input id="2" type="checkbox" checked="checked" name="checkbox"/></td>-->
+            <!--<td class="show_img">-->
+            <!--<img src="/img/home/feature_prodects/cont1.jpg"/></td>-->
+            <!--<td class="title" colspan="2"><span>这是一个商品</span></td>-->
+            <!--<td class="cost">￥<span class="single_cost">20.00</span>元</td>-->
+            <!--<td class="count"><span class="minus">-</span><span class="number">2</span>-->
+            <!--<span class="add">+</span></td>-->
+            <!--<td class="per_sum">￥<span class="one_sum_cost">40.00</span>元</td>-->
+            <!--<td class="delete_img"><img src="/img/delete_icon.jpg"/></td>-->
+            <!--</tr>-->
+            <!--<tr class="table_content">-->
+            <!--<td class="input_checkbox"><input id="3" type="checkbox" checked="checked" name="checkbox"/></td>-->
+            <!--<td class="show_img">-->
+            <!--<img src="/img/home/feature_prodects/cont1.jpg"/></td>-->
+            <!--<td class="title" colspan="2"><span>这是一个商品</span></td>-->
+            <!--<td class="cost">￥<span>20.00</span>元</td>-->
+            <!--<td class="count"><span class="minus">-</span><span class="number">2</span><span class="add">+</span></td>-->
+            <!--<td class="per_sum">￥<span>40.00</span>元</td>-->
+            <!--<td class="delete_img"><img src="/img/delete_icon.jpg"/></td>-->
+            <!--</tr>-->
+            <!--<tr class="table_content">-->
+            <!--<td class="input_checkbox"><input id="4" type="checkbox" checked="checked" name="checkbox"/></td>-->
+            <!--<td class="show_img">-->
+            <!--<img src="/img/home/feature_prodects/cont1.jpg"/></td>-->
+            <!--<td class="title" colspan="2"><span>这是一个商品</span></td>-->
+            <!--<td class="cost">￥<span>20.00</span>元</td>-->
+            <!--<td class="count"><span class="minus">-</span><span class="number">2</span><span class="add">+</span></td>-->
+            <!--<td class="per_sum">￥<span>40.00</span>元</td>-->
+            <!--<td class="delete_img"><img src="/img/delete_icon.jpg"/></td>-->
+            <!--</tr>-->
             <tr class="end_pay">
                 <td class="is_all"><input id="all" type="checkbox" checked="checked"/>全选</td>
                 <td class="space" colspan="3"></td>
                 <td colspan="2" class="all_sum">总价：￥<span>500.00</span>元</td>
                 <td colspan="3" class="pay_button_div">
-                    <button class="pay_button">结算</button></td>
+                    <button class="pay_button">结算</button>
+                </td>
             </tr>
         </table>
     </div>
     <footer>
-        <p>Copyright © 2014.Company name All rights reserved.</p>
+        <p>Copyright © 2017.Company name All rights reserved.<a href="/"></a></p>
     </footer>
 </div>
 </body>

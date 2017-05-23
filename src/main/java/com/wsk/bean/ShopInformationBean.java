@@ -1,9 +1,11 @@
 package com.wsk.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by wsk1103 on 2017/5/19.
  */
-public class ShopInformationBean {
+public class ShopInformationBean implements Serializable{
     private int id;
     private String name;
     private int level;

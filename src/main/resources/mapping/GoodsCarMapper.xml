@@ -5,12 +5,12 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="modified" property="modified" jdbcType="TIMESTAMP" />
     <result column="sid" property="sid" jdbcType="INTEGER" />
-    <result column="scid" property="scid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="display" property="display" jdbcType="INTEGER" />
   </resultMap>
   <sql id="all" >
-    id, modified, sid, scid, quantity, display
+    id, modified, sid, uid, quantity, display
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -18,11 +18,11 @@
     from goodscar
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectBySCid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="all"/>
     from goodscar
-    where scid = #{scid,jdbcType=INTEGER} and display=1
+    where uid = #{uid,jdbcType=INTEGER} and display=1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goodscar
@@ -30,10 +30,10 @@
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.GoodsCar" >
     insert into goodscar (id, modified, sid, 
-      scid, quantity, display
+      uid, quantity, display
       )
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER}, 
-      #{scid,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{display,jdbcType=INTEGER}
+      #{uid,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{display,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.GoodsCar" >
@@ -48,8 +48,8 @@
       <if test="sid != null" >
         sid,
       </if>
-      <if test="scid != null" >
-        scid,
+      <if test="uid != null" >
+        uid,
       </if>
       <if test="quantity != null" >
         quantity,
@@ -68,8 +68,8 @@
       <if test="sid != null" >
         #{sid,jdbcType=INTEGER},
       </if>
-      <if test="scid != null" >
-        #{scid,jdbcType=INTEGER},
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
       </if>
       <if test="quantity != null" >
         #{quantity,jdbcType=INTEGER},
@@ -88,8 +88,8 @@
       <if test="sid != null" >
         sid = #{sid,jdbcType=INTEGER},
       </if>
-      <if test="scid != null" >
-        scid = #{scid,jdbcType=INTEGER},
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
       </if>
       <if test="quantity != null" >
         quantity = #{quantity,jdbcType=INTEGER},
@@ -104,7 +104,7 @@
     update goodscar
     set modified = #{modified,jdbcType=TIMESTAMP},
       sid = #{sid,jdbcType=INTEGER},
-      scid = #{scid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
       display = #{display,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

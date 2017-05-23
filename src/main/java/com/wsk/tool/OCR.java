@@ -1,6 +1,5 @@
 package com.wsk.tool;
 
-import com.wsk.tool.handleFile.ReadTxt;
 import net.sourceforge.tess4j.Tesseract;
 
 import javax.imageio.ImageIO;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  * Created by Maibenben on 2017/1/6.
  */
 public class OCR {
-    public static String FindOCR(String srImage) {
+    private static String FindOCR(String srImage) {
         try {
             System.out.println("start");
             double start=System.currentTimeMillis();
@@ -39,7 +38,7 @@ public class OCR {
     }
     private static boolean isOk(String image) throws IOException {
         String result = FindOCR(image);
-        ArrayList<String> list= ReadTxt.readTxt();
+        ArrayList<String> list= StringUtils.getInstance().readTxt();
         result = result.replaceAll("\\s*", "");
         System.out.println(result);
         for (String cc : list) {
@@ -54,7 +53,7 @@ public class OCR {
         String result = FindOCR(image);
         ArrayList<String> list;
         try {
-            list = ReadTxt.readTxt();
+            list = StringUtils.getInstance().readTxt();
         } catch (Exception e) {
             e.printStackTrace();
             return false;

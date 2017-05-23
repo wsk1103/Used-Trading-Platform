@@ -1,5 +1,6 @@
 .featured_products {
-    width: 92%;
+    width: 94%;
+    padding-bottom: 2em;
     height: 65%;
     position: absolute;
     left: 4%;
@@ -19,14 +20,27 @@
 .featured_products .product {
     position: relative;
     float: left;
-    margin-left: 3%;
-    margin-right: 2%;
+    margin-left: 2%;
+    margin-right: 1%;
     display: block;
     text-align: center;
     line-height: 2em;
     width: 14.5%;
+    height: 350px;
+    border-radius: 6px;
+    padding: 1em;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }
 
+.featured_products .product .product_img_div {
+    display: block;
+    vertical-align:middle;
+    width: 100%;
+    height: 50%;
+    margin: auto;
+    text-align: center;
+
+}
 .featured_products .product .product_name {
     /*color: rgba(0,0,0,0.62);*/
     font-size: 1em;

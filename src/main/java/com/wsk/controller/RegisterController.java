@@ -4,8 +4,7 @@ import com.wsk.pojo.UserInformation;
 import com.wsk.pojo.UserPassword;
 import com.wsk.service.UserInformationService;
 import com.wsk.service.UserPasswordService;
-import com.wsk.tool.empty.Empty;
-import com.wsk.tool.encrypt.Encrypt;
+import com.wsk.tool.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +39,7 @@ public class RegisterController {
         String insertUserToken = (String) request.getSession().getAttribute("token");
         Map<String, Integer> map = new HashMap<>();
         //防止重复提交
-        if (Empty.isNullOrEmpty(insertUserToken) || !insertUserToken.equals(token)) {
+        if (StringUtils.getInstance().isNullOrEmpty(insertUserToken) || !insertUserToken.equals(token)) {
             map.put("result",0);
             return map;
         }
@@ -80,7 +79,7 @@ public class RegisterController {
         int uid ;
         if (result == 1) {
             uid = userInformationService.selectIdByPhone(realPhone);
-            String newPassword = Encrypt.getMD5(password);
+            String newPassword = StringUtils.getInstance().getMD5(password);
             UserPassword userPassword = new UserPassword();
             userPassword.setModified(new Date());
             userPassword.setUid(uid);

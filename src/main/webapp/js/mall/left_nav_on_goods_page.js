@@ -72,7 +72,7 @@ $(function () {
                                 "<img src='" + data[i].image + "' title=" + data.image + "'/>" +
                                 "<span class='detail_product_name' value='"+data[i].id+"'>" + data[i].name + "</span><br/>" +
                                 "<span class='detail_product_cost'>$" + data[i].price + "</span><br/>" +
-                                "<span class='detail_buy product_1'>加入购物车</span>" +
+                                "<span class='detail_buy product_1' value='"+data[i].id+"'>加入购物车</span>" +
                                 "</div>" +
                                 "</div>");
                         }
@@ -80,6 +80,27 @@ $(function () {
                         $('.detail_product_name').click(function () {
                             var id = $(this).attr('value');
                             window.location.href='/selectById?id='+id;
+                        });
+                        $('.detail_buy').click(function () {
+                            var id = $(this).attr('value');
+                            $.ajax({
+                                url:'/insertGoodsCar',
+                                dataType:'JSON',
+                                type:'post',
+                                data:{id:id},
+                                success:function (data) {
+                                    var result = data.result;
+                                    if (result == '2'){
+                                        alert('您还未登录，请先登录！！！');
+                                    } else if (result == '1'){
+                                        alert('加入购物车成功');
+                                    } else if (result == '0'){
+                                        alert('加入购物车失败');
+                                    } else {
+                                        alert('发生了错误，请检测网络');
+                                    }
+                                }
+                            })
                         });
                     }
                 });
@@ -93,7 +114,27 @@ $(function () {
     $('header').click(function () {
         hideParticular();
     });
-
+    $('.detail_buy').click(function () {
+        var id = $(this).attr('value');
+        $.ajax({
+            url:'/insertGoodsCar',
+            dataType:'JSON',
+            type:'post',
+            data:{id:id},
+            success:function (data) {
+                var result = data.result;
+                if (result == '2'){
+                    alert('您还未登录，请先登录！！！');
+                } else if (result == '1'){
+                    alert('加入购物车成功');
+                } else if (result == '0'){
+                    alert('加入购物车失败');
+                } else {
+                    alert('发生了错误，请检测网络');
+                }
+            }
+        })
+    });
     //new
     bindClick();
     //  直接点击页数

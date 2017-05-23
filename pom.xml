@@ -35,6 +35,13 @@
       <artifactId>mybatis</artifactId>
       <version>3.4.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-websocket</artifactId>
+      <version>4.3.7.RELEASE</version>
+    </dependency>
+
     <!--https://mvnrepository.com/artifact/org.mybatis/mybatis-spring-->
     <dependency>
       <groupId>org.mybatis</groupId>

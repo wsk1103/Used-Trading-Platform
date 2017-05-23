@@ -34,8 +34,6 @@
     <include refid="all"/>
     from shopcar
     where uid = #{uid,jdbcType=INTEGER} and display = 1
-    limit 1
---     limit #{1},10
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shopcar

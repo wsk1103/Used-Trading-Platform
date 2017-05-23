@@ -3,7 +3,7 @@ package com.wsk.controller;
 import com.wsk.bean.ShopInformationBean;
 import com.wsk.pojo.*;
 import com.wsk.service.*;
-import com.wsk.tool.empty.Empty;
+import com.wsk.tool.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +42,7 @@ public class HomeController {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
 
         // if user login,the session will have the "userInformation"
-        if (!Empty.isNullOrEmpty(userInformation)) {
+        if (!StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             model.addAttribute("userInformation", userInformation);
         } else {
             userInformation = new UserInformation();
@@ -96,7 +96,7 @@ public class HomeController {
     @RequestMapping(value = "/mall_page")
     public String mallPage(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-        if (Empty.isNullOrEmpty(userInformation)) {
+        if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             userInformation = new UserInformation();
             model.addAttribute("userInformation", userInformation);
         } else {

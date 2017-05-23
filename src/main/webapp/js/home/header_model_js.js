@@ -3,17 +3,17 @@
  */
 $(function () {
     $('body').click(function (e) {
-        if (e.clientX>150||e.clientY>300) {
+        if (e.clientX > 150 || e.clientY > 300) {
             if ($('.short_nav_show').is(":visible")) {
                 $('.short_nav_show').animate({
                     opacity: 0,
                     height: 0
-                }, 500,function () {
+                }, 500, function () {
                     $(this).hide(0);
                 });
             }
-            if ($('.personal_nav').is(":visible")){
-                $(this).animate({height: '0%'},300).hide(0);
+            if ($('.personal_nav').is(":visible")) {
+                $(this).animate({height: '0%'}, 300).hide(0);
             }
         }
     });
@@ -58,12 +58,12 @@ $(function () {
 
     });
     $('.short_nav').click(function () {
-        if ($('.short_nav').css('opacity')>0.5) {
+        if ($('.short_nav').css('opacity') > 0.5) {
             if ($('.short_nav_show').is(":visible")) {
                 $('.short_nav_show').animate({
                     opacity: 0,
                     height: 0
-                }, 500,function () {
+                }, 500, function () {
                     $(this).hide(0);
                 });
             } else {
@@ -76,16 +76,68 @@ $(function () {
     });
     $('.user_name_a').mouseenter(function () {
         if (!$('.personal_nav').is(":visible")) {
-            $('.personal_nav').show(0).animate({height: '23%'},500);
+            $('.personal_nav').show(0).animate({height: '38%'}, 500);
         }
     });
     $('.personal_nav').mouseleave(function () {
-        if ($('.personal_nav').is(":visible")){
-            $(this).animate({height: '0%'},300).hide(0);
+        if ($('.personal_nav').is(":visible")) {
+            $(this).animate({height: '0%'}, 300).hide(0);
         }
     });
     $('.search_icon').click(function () {
         var name = $('.nav_search_input').val();
-        window.location.href='/findShopByName?name='+name;
+        window.location.href = '/findShopByName?name=' + name;
     });
+});
+jQuery(document).ready(function ($) {
+    // if (window.history && window.history.pushState) {
+    //     $(window).on('popstate', function () {
+    //         var hashLocation = location.hash;
+    //         var hashSplit = hashLocation.split("#!/");
+    //         var hashName = hashSplit[1];
+    //         if (hashName !== '') {
+    //             var hash = window.location.hash;
+    //             if (hash === '') {
+    //                 // alert("Back button isn't supported. You are leaving this application on next clicking the back button");
+    //                 window.history.pushState('forward', null,'./?WSKandXYF=后退不了了吧，我故意设置的');
+    //             }
+    //         }
+    //     });
+        window.history.pushState('forward', '/?wsk','./?WSKandXYF='+new Date().getTime());
+    // }
+    //监听关闭事件
+    window.onbeforeunload =(function () {
+        window.location.href='/logout';
+    });
+    var host = window.location.host;
+    var websocket = new WebSocket("ws://" + host + "/sockjs/webSocketIMServer");
+    var phone = $('#user_name_a').attr('value');
+    if (phone !== 'wsk') {
+        websocket.onopen = function () {
+            console.log("websocket连接上");
+            websocket.send("start");
+        };
+        websocket.onmessage = function (evnt) {
+            // console.log(evnt.data);
+            var result = evnt.data;
+            if (result == "error"){
+                window.location.href='/logout';
+                alert("该账号在其他地方登录了，请检查是否为本人操作，防止密码丢失！！！");
+                return;
+            }
+            setTimeout(function () {
+                messageHandle();
+            }, 2000);
+        };
+        websocket.onerror = function () {
+            console.log("websocket错误");
+        };
+        websocket.onclose = function () {
+            console.log("websocket关闭");
+        };
+        function messageHandle() {
+            // alert(phone);
+            websocket.send(phone);
+        };
+    }
 });

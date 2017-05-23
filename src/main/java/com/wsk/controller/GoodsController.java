@@ -6,7 +6,7 @@ import com.wsk.bean.UserWantBean;
 import com.wsk.pojo.*;
 import com.wsk.service.*;
 import com.wsk.token.TokenProccessor;
-import com.wsk.tool.empty.Empty;
+import com.wsk.tool.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +51,7 @@ public class GoodsController {
     public String publish(HttpServletRequest request, Model model) {
         //先判断用户有没有登录
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-        if (Empty.isNullOrEmpty(userInformation)) {
+        if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             //如果没有登录
 //            userInformation = new UserInformation();
 //            model.addAttribute("userInformation", userInformation);
@@ -65,7 +65,7 @@ public class GoodsController {
             String clazz = userInformation.getClazz();
             String sno = userInformation.getSno();
             String dormitory = userInformation.getDormitory();
-            if (Empty.isNullOrEmpty(realName) || Empty.isNullOrEmpty(clazz) || Empty.isNullOrEmpty(sno) || Empty.isNullOrEmpty(dormitory)) {
+            if (StringUtils.getInstance().isNullOrEmpty(realName) || StringUtils.getInstance().isNullOrEmpty(clazz) || StringUtils.getInstance().isNullOrEmpty(sno) || StringUtils.getInstance().isNullOrEmpty(dormitory)) {
                 //没有
                 model.addAttribute("message", "请先认证真实信息");
                 return "redirect:personal_info";
@@ -89,7 +89,7 @@ public class GoodsController {
         try {
             List<ShopInformation> shopInformations = shopInformationService.selectByName(name);
             UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-            if (Empty.isNullOrEmpty(userInformation)) {
+            if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
                 userInformation = new UserInformation();
                 model.addAttribute("userInformation", userInformation);
             } else {
@@ -126,7 +126,7 @@ public class GoodsController {
     public String selectById(@RequestParam int id,
                              HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-        if (Empty.isNullOrEmpty(userInformation)) {
+        if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             userInformation = new UserInformation();
             model.addAttribute("userInformation", userInformation);
         }
@@ -163,7 +163,7 @@ public class GoodsController {
     @RequestMapping(value = "/require_mall")
     public String requireMall(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-        if (Empty.isNullOrEmpty(userInformation)) {
+        if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             userInformation = new UserInformation();
             model.addAttribute("userInformation", userInformation);
         } else {
