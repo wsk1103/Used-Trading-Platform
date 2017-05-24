@@ -88,8 +88,6 @@ public class RegisterController {
                 result = userPasswordService.insertSelective(userPassword);
             } catch (Exception e){
                 userInformationService.deleteByPrimaryKey(uid);
-//                model.addAttribute("token", insertUserToken);
-//                model.addAttribute("phone", realPhone);
                 e.printStackTrace();
                 map.put("result",0);
                 return map;

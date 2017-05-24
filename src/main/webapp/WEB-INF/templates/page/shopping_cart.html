@@ -47,9 +47,9 @@
                          th:title="${o.name}"/></td>
                 <td class="title" colspan="2"><span th:text="${o.name}">这是一个商品</span></td>
                 <td class="cost">￥<span th:text="${o.price}">20.00</span>元</td>
-                <td class="count"><span class="minus">-</span><span class="number">2</span><span class="add">+</span>
+                <td class="count"><span class="minus">-</span><span class="number" th:text="${o.quantity}">2</span><span class="add">+</span>
                 </td>
-                <td class="per_sum">￥<span th:with="sum=${o.price}*${o.quantity}" th:text="sum">40.00</span>元</td>
+                <td class="per_sum">￥<span th:with="sum=${o.price}*${o.quantity}" th:text="${sum}">40.00</span>元</td>
                 <td class="delete_img"><img src="/img/delete_icon.jpg" th:value="${o.id}" class="deleteShopCar"/></td>
             </tr>
             <!--<tr class="table_content">-->

@@ -69,7 +69,7 @@ $(function () {
                             $all_product.append("<div class='product_content_div'>" +
                                 "<div class='detail_product'>" +
                                 "<input type='hidden' value=" + data[i].id + " '/>" +
-                                "<img src='" + data[i].image + "' title=" + data.image + "'/>" +
+                                "<div class='product_img_div'><img src='" + data[i].image + "' title=" + data.image + "'/></div>" +
                                 "<span class='detail_product_name' value='"+data[i].id+"'>" + data[i].name + "</span><br/>" +
                                 "<span class='detail_product_cost'>$" + data[i].price + "</span><br/>" +
                                 "<span class='detail_buy product_1' value='"+data[i].id+"'>加入购物车</span>" +
@@ -182,7 +182,7 @@ $(function () {
                     $all_product.append("<div class='product_content_div'>" +
                         "<div class='detail_product'>" +
                         "<input type='hidden' value= ''/>" +
-                        "<img src='' title='暂时没有该分类的商品' />" +
+                        "<div class='product_img_div'><img src='' title='暂时没有该分类的商品' /></div>" +
                         "<span class='detail_product_name'></span><br/>" +
                         "<span class='detail_product_cost'></span><br/>" +
                         "<span class='detail_buy product_1'>加入购物车</span>" +
@@ -193,7 +193,8 @@ $(function () {
                     $all_product.append("<div class='product_content_div'>" +
                         "<div class='detail_product'>" +
                         "<input type='hidden' value=" + data[i].id + " '/>" +
-                        "<img src='" + data[i].image + "' title=" + data.image + "'/>" +
+
+                        "<div class='product_img_div'><img src='" + data[i].image + "' title=" + data.image + "'/></div>" +
                         "<span class='detail_product_name' value='"+data[i].id+"'>" + data[i].name + "</span><br/>" +
                         "<span class='detail_product_cost'>$" + data[i].price + "</span><br/>" +
                         "<span class='detail_buy product_1' value='"+data[i].id+"'>加入购物车</span>" +

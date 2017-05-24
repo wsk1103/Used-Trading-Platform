@@ -6,6 +6,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -24,11 +25,16 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 //            super.handleTextMessage(session, message);
             System.out.println(session.getId()+" :"+message.getPayload() + "   " + new Date());
             String m = message.getPayload();
-            if (m.equals("start")){
+            String[] wsk = m.split(",");
+            String phone = wsk[0];
+            long time = Long.parseLong(wsk[1]);
+            String action = wsk[2];
+            if (action.equals("start")){
                 session.sendMessage(new TextMessage("success"));
+                SaveSession.getInstance().save(phone,time);
                 return;
             }
-            boolean b = SaveSession.getInstance().isHave(m);
+            boolean b = SaveSession.getInstance().isHave(phone,time);
             if (b) {
                 if (session.isOpen()) {
                     session.sendMessage(new TextMessage("error"));
@@ -39,6 +45,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            try {
+                session.sendMessage(new TextMessage("error"));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

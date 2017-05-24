@@ -76,7 +76,7 @@ public class UserController {
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-        SaveSession.getInstance().remove(userInformation.getPhone());
+//        SaveSession.getInstance().remove(userInformation.getPhone());
         request.getSession().removeAttribute("userInformation");
         request.getSession().removeAttribute("uid");
         System.out.println("logout");
@@ -1072,8 +1072,6 @@ public class UserController {
         }
         //如果密码账号对应正确，将userInformation存储到session中
         request.getSession().setAttribute("userInformation", userInformation);
-        //该session过最多存在30分钟，如果用户不活动的话
-        request.getSession().setMaxInactiveInterval(60*30);
         request.getSession().setAttribute("uid", uid);
         SaveSession.getInstance().save(phone,new Date().getTime());
         return true;

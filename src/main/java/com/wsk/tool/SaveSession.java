@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class SaveSession {
     private static final Map<String, Long> map1 = new HashMap<>();
-    private static final Map<String, Long> map2 = new HashMap<>();
+//    private static final Map<String, Long> map2 = new HashMap<>();
 
     private SaveSession(){}
 
@@ -22,21 +22,21 @@ public class SaveSession {
     }
 
     public void save(String phone, Long time) {
-        synchronized (map2) {
-            map2.put(phone, time);
+        synchronized (map1) {
+            map1.put(phone, time);
         }
     }
 
-    public boolean isHave(String phone) {
+    public boolean isHave(String phone,long time) {
         synchronized (map1) {
             if (StringUtils.getInstance().isNullOrEmpty(map1.get(phone))) {
-                map1.put(phone, map2.get(phone));
+                map1.put(phone, time);
                 return false;
             } else {
                 long m_1_Time = map1.get(phone);
-                long m_2_Time = map2.get(phone);
-                if (m_1_Time<(m_2_Time)) {
-                    map1.put(phone, map2.get(phone));
+//                long m_2_Time = map2.get(phone);
+                if (time<(m_1_Time)) {
+                    map1.put(phone, time);
                     return true;
                 } else {
                     return false;
@@ -48,7 +48,7 @@ public class SaveSession {
         synchronized (map1){
             if (!StringUtils.getInstance().isNullOrEmpty(map1.get(phone))) {
                 map1.remove(phone);
-                map2.remove(phone);
+//                map2.remove(phone);
             }
         }
     }

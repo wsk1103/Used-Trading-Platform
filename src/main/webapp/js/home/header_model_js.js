@@ -69,7 +69,7 @@ $(function () {
             } else {
                 $('.short_nav_show').show(0).css({opacity: 0, height: 0}).animate({
                     opacity: 1,
-                    height: "43%"
+                    height: "30%"
                 }, 500).show(0);
             }
         }
@@ -110,12 +110,13 @@ jQuery(document).ready(function ($) {
         window.location.href='/logout';
     });
     var host = window.location.host;
+    var me = new Date().getTime();
     var websocket = new WebSocket("ws://" + host + "/sockjs/webSocketIMServer");
     var phone = $('#user_name_a').attr('value');
     if (phone !== 'wsk') {
         websocket.onopen = function () {
             console.log("websocket连接上");
-            websocket.send("start");
+            websocket.send(phone+","+me+",start");
         };
         websocket.onmessage = function (evnt) {
             // console.log(evnt.data);
@@ -137,7 +138,7 @@ jQuery(document).ready(function ($) {
         };
         function messageHandle() {
             // alert(phone);
-            websocket.send(phone);
+            websocket.send(phone+","+me+",send");
         };
     }
 });

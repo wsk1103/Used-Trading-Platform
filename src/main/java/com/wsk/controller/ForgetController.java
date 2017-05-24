@@ -77,9 +77,6 @@ public class ForgetController {
         String updatePasswordToken = (String) request.getSession().getAttribute("token");
         Map<String, Integer> map = new HashMap<>();
         if (StringUtils.getInstance().isNullOrEmpty(updatePasswordToken) || !updatePasswordToken.equals(token)) {
-//            updatePasswordToken = TokenProccessor.getInstance().makeToken();
-//            request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);
-//            model.addAttribute("token",updatePasswordToken);
             map.put("result", 0);
             return map;
         }
@@ -99,9 +96,6 @@ public class ForgetController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-//            request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);
-//            model.addAttribute("token",updatePasswordToken);
-//            model.addAttribute("phone", realPhone);
             map.put("result", 0);
             return map;
         }
@@ -114,9 +108,6 @@ public class ForgetController {
         try {
             result = userPasswordService.updateByPrimaryKeySelective(userPassword);
         } catch (Exception e) {
-//            request.getSession().setAttribute("updatePasswordToken",updatePasswordToken);
-//            model.addAttribute("token",updatePasswordToken);
-//            model.addAttribute("phone", realPhone);
             e.printStackTrace();
             map.put("result", 0);
             return map;

@@ -27,7 +27,7 @@
                 </div>
                 <div class="publish_content">
                     <input type="text" class="title_input" name="name" required="required" th:value="${userWant.name}"
-                           th:text="${userWant.name}"/>
+                           />
                 </div>
             </div>
             <div class="publish_one_par">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="publish_content">
                     <input type="text" class="count_input" name="quantity" required="required"
-                           th:value="${userWant.quantity}" th:text="${userWant.quantity}"/>
+                           th:value="${userWant.quantity}" />
                 </div>
             </div>
             <div class="publish_one_par">
@@ -45,8 +45,8 @@
                 </div>
                 <div class="publish_content cost_content">
                     <input type="text" class="cost_input" name="price" required="required" th:value="${userWant.price}"
-                           th:text="${userWant.price}"/>
-                    <span>  RMB(.00)</span>
+                           />
+                    <span>RMB(.00)</span>
                 </div>
             </div>
             <div class="publish_one_par">
@@ -93,6 +93,7 @@
                         <option>全新</option>
                     </select>
                 </div>
+                <br/>
                 <div th:value="${sort}" th:text="${sort}"></div>
             </div>
             <div class="submit_content_div">
