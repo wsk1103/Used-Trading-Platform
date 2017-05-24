@@ -1,0 +1,2 @@
+# JavaDesign
+basice of SSM
