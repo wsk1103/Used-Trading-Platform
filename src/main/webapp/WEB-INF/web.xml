@@ -71,51 +71,51 @@
   </session-config>
   <error-page>
     <location>/error</location>
-    <error-code>405</error-code>
+    <!--<error-code>405</error-code>-->
   </error-page>
   <error-page>
   <location>/error</location>
-  <error-code>404</error-code>
+  <!--<error-code>404</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>403</error-code>
+    <!--<error-code>403</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>402</error-code>
+    <!--<error-code>402</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>401</error-code>
+    <!--<error-code>401</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>400</error-code>
+    <!--<error-code>400</error-code>-->
   </error-page>
   <error-page>
   <location>/error</location>
-  <error-code>500</error-code>
+  <!--<error-code>500</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>501</error-code>
+    <!--<error-code>501</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>502</error-code>
+    <!--<error-code>502</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>503</error-code>
+    <!--<error-code>503</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>504</error-code>
+    <!--<error-code>504</error-code>-->
   </error-page>
   <error-page>
     <location>/error</location>
-    <error-code>505</error-code>
+    <!--<error-code>505</error-code>-->
   </error-page>
 
 </web-app>

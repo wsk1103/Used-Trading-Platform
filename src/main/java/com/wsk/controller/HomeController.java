@@ -26,8 +26,6 @@ public class HomeController {
     @Resource
     private ShopInformationService shopInformationService;
     @Resource
-    private ShopPictureService shopPictureService;
-    @Resource
     private SpecificeService specificeService;
     @Resource
     private ClassificationService classificationService;

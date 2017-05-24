@@ -29,6 +29,13 @@
       <artifactId>spring-context-support</artifactId>
       <version>4.3.7.RELEASE</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>4.3.7.RELEASE</version>
+    </dependency>
+
     <!--https://mvnrepository.com/artifact/org.mybatis/mybatis-->
     <dependency>
       <groupId>org.mybatis</groupId>
@@ -87,6 +94,12 @@
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring4</artifactId>
       <version>2.1.4.RELEASE</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.5</version>
     </dependency>
 
     <!--导入dbcp的jar包，用来在applicationContext.xml中配置数据库-->
