@@ -721,6 +721,7 @@ public class UserController {
             String sb = getSort(sort);
             model.addAttribute("sort", sb);
             model.addAttribute("action", 2);
+            return "redirect:/my_publish_product_page";
         } else if (action == 2) {//更新商品
             ShopInformation shopInformation = new ShopInformation();
             shopInformation.setModified(new Date());
@@ -749,7 +750,7 @@ public class UserController {
             model.addAttribute("action", 2);
             model.addAttribute("sort", getSort(sort));
         }
-        return "page/publish_product";
+        return "redirect:/my_publish_product_page";
     }
     //从发布的商品直接跳转到修改商品
     @RequestMapping(value = "/modifiedMyPublishProduct")
@@ -1090,5 +1091,70 @@ public class UserController {
     //获得第一层分类
     private AllKinds selectAllKindsByAid(int aid) {
         return allKindsService.selectByPrimaryKey(aid);
+    }
+
+    public void save(ShopInformation shopInformation,UserRelease userRelease){
+        shopInformationService.insertSelective(shopInformation);
+        userReleaseService.insertSelective(userRelease);
+    }
+
+    //循环插入商品
+    //发布商品
+    @RequestMapping(value = "/test")
+    public String insertGoods() {
+
+            //begin insert the shopInformation to the MySQL
+//            ShopInformation shopInformation = new ShopInformation();
+//            shopInformation.setName(name);
+//            shopInformation.setLevel(level);
+//            shopInformation.setRemark(remark);
+//            shopInformation.setPrice(new BigDecimal(price));
+//            shopInformation.setSort(sort);
+//            shopInformation.setQuantity(quantity);
+//            shopInformation.setModified(new Date());
+//            shopInformation.setImage(image);//This is the other uniquely identifies
+//            shopInformation.setUid(uid);
+//            //将发布的商品的编号插入到用户的发布中
+//            UserRelease userRelease = new UserRelease();
+//            userRelease.setModified(new Date());
+//            userRelease.setSid(sid);
+//            userRelease.setUid(uid);
+//            shopInformation.setId(sid);
+        Random random = new Random();
+        ShopInformation shopInformation;
+        UserRelease userRelease;
+        int level,uid,quantity;
+        double price;
+        for (int i = 1,k=1,j=189;i<1000;i++,j++,k++) {
+            if (k>94){
+                k=1;
+            }
+            level = random.nextInt(10)+1;
+            price = Math.random()*1000+1;
+            quantity = random.nextInt(10)+1;
+            uid = random.nextInt(100)+1;
+            shopInformation = new ShopInformation();
+            shopInformation.setId(j);
+            shopInformation.setName("百年孤独");
+            shopInformation.setModified(new Date());
+            shopInformation.setLevel(level);
+            shopInformation.setRemark("看上的请联系我，QQ：1261709167，微信：1261709167");
+//            double price = Math.random()*1000.00+1;
+            shopInformation.setPrice(new BigDecimal(price));
+            shopInformation.setSort(k);
+            shopInformation.setQuantity(quantity);
+            shopInformation.setImage("/image/QyBHYiMfYQ4XZFCqxEv0.jpg");
+//            int uid = random.nextInt(100)+1;
+            shopInformation.setUid(uid);
+//            userRelease = new UserRelease();
+//            userRelease.setUid(uid);
+//            userRelease.setSid(j);
+//            userRelease.setModified(new Date());
+//            userRelease.setDisplay(1);
+            shopInformationService.updateByPrimaryKeySelective(shopInformation);
+//            userReleaseService.insertSelective(userRelease);
+        }
+        System.out.println("success");
+        return "page/publish_product";
     }
 }

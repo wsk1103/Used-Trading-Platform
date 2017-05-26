@@ -27,7 +27,7 @@
     select
     <include refid="all" />
     from userrelease
-    where uid =#{0} and display = 1
+    where uid =#{0} and display = 1 order by id DESC
     limit #{1},10
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

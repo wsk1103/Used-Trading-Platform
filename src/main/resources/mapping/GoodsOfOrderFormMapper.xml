@@ -22,7 +22,7 @@
     select
     <include refid="all"/>
     from goodsoforderform
-    where ofid = #{ofid,jdbcType=INTEGER} and display=1
+    where ofid = #{ofid,jdbcType=INTEGER} and display=1  order by id DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goodsoforderform

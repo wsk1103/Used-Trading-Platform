@@ -21,7 +21,7 @@
     <div class="publish_product_div">
         <form action="/insertGoods" method="post" enctype="multipart/form-data">
             <input type="hidden" th:value="${token}" name="token"/>
-            <input type="hidden" th:value="${action}" value="1" name="action"/>
+            <input type="hidden" th:value="${action}" value="1" name="action" class="action"/>
             <input type="hidden" th:if="${shopInformation.id}!=null" th:value="${shopInformation.id}" name="id"/>
             <input type="hidden" th:if="${shopInformation.id}==null" value="0" name="id"/>
             <div class="publish_one_par">

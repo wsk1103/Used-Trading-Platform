@@ -34,6 +34,24 @@ $(function () {
         });
     });
     $('.buy_button').click(function () {
-
+        var id = $(this).attr('value');
+        $.ajax({
+            url:'/insertGoodsCar',
+            dataType:'JSON',
+            type:'post',
+            data:{id:id},
+            success:function (data) {
+                var result = data.result;
+                if (result == '2'){
+                    alert('您还未登录，请先登录！！！');
+                } else if (result == '1'){
+                    alert('加入购物车成功');
+                } else if (result == '0'){
+                    alert('加入购物车失败');
+                } else {
+                    alert('发生了错误，请检测网络');
+                }
+            }
+        })
     });
 });

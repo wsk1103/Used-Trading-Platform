@@ -22,7 +22,7 @@
     select
     <include refid="all"/>
     from goodscar
-    where uid = #{uid,jdbcType=INTEGER} and display=1
+    where uid = #{uid,jdbcType=INTEGER} and display=1 order by id DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goodscar

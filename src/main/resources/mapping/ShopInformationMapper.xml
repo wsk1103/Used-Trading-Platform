@@ -43,7 +43,7 @@
   <select id="getCountsOfShelf" resultType="java.lang.Integer" >
     select count(id)
     from shopinformation
-    where uid = #{uid,jdbcType=INTEGER} and display =0
+    where uid = #{uid,jdbcType=INTEGER} and display =0 order by id DESC
   </select>
   <select id="getCounts" resultType="java.lang.Integer">
     select count(id)

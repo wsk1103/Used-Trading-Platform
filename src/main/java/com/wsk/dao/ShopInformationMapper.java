@@ -36,6 +36,6 @@ public interface ShopInformationMapper {
     List<ShopInformation> selectBySort(int sort);
 
     //选择用户的发布
-    @Select("select * from shopinformation where uid=#{uid} and display=1")
+    @Select("select * from shopinformation where uid=#{uid} and display=1 order by id desc")
     List<ShopInformation> selectUserReleaseByUid(int uid);
 }

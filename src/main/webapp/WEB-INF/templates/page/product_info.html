@@ -34,7 +34,7 @@
             <span class="info_content" th:text="${shopInformation.remark}">这是一个商品，联系电话1111111111</span><br/>
             <span class="what_info">分类：</span>
             <span class="info_content" th:text="${sort}">数码科技-手机-苹果</span><br/>
-            <button class="buy_button">加入购物车</button>
+            <button class="buy_button" th:value="${shopInformation.id}">加入购物车</button>
         </div>
         <div class="publish_comment">
             <span>留言：</span><br/><br/>

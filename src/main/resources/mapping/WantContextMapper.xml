@@ -21,7 +21,7 @@
     select
     <include refid="all"/>
     from wantcontext
-    where uwid = #{0}
+    where uwid = #{0} order by id DESC
     limit #{1},10
   </select>
   <select id="getCounts" resultType="java.lang.Integer">

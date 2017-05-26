@@ -111,6 +111,7 @@ $(function () {
         $('.choose_second_type').html(secondText);
         $('.choose_third_type').html(thirdText);
     }
+
 });
 $(function () {
    if (($('.show_tip').is(':hidden'))){
