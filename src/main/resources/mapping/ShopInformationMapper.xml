@@ -61,6 +61,7 @@
     <include refid="all" />
     from shopinformation
     where name LIKE CONCAT('%',#{name},'%') order by id desc
+    limit 12
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shopinformation

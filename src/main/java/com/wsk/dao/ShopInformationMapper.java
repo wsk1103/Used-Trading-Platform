@@ -32,10 +32,10 @@ public interface ShopInformationMapper {
     List<ShopInformation> selectByName(String name);
 
     //通过分类选择
-    @Select("select * from shopinformation where sort=#{sort} and display =1")
+    @Select("select * from shopinformation where sort=#{sort} and display =1 limit 12")
     List<ShopInformation> selectBySort(int sort);
 
     //选择用户的发布
-    @Select("select * from shopinformation where uid=#{uid} and display=1 order by id desc")
+    @Select("select * from shopinformation where uid=#{uid} and display=1 order by id desc limit 12")
     List<ShopInformation> selectUserReleaseByUid(int uid);
 }

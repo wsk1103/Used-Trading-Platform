@@ -22,7 +22,7 @@ public interface UserWantMapper {
 
     List<UserWant> selectByUid(int uid, int start);
 
-    @Select("select * from userWant where uid=#{id} and display=1")
+    @Select("select * from userWant where uid=#{id} and display=1 order by id desc limit 12")
     List<UserWant> selectMineByUid(int id);
 
     List<UserWant> selectAll();
