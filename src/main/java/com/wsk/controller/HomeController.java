@@ -35,7 +35,7 @@ public class HomeController {
     private ShopContextService shopContextService;
 
 
-    @RequestMapping("/")
+    @RequestMapping(value = {"/","/home"})
     public String home(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         // if user login,the session will have the "userInformation"
@@ -142,7 +142,7 @@ public class HomeController {
         stringBuffer.append(classification.getName());
         stringBuffer.append("-");
         stringBuffer.append(specific.getName());
-        System.out.println(sort);
+//        System.out.println(sort);
         return stringBuffer.toString();
     }
 

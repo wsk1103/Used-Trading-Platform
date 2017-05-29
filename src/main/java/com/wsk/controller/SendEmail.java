@@ -101,7 +101,7 @@ public class SendEmail {
             message.setSubject("来自WSK的验证码");
             message.setContent(text, "text/html;charset=UTF-8");
             //这里先不发生信息，以后要开启的
-//            ts.sendMessage(message, message.getAllRecipients());
+            ts.sendMessage(message, message.getAllRecipients());
             ts.close();
             req.getSession().setAttribute("phone", realPhone);
             map.put("result", "1");

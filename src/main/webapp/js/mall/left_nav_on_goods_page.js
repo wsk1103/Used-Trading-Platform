@@ -2,6 +2,7 @@
  * Created by alone on 2017/5/14.
  */
 $(function () {
+    insertShopCar();
     var type_list = getTypeList();
     $(window).scroll(function () {
         var temp = $(this).scrollTop();
@@ -81,6 +82,7 @@ $(function () {
                             var id = $(this).attr('value');
                             window.location.href='/selectById?id='+id;
                         });
+                        insertShopCar();
                     }
                 });
                 // alert(wsk);
@@ -206,7 +208,7 @@ $(function () {
                     var id = $(this).attr('value');
                     window.location.href='/selectById?id='+id;
                 });
-
+                insertShopCar();
             }
         });
 
@@ -216,27 +218,30 @@ $(function () {
         var id = $(this).attr('value');
         window.location.href='/selectById?id='+id;
     });
-    $('.detail_buy').click(function () {
-        var id = $(this).attr('value');
-        $.ajax({
-            url:'/insertGoodsCar',
-            dataType:'JSON',
-            type:'post',
-            data:{id:id},
-            success:function (data) {
-                var result = data.result;
-                if (result == '2'){
-                    alert('您还未登录，请先登录！！！');
-                } else if (result == '1'){
-                    alert('加入购物车成功');
-                } else if (result == '0'){
-                    alert('加入购物车失败');
-                } else {
-                    alert('发生了错误，请检测网络');
+    function insertShopCar() {
+        $('.detail_buy').click(function () {
+            var id = $(this).attr('value');
+            $.ajax({
+                url:'/insertGoodsCar',
+                dataType:'JSON',
+                type:'post',
+                data:{id:id},
+                success:function (data) {
+                    var result = data.result;
+                    if (result == '2'){
+                        alert('您还未登录，请先登录！！！');
+                    } else if (result == '1'){
+                        alert('加入购物车成功');
+                    } else if (result == '0'){
+                        alert('加入购物车失败');
+                    } else {
+                        alert('发生了错误，请检测网络');
+                    }
                 }
-            }
-        })
-    });
+            })
+        });
+    }
+
 });
 function hideParticular() {
     if ($('.particular_type_div').is(":visible")) {

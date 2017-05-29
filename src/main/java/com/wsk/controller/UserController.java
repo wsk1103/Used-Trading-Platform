@@ -75,11 +75,16 @@ public class UserController {
     //退出
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request) {
-        UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
+        try {
+            UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
 //        SaveSession.getInstance().remove(userInformation.getPhone());
-        request.getSession().removeAttribute("userInformation");
-        request.getSession().removeAttribute("uid");
-        System.out.println("logout");
+            request.getSession().removeAttribute("userInformation");
+            request.getSession().removeAttribute("uid");
+            System.out.println("logout");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/home";
+        }
         return "redirect:/";
     }
 
