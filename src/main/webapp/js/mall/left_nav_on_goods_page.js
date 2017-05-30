@@ -57,20 +57,21 @@ $(function () {
                         $all_product.html('');
                         if (data.length === 0) {
                             $all_product.append("<div class='product_content_div'>" +
-                                "<div class='detail_product'>" +
+                                "<figure class='detail_product'>" +
                                 "<input type='hidden' value= ''/>" +
                                 "<img src='' title='暂时没有该分类的商品' />" +
                                 "<span class='detail_product_name'></span><br/>" +
                                 "<span class='detail_product_cost'></span><br/>" +
                                 "<span class='detail_buy product_1'>加入购物车</span>" +
-                                "</div>" +
+                                "</figure>" +
                                 "</div>");
                         }
                         for (var i = 0; i < data.length; i++) {
                             $all_product.append("<div class='product_content_div'>" +
                                 "<div class='detail_product'>" +
                                 "<input type='hidden' value=" + data[i].id + " '/>" +
-                                "<div class='product_img_div'><img src='" + data[i].image + "' title=" + data.image + "'/></div>" +
+                                "<div class='product_img_div'><img class='show_img' src='" + data[i].image + "' title=" + data.name + "'/></div>" +
+                                "<p class='show_tip'>"+data[i].remark+"</p>"+
                                 "<span class='detail_product_name' value='"+data[i].id+"'>" + data[i].name + "</span><br/>" +
                                 "<span class='detail_product_cost'>$" + data[i].price + "</span><br/>" +
                                 "<span class='detail_buy product_1' value='"+data[i].id+"'>加入购物车</span>" +
@@ -195,8 +196,10 @@ $(function () {
                     $all_product.append("<div class='product_content_div'>" +
                         "<div class='detail_product'>" +
                         "<input type='hidden' value=" + data[i].id + " '/>" +
-
-                        "<div class='product_img_div'><img src='" + data[i].image + "' title=" + data.image + "'/></div>" +
+                        "<div class='product_img_div'>" +
+                        "<img class='show_img' src='" + data[i].image + "' title=" + data.name + "'/>" +
+                        "</div>" +
+                        "<p class='show_tip'>"+data[i].remark+"</p>"+
                         "<span class='detail_product_name' value='"+data[i].id+"'>" + data[i].name + "</span><br/>" +
                         "<span class='detail_product_cost'>$" + data[i].price + "</span><br/>" +
                         "<span class='detail_buy product_1' value='"+data[i].id+"'>加入购物车</span>" +

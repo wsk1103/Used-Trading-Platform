@@ -60,8 +60,9 @@
                 <div class="detail_product" th:each="o:${shopInformationBean}">
                     <input type="hidden" th:value="${o.id}" name="id"/>
                     <div class="product_img_div">
-                        <img src="/img/home/feature_prodects/cont2.jpg" th:src="${o.image}" th:title="${o.name}"/>
+                        <img src="/img/home/feature_prodects/cont2.jpg" th:src="${o.image}" th:title="${o.name}" class="show_img"/>
                     </div>
+                    <p class="show_tip" th:text="${o.remark}"></p>
                     <span class="detail_product_name" th:text="${o.name}" th:value="${o.id}">Big block Lether Bag</span><br/>
                     <span class="detail_product_cost" th:text="'￥'+${o.price}+'元'">￥350.00元</span><br/>
                     <span class="detail_buy product_1" th:value="${o.id}">加入购物车</span>

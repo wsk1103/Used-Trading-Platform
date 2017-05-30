@@ -76,16 +76,17 @@
 </div>
 <div class="featured_products">
     <h2>精选的商品</h2>
-    <div class="product" th:each="o:${shopInformationBean}">
+    <figure class="product" th:each="o:${shopInformationBean}">
         <div class="product_img_div">
-            <img src="/img/home/feature_prodects/cont1.jpg" style="max-height:180px;max-width: 100%;" th:src="${o.image}"/>
+            <img src="/img/home/feature_prodects/cont1.jpg" class="show_img" th:src="${o.image}"/>
         </div>
+        <p class="show_tip" th:text="${o.remark}"></p>
         <input class="product_id" type="hidden" th:value="${o.id}"/>
         <a class="product_name" th:href="'/selectById?id='+${o.id}" th:text="${o.name}" th:title="${o.name}">wsk1103</a><br/>
         <!--<span class="product_name" th:text="${o.name}" th:value="${o.id}">Big block Lether Bag</span><br/>-->
         <span class="product_cost" th:text="'￥'+${o.price}+'元'">$350.00</span><br/><br/>
         <span class="buy product_1" th:value="${o.id}">加入购物车</span>
-    </div>
+    </figure>
     <!--<div class="product">-->
         <!--<img src="img/home/feature_prodects/cont2.jpg" width="100%"/>-->
         <!--<span class="product_name">Big block Lether Bag</span>-->

@@ -10,23 +10,26 @@
     display: block;
     border-radius: 10px;
 }
+
 .my_slide {
     display: block;
     width: 80%;
     left: 10%;
-    top:0;
+    top: 0;
     height: 100%;
     position: absolute;
     float: left;
     opacity: 0;
     color: white;
 }
-.my_slide h1{
+
+.my_slide h1 {
     position: absolute;
     left: 10%;
     top: 30%;
     width: 30%;
 }
+
 .my_slide p {
     position: absolute;
     left: 10%;
@@ -34,12 +37,14 @@
     width: 30%;
     overflow: inherit;
 }
-.slide_img{
+
+.slide_img {
     position: absolute;
     left: 50%;
     top: 25%;
     width: 60%;
 }
+
 .left_border {
     position: absolute;
     left: 5%;
@@ -47,8 +52,9 @@
     width: 50px;
     height: 90px;
     border-radius: 6px;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
 }
+
 .left_turn {
     position: absolute;
     left: 8px;
@@ -59,6 +65,7 @@
     background-repeat: no-repeat;
     cursor: pointer;
 }
+
 .right_border {
     position: absolute;
     left: 92%;
@@ -66,8 +73,9 @@
     width: 50px;
     height: 90px;
     border-radius: 6px;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
 }
+
 .right_turn {
     position: absolute;
     left: 8px;
@@ -79,15 +87,47 @@
     background-position: -34px 0;
     cursor: pointer;
 }
+
 .current {
     opacity: 1;
 }
-.product_name{
+
+.product_name {
     cursor: pointer;
     color: black;
     text-decoration: none;
     margin-top: 2em;
 }
-.product_name:hover{
+
+.product_name:hover {
     color: slateblue;
+}
+
+.product {
+    position: relative;
+}
+
+.show_img {
+    max-height: 180px;
+    max-width: 100%;
+    transition: opacity 0.35s, transform 0.35s;
+    opacity: 1;
+    cursor: auto;
+}
+
+.product:hover .show_img {
+    opacity: .5;
+}
+
+.product:hover .show_tip {
+    opacity: 1;
+}
+
+.show_tip {
+    opacity: 0;
+    transition: opacity 0.35s, transform 0.35s;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: auto;
 }

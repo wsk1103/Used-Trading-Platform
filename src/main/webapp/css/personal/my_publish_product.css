@@ -12,7 +12,7 @@
     margin-left: 10%;
     display: block;
 }
-div.detail_product {
+.detail_product {
     width: 15%;
     height: 460px;
     float: left;
@@ -25,7 +25,7 @@ div.detail_product {
     line-height: 3em;
     z-index: 1000;
 }
-div.detail_product .product_img_div{
+.detail_product .product_img_div{
     display: block;
     vertical-align:middle;
     width: 100%;
@@ -116,4 +116,32 @@ footer p {
     text-align: center;
     color: white;
     font-size: 1.2em;
+}
+.detail_product {
+    position: relative;
+}
+
+.show_img {
+    max-height: 180px;
+    max-width: 100%;
+    transition: opacity 0.35s, transform 0.35s;
+    opacity: 1;
+    cursor: auto;
+}
+
+.detail_product:hover .show_img {
+    opacity: .5;
+}
+
+.detail_product:hover .show_tip {
+    opacity: 1;
+}
+
+.show_tip {
+    opacity: 0;
+    transition: opacity 0.35s, transform 0.35s;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: auto;
 }

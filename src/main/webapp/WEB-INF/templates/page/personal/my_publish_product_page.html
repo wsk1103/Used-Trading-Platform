@@ -65,56 +65,17 @@
 <div class="temp_content">
     <!--注意需要加一个br，不然会在同一行显示-->
     <div class="product_content_div">
-        <div class="detail_product" th:each="o:${shopInformationBean}">
+        <figure class="detail_product" th:each="o:${shopInformationBean}">
             <div class="product_img_div">
-                <img src="/img/home/feature_prodects/cont2.jpg" th:src="${o.getImage()}"/>
+                <img src="/img/home/feature_prodects/cont2.jpg" th:src="${o.getImage()}" class="show_img"/>
             </div>
+            <p class="show_tip" th:text="${o.remark}"></p>
             <span class="detail_product_name" th:text="${o.getName()}" th:value="${o.id}">Big block Lether Bag</span><br/>
             <span class="detail_product_cost" th:text="'$'+${o.getPrice()}">$350.00</span><br/>
             <span class="detail_type" th:text="${o.getSort()}">数码科技-手机-苹果</span>
             <div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish" th:value="${o.getId()}"/>
                 <img src="/img/delete_icon.jpg" class="delete_publish" th:value="${o.getId()}"/></div>
-        </div>
-        <!--<div class="detail_product">-->
-        <!--<img src="/img/home/feature_prodects/cont2.jpg" width="100%"/>-->
-        <!--<span class="detail_product_name">Big block Lether Bag</span>-->
-        <!--<span class="detail_product_cost">$350.00</span><br/>-->
-        <!--<span class="detail_type">数码科技-手机-苹果</span>-->
-        <!--<div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>-->
-        <!--<img src="/img/delete_icon.jpg" class="delete_publish"/></div>-->
-        <!--</div>-->
-        <!--<div class="detail_product">-->
-        <!--<img src="/img/home/feature_prodects/cont2.jpg" width="100%"/>-->
-        <!--<span class="detail_product_name">Big block Lether Bag</span>-->
-        <!--<span class="detail_product_cost">$350.00</span><br/>-->
-        <!--<span class="detail_type">数码科技-手机-苹果</span>-->
-        <!--<div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>-->
-        <!--<img src="/img/delete_icon.jpg" class="delete_publish"/></div>-->
-        <!--</div>-->
-        <!--<div class="detail_product">-->
-        <!--<img src="/img/home/feature_prodects/cont2.jpg" width="100%"/>-->
-        <!--<span class="detail_product_name">Big block Lether Bag</span>-->
-        <!--<span class="detail_product_cost">$350.00</span><br/>-->
-        <!--<span class="detail_type">数码科技-手机-苹果</span><br/>-->
-        <!--<div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>-->
-        <!--<img src="/img/delete_icon.jpg" class="delete_publish"/></div>-->
-        <!--</div>-->
-        <!--<div class="detail_product">-->
-        <!--<img src="/img/home/feature_prodects/cont2.jpg" width="100%"/>-->
-        <!--<span class="detail_product_name">Big block Lether Bag</span>-->
-        <!--<span class="detail_product_cost">$350.00</span><br/>-->
-        <!--<span class="detail_type">数码科技-手机-苹果</span>-->
-        <!--<div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>-->
-        <!--<img src="/img/delete_icon.jpg" class="delete_publish"/></div>-->
-        <!--</div>-->
-        <!--<div class="detail_product">-->
-        <!--<img src="/img/home/feature_prodects/cont2.jpg" width="100%"/>-->
-        <!--<span class="detail_product_name">Big block Lether Bag</span>-->
-        <!--<span class="detail_product_cost">$350.00</span><br/>-->
-        <!--<span class="detail_type">数码科技-手机-苹果</span>-->
-        <!--<div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish"/>-->
-        <!--<img src="/img/delete_icon.jpg" class="delete_publish"/></div>-->
-        <!--</div>-->
+        </figure>
     </div>
     <div class="pagination_div">
         <a class="pagination_lt">&lt;</a>
