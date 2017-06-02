@@ -103,7 +103,7 @@ jQuery(document).ready(function ($) {
     //             }
     //         }
     //     });
-        window.history.pushState('forward', '/?wsk','./?WSKandXYF='+new Date().getTime());
+    //     window.history.pushState('forward', '/?wsk','./?WSKandXYF='+new Date().getTime());
     // }
     //监听关闭事件
     window.onbeforeunload =(function () {

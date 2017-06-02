@@ -642,8 +642,14 @@ public class UserController {
                 return "redirect:publish_product?error=请插入图片";
             }
             String random;
-            String path = "D:\\";
+            String path = "D:\\",save="";
             random = "image\\" + StringUtils.getInstance().getRandomChar() + new Date().getTime() + ".jpg";
+            StringBuilder thumbnails = new StringBuilder();
+            thumbnails.append(path);
+            thumbnails.append("image/thumbnails/");
+            StringBuilder wsk = new StringBuilder();
+            wsk.append(StringUtils.getInstance().getRandomChar()).append(new Date().getTime()).append(".jpg");
+            thumbnails.append(wsk);
 //        String fileName = "\\" + random + ".jpg";
             File file = new File(path, random);
             if (!file.exists()) {
@@ -661,6 +667,11 @@ public class UserController {
             if (!OCR.isOk2(pornograp)) {
                 return "redirect:publish_product?error=图片不能含有敏感文字";
             }
+            if (StringUtils.getInstance().thumbnails(path+random,thumbnails.toString())){
+                save = "/images/thumbnails/" + wsk.toString();
+            } else {
+                return "redirect:publish_product?error=生成缩略图失败";
+            }
             //begin insert the shopInformation to the MySQL
             ShopInformation shopInformation = new ShopInformation();
             shopInformation.setName(name);
@@ -671,6 +682,7 @@ public class UserController {
             shopInformation.setQuantity(quantity);
             shopInformation.setModified(new Date());
             shopInformation.setImage(random);//This is the other uniquely identifies
+            shopInformation.setThumbnails(save);
 //        shopInformation.setUid(4);
             int uid = (int) request.getSession().getAttribute("uid");
             shopInformation.setUid(uid);

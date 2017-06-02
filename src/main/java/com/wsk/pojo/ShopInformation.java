@@ -31,6 +31,8 @@ public class ShopInformation implements Serializable {
 
     private Integer sales;
 
+    private String thumbnails;
+
     public Integer getId() {
         return id;
     }
@@ -133,5 +135,13 @@ public class ShopInformation implements Serializable {
 
     public void setSales(Integer sales) {
         this.sales = sales;
+    }
+
+    public String getThumbnails() {
+        return thumbnails;
+    }
+
+    public void setThumbnails(String thumbnails) {
+        this.thumbnails = thumbnails;
     }
 }

@@ -15,10 +15,11 @@
     <result column="sales" property="sales" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
     <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="thumbnails" property="thumbnails" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="all" >
     id, modified, name, level, remark, price, sort, display, quantity, transaction, sales,
-    uid, image
+    uid, image,thumbnails
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
     select 
@@ -72,12 +73,12 @@
       level, remark, price, 
       sort, display, quantity, 
       transaction, sales, uid,
-      image)
+      image,thumbnails)
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR},
       #{level,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
       #{sort,jdbcType=INTEGER}, #{display,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER},
       #{transaction,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},
-      #{image,jdbcType=VARCHAR})
+      #{image,jdbcType=VARCHAR}),#{thumbnails,jdbcType=VARCHAR}
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.ShopInformation" >
     insert into shopinformation
@@ -121,6 +122,9 @@
       <if test="image != null" >
         image,
       </if>
+      <if test="thumbnails!=null">
+        thumbnails,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -161,6 +165,9 @@
       </if>
       <if test="image != null" >
         #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnails!=null">
+        #{thumbnails,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -203,6 +210,9 @@
       <if test="image != null" >
         image = #{image,jdbcType=VARCHAR},
       </if>
+      <if test="thumbnails!=null">
+        thumbnails=#{thumbnails,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -219,7 +229,8 @@
       transaction = #{transaction,jdbcType=INTEGER},
       sales = #{sales,jdbcType=INTEGER},
       uid = #{uid,jdbcType=INTEGER},
-      image = #{image,jdbcType=VARCHAR}
+      image = #{image,jdbcType=VARCHAR},
+      thumbnails = #{thumbnails,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.wsk.tool;
 
+import net.coobird.thumbnailator.Thumbnails;
 import sun.misc.BASE64Encoder;
 
 import java.io.*;
@@ -127,5 +128,20 @@ public class StringUtils {
             return null;
         }
         return test;
+    }
+    public boolean thumbnails(String path,String save) {
+//        String random = getRandom();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append("D:/image/cc/");
+//        stringBuilder.append(random);
+//        stringBuilder.append(new Date().getTime());
+//        stringBuilder.append(".jpg");
+        try {
+            Thumbnails.of(path).size(215, 229).toFile(save);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

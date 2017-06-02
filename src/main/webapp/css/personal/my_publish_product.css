@@ -23,7 +23,7 @@
     padding: 2%;
     text-align: center;
     line-height: 3em;
-    z-index: 1000;
+    /*z-index: 1000;*/
 }
 .detail_product .product_img_div{
     display: block;
@@ -144,4 +144,5 @@ footer p {
     top: 0px;
     left: 0px;
     cursor: auto;
+    width: 95%;
 }
