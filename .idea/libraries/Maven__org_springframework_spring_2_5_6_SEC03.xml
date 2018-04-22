@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework:spring:2.5.6.SEC03">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring/2.5.6.SEC03/spring-2.5.6.SEC03.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring/2.5.6.SEC03/spring-2.5.6.SEC03-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring/2.5.6.SEC03/spring-2.5.6.SEC03-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

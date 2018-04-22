@@ -9,10 +9,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by Maibenben on 2017/1/6.
+ * Created by WSK on 2017/1/6.
  */
 public class OCR {
-    private static String FindOCR(String srImage) {
+    /**
+     *
+     * @param srImage 图片路径
+     * @param ZH_CN 是否使用中文训练库,true-是
+     * @return 识别结果
+     */
+    private static String FindOCR(String srImage, boolean ZH_CN) {
         try {
             System.out.println("start");
             double start=System.currentTimeMillis();
@@ -23,21 +29,19 @@ public class OCR {
             BufferedImage textImage = ImageIO.read(imageFile);
             Tesseract instance=Tesseract.getInstance();
             instance.setDatapath("C:\\Program Files (x86)\\Tesseract-OCR\\tessdata");//设置训练库
-            instance.setLanguage("chi_sim");//中文识别
-            String result = null;
-            result = instance.doOCR(textImage);
+            if (ZH_CN)
+                instance.setLanguage("chi_sim");//中文识别
+            String result = instance.doOCR(textImage);
             double end=System.currentTimeMillis();
-            System.out.println("耗时"+(end-start)+" ms");
-//            System.out.println(result);
+            System.out.println("耗时"+(end-start)/1000+" s");
             return result;
         } catch (Exception e) {
             e.printStackTrace();
             return "发生未知错误";
         }
-//        assertEquals(expResult, result.substring(0, expResult.length()));
     }
     private static boolean isOk(String image) throws IOException {
-        String result = FindOCR(image);
+        String result = FindOCR(image,true);
         ArrayList<String> list= StringUtils.getInstance().readTxt();
         result = result.replaceAll("\\s*", "");
         System.out.println(result);
@@ -50,7 +54,7 @@ public class OCR {
         return true;
     }
     public static boolean isOk2(String image){
-        String result = FindOCR(image);
+        String result = FindOCR(image,true);
         ArrayList<String> list;
         try {
             list = StringUtils.getInstance().readTxt();
@@ -68,12 +72,7 @@ public class OCR {
         return true;
     }
     public static void main(String[] args) throws Exception {
-//        String result=FindOCR("image/test1.jpg");
-        boolean a=isOk("image/9.jpg");
-        if (a)
-            System.out.println("true");
-        else
-            System.out.println("false");
-//        System.out.println(result);
+        String result=FindOCR("D:\\test2.png",true);
+        System.out.println(result);
     }
 }
