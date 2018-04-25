@@ -92,9 +92,9 @@ public class SendEmail {
         Session session = Session.getInstance(prop);//��ȡ�Ự
         try {
             Transport ts = session.getTransport();//��������
-            ts.connect("smtp.139.com", "18814095631@139.com", "yushi1103");
+            ts.connect("smtp.139.com", "******@139.com", "*****");
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("18814095631@139.com"));
+            message.setFrom(new InternetAddress("******@139.com"));
             String realPhone = phone;
             phone += "@139.com";
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(phone));
