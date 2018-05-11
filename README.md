@@ -1,5 +1,5 @@
-# JavaDesign
-basice of SSM  
+# 基于SSM的校园二手交易平台
+basice of SSM  
 详情查看：https://blog.csdn.net/wsk1103/article/details/80214238  
 
 Java版本：1.8   
