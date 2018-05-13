@@ -72,7 +72,7 @@ public class OCR {
         return true;
     }
     public static void main(String[] args) throws Exception {
-        String result=FindOCR("D:\\test2.png",true);
-        System.out.println(result);
+//        String result=FindOCR("D:\\test2.png",true);
+//        System.out.println(result);
     }
 }

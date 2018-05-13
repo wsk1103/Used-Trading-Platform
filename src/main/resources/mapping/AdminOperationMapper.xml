@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wsk.dao.AdminOperationMapper" >
-  <resultMap id="BaseResultMap" type="com.wsk.pojo.AdminOperation" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="aid" property="aid" jdbcType="INTEGER" />
-    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
-    <result column="operation" property="operation" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, aid, modified, operation
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from adminoperation
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from adminoperation
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.wsk.pojo.AdminOperation" >
-    insert into adminoperation (id, aid, modified, 
-      operation)
-    values (#{id,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, 
-      #{operation,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.wsk.pojo.AdminOperation" >
-    insert into adminoperation
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="aid != null" >
-        aid,
-      </if>
-      <if test="modified != null" >
-        modified,
-      </if>
-      <if test="operation != null" >
-        operation,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="aid != null" >
-        #{aid,jdbcType=INTEGER},
-      </if>
-      <if test="modified != null" >
-        #{modified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="operation != null" >
-        #{operation,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.AdminOperation" >
-    update adminoperation
-    <set >
-      <if test="aid != null" >
-        aid = #{aid,jdbcType=INTEGER},
-      </if>
-      <if test="modified != null" >
-        modified = #{modified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="operation != null" >
-        operation = #{operation,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.AdminOperation" >
-    update adminoperation
-    set aid = #{aid,jdbcType=INTEGER},
-      modified = #{modified,jdbcType=TIMESTAMP},
-      operation = #{operation,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.wsk.dao.AdminOperationMapper">
+    <resultMap id="BaseResultMap" type="com.wsk.pojo.AdminOperation">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="aid" property="aid" jdbcType="INTEGER"/>
+        <result column="modified" property="modified" jdbcType="TIMESTAMP"/>
+        <result column="operation" property="operation" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, aid, modified, operation
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from adminoperation
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM adminoperation
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wsk.pojo.AdminOperation">
+        INSERT INTO adminoperation (id, aid, modified,
+                                    operation)
+        VALUES (#{id,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP},
+                #{operation,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wsk.pojo.AdminOperation">
+        insert into adminoperation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="aid != null">
+                aid,
+            </if>
+            <if test="modified != null">
+                modified,
+            </if>
+            <if test="operation != null">
+                operation,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="aid != null">
+                #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="modified != null">
+                #{modified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operation != null">
+                #{operation,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.AdminOperation">
+        update adminoperation
+        <set>
+            <if test="aid != null">
+                aid = #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="modified != null">
+                modified = #{modified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operation != null">
+                operation = #{operation,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.AdminOperation">
+        UPDATE adminoperation
+        SET aid       = #{aid,jdbcType=INTEGER},
+            modified  = #{modified,jdbcType=TIMESTAMP},
+            operation = #{operation,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

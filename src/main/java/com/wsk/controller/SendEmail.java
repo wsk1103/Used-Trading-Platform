@@ -3,8 +3,6 @@ package com.wsk.controller;
 import com.wsk.pojo.UserInformation;
 import com.wsk.service.UserInformationService;
 import com.wsk.tool.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,14 +31,14 @@ public class SendEmail {
 
     @Resource
     private UserInformationService userInformationService;
-    private static final Log log = LogFactory.getLog(SendEmail.class);
+//    private static final Log log = LogFactory.getLog(SendEmail.class);
 
     //send the Email to the phone
     @RequestMapping(value = "sendCode", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public Map sendEmail(HttpServletRequest req, HttpServletResponse res,
                          @RequestParam String phone, @RequestParam String action, @RequestParam String token) {
-        log.debug(phone+":开始进入发验证码阶段");
+//        log.debug(phone+":开始进入发验证码阶段");
 //返回的数据，会被转换成json
         Map<String, String> map = new HashMap<>();
         map.put("result", "-1");
