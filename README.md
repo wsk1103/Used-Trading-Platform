@@ -10,4 +10,5 @@ Java版本：1.8
 开发工具：Idea 2017  
 版本管理工具：Maven  
 版本控制工具：GitHub  
-下载地址：https://download.csdn.net/download/wsk1103/10395604  
+下载地址：https://download.csdn.net/download/wsk1103/10395604  
+访问路径：http://119.29.194.92:8181/
