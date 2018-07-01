@@ -1,4 +1,7 @@
 # 基于SSM的校园二手交易平台
+
+喜欢就点一下star哟，谢谢亲的支持  
+
 basice of SSM  
 详情查看：https://blog.csdn.net/wsk1103/article/details/80214238  
 
