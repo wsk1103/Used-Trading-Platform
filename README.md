@@ -13,8 +13,7 @@ Java版本：1.8
 开发工具：Idea 2017  
 版本管理工具：Maven  
 版本控制工具：GitHub  
-下载地址：https://download.csdn.net/download/wsk1103/10395604  
-访问路径：http://119.29.194.92:8181/
+
 ## 3.2 实现过程
 ### 3.2.1 商品首页实现
  
@@ -98,3 +97,6 @@ maxWait=60000
 
 将图片解压到任意一个盘，然后配置Tomcat，将图片路径引用到本地配置的图片路径下。  
 ![这里写图片描述](https://img-blog.csdn.net/2018070112373963?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dzazExMDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+
+PS:该项目可以直接当毕业设计使用，需要的可以有偿+QQ：1261709167
