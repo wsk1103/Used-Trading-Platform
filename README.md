@@ -2,9 +2,6 @@
 
 喜欢就点一下star哟，谢谢亲的支持  
 
-basice of SSM  
-详情查看：https://blog.csdn.net/wsk1103/article/details/80214238  
-
 Java版本：1.8   
 数据库：MySQL  
 框架：Spring + Spring MVC + MyBatis  
@@ -78,7 +75,6 @@ Java版本：1.8
  ![这里写图片描述](https://img-blog.csdn.net/20180506142916295?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dzazExMDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
  ![这里写图片描述](https://img-blog.csdn.net/20180506142923392?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dzazExMDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-参考地址：https://blog.csdn.net/wsk1103/article/details/80214238
 
 搭建数据库
 MySQL
