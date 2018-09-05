@@ -95,4 +95,4 @@ maxWait=60000
 ![这里写图片描述](https://img-blog.csdn.net/2018070112373963?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dzazExMDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 
-PS:该项目可以直接当毕业设计使用，需要的可以有偿+QQ：1261709167
+PS:该项目可以直接当毕业设计使用，需要的可以咨询+QQ：1261709167
