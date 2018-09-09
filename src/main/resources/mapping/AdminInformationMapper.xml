@@ -7,34 +7,38 @@
         <result column="password" property="password" jdbcType="CHAR"/>
         <result column="modified" property="modified" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+    <sql id="table">
+        admininformation
+    </sql>
+
     <sql id="Base_Column_List">
         id, ano, password, modified
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from admininformation
+        from<include refid="table"/>
         where id = #{id,jdbcType=INTEGER}
     </select>
     <select id="selectByNo" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        FROM admininformation
+        FROM<include refid="table"/>
         where ano = #{ano,jdbcType=INTEGER}
         limit 1
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        DELETE FROM admininformation
+        DELETE
+        FROM<include refid="table"/>
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.wsk.pojo.AdminInformation">
-        INSERT INTO admininformation (id, ano, password,
-                                      modified)
-        VALUES (#{id,jdbcType=INTEGER}, #{ano,jdbcType=CHAR}, #{password,jdbcType=CHAR},
-                #{modified,jdbcType=TIMESTAMP})
+        INSERT INTO<include refid="table"/> (id, ano, password, modified)
+        VALUES (#{id,jdbcType=INTEGER}, #{ano,jdbcType=CHAR}, #{password,jdbcType=CHAR}, #{modified,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.wsk.pojo.AdminInformation">
-        insert into admininformation
+        insert into<include refid="table"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -65,7 +69,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.AdminInformation">
-        update admininformation
+        update<include refid="table"/>
         <set>
             <if test="ano != null">
                 ano = #{ano,jdbcType=CHAR},
@@ -80,7 +84,8 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.AdminInformation">
-        UPDATE admininformation
+        UPDATE
+        <include refid="table"/>
         SET ano      = #{ano,jdbcType=CHAR},
             password = #{password,jdbcType=CHAR},
             modified = #{modified,jdbcType=TIMESTAMP}

@@ -8,34 +8,39 @@
     <result column="modified" property="modified" jdbcType="TIMESTAMP" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
   </resultMap>
+
+  <sql id="table">
+    userstate
+  </sql>
+
   <sql id="all" >
     id, credit, balance, modified, uid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="all" />
-    from userstate
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByUid" resultMap="BaseResultMap">
     select
     <include refid="all" />
-    from userstate
+    from <include refid="table"/>
     where uid = #{uid,jdbcType=INTEGER}
     limit 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from userstate
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.UserState" >
-    insert into userstate (id, credit, balance, 
+    insert into <include refid="table"/> (id, credit, balance,
       modified, uid)
     values (#{id,jdbcType=INTEGER}, #{credit,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, 
       #{modified,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.UserState" >
-    insert into userstate
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -72,7 +77,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.UserState" >
-    update userstate
+    update <include refid="table"/>
     <set >
       <if test="credit != null" >
         credit = #{credit,jdbcType=INTEGER},
@@ -90,7 +95,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.UserState" >
-    update userstate
+    update
+    <include refid="table"/>
     set credit = #{credit,jdbcType=INTEGER},
       balance = #{balance,jdbcType=DECIMAL},
       modified = #{modified,jdbcType=TIMESTAMP},

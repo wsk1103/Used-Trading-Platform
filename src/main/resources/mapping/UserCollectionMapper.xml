@@ -8,40 +8,45 @@
     <result column="sid" property="sid" jdbcType="INTEGER" />
     <result column="display" property="display" jdbcType="INTEGER" />
   </resultMap>
+
+  <sql id="table">
+    usercollection
+  </sql>
+
   <sql id="all" >
     id, modified, uid, sid, display
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select 
     <include refid="all" />
-    from usercollection
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="getCounts" resultType="java.lang.Integer">
     select
     count(id)
-    from usercollection
+    from <include refid="table"/>
     where uid = #{uid} and display =1
   </select>
   <select id="selectByUid" resultMap="BaseResultMap">
     SELECT
     <include refid="all" />
-    from usercollection
+    from <include refid="table"/>
     where uid =#{0} and display =1
     limit #{1},10
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from usercollection
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.UserCollection" >
-    insert into usercollection (id, modified, uid, 
+    insert into <include refid="table"/> (id, modified, uid,
       sid, display)
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}, 
       #{sid,jdbcType=INTEGER}, #{display,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.UserCollection" >
-    insert into usercollection
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -78,7 +83,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.UserCollection" >
-    update usercollection
+    update <include refid="table"/>
     <set >
       <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
@@ -96,7 +101,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.UserCollection" >
-    update usercollection
+    update
+    <include refid="table"/>
     set modified = #{modified,jdbcType=TIMESTAMP},
       uid = #{uid,jdbcType=INTEGER},
       sid = #{sid,jdbcType=INTEGER},

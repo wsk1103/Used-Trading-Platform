@@ -17,6 +17,11 @@
     <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="thumbnails" property="thumbnails" jdbcType="VARCHAR" />
   </resultMap>
+
+  <sql id="table">
+    shopinformation
+  </sql>
+
   <sql id="all" >
     id, modified, name, level, remark, price, sort, display, quantity, transaction, sales,
     uid, image,thumbnails
@@ -24,52 +29,52 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
     select 
     <include refid="all" />
-    from shopinformation
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectTen" resultMap="BaseResultMap" >
     select
     <include refid="all" />
-    FROM shopinformation
+    FROM <include refid="table"/>
     where display = 1 order by id desc
     limit #{start} , #{end}
   </select>
   <select id="selectOffShelf" resultMap="BaseResultMap">
     select
     <include refid="all" />
-    from shopinformation
+    from <include refid="table"/>
     where uid = #{0} and display = 0 order by id desc
     limit #{1},10
   </select>
   <select id="getCountsOfShelf" resultType="java.lang.Integer" >
     select count(id)
-    from shopinformation
+    from <include refid="table"/>
     where uid = #{uid,jdbcType=INTEGER} and display =0 order by id DESC
   </select>
   <select id="getCounts" resultType="java.lang.Integer">
     select count(id)
-    from shopinformation
+    from <include refid="table"/>
     where display =1
   </select>
   <select id="selectIdByImage" resultType="java.lang.Integer">
     select id
-    from shopinformation
+    from <include refid="table"/>
     where image = #{image,jdbcType=VARCHAR}
     limit 1
   </select>
   <select id="selectByName" resultMap="BaseResultMap">
     select
     <include refid="all" />
-    from shopinformation
+    from <include refid="table"/>
     where name LIKE CONCAT('%',#{name},'%') order by id desc
     limit 12
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from shopinformation
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.ShopInformation" >
-    insert into shopinformation (id, modified, name, 
+    insert into <include refid="table"/> (id, modified, name,
       level, remark, price, 
       sort, display, quantity, 
       transaction, sales, uid,
@@ -81,7 +86,7 @@
       #{image,jdbcType=VARCHAR}),#{thumbnails,jdbcType=VARCHAR}
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.ShopInformation" >
-    insert into shopinformation
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -172,7 +177,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.ShopInformation" >
-    update shopinformation
+    update <include refid="table"/>
     <set >
       <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
@@ -217,7 +222,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.ShopInformation" >
-    update shopinformation
+    update
+    <include refid="table"/>
     set modified = #{modified,jdbcType=TIMESTAMP},
       name = #{name,jdbcType=VARCHAR},
       level = #{level,jdbcType=INTEGER},

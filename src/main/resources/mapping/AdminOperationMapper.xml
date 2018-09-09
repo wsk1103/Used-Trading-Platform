@@ -7,27 +7,34 @@
         <result column="modified" property="modified" jdbcType="TIMESTAMP"/>
         <result column="operation" property="operation" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <sql id="table">
+        adminoperation
+    </sql>
+
     <sql id="Base_Column_List">
         id, aid, modified, operation
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from adminoperation
+        from<include refid="table"/>
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        DELETE FROM adminoperation
+        DELETE
+        FROM<include refid="table"/>
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.wsk.pojo.AdminOperation">
-        INSERT INTO adminoperation (id, aid, modified,
-                                    operation)
-        VALUES (#{id,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP},
+        INSERT INTO<include refid="table"/> (id, aid, modified, operation)
+        VALUES (#{id,jdbcType=INTEGER},
+                #{aid,jdbcType=INTEGER},
+                #{modified,jdbcType=TIMESTAMP},
                 #{operation,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.wsk.pojo.AdminOperation">
-        insert into adminoperation
+        insert into<include refid="table"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -58,7 +65,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.AdminOperation">
-        update adminoperation
+        update<include refid="table"/>
         <set>
             <if test="aid != null">
                 aid = #{aid,jdbcType=INTEGER},
@@ -73,7 +80,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.AdminOperation">
-        UPDATE adminoperation
+        UPDATE<include refid="table"/>
         SET aid       = #{aid,jdbcType=INTEGER},
             modified  = #{modified,jdbcType=TIMESTAMP},
             operation = #{operation,jdbcType=VARCHAR}

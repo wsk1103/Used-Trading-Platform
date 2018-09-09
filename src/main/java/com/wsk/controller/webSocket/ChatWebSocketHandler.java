@@ -57,7 +57,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     @SuppressWarnings("unchecked")
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        System.out.println(session.getId()+":start.....");
         sessions.add(session);
         //处理离线消息
     }
@@ -65,7 +64,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     //抛出异常时处理
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        System.out.println(session.getId()+":start error");
         if (session.isOpen()) {
             session.close();
         }
@@ -75,7 +73,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     //连接关闭后处理
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) {
-        System.out.println(session.getId()+":close......");
         sessions.remove(session);
     }
 

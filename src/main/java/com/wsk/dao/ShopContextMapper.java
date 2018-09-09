@@ -22,6 +22,6 @@ public interface ShopContextMapper {
 
     List<ShopContext> findById(int sid, int start);
 
-    @Select("select * from ShopContext where sid=#{id,jdbcType=INTEGER} and display=1")
+    @Select("select * from shopcontext where sid=#{id,jdbcType=INTEGER} and display=1")
     List<ShopContext> selectBySid(int id);
 }

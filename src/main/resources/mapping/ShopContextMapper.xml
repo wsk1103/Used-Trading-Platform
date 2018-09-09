@@ -9,34 +9,39 @@
     <result column="display" property="display" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
   </resultMap>
+
+  <sql id="table">
+    shopcontext
+  </sql>
+
   <sql id="all" >
     id, modified, sid, context, display, uid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="all" />
-    from shopcontext
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="getCounts" resultType="java.lang.Integer">
     select
     count(id)
-    from shopcontext
+    from <include refid="table"/>
     where sid = #{sid} and display = 1
   </select>
   <select id="findById" resultMap="BaseResultMap">
     select
     <include refid="all" />
-    from shopcontext
+    from <include refid="table"/>
     where sid = #{0} and display =1
     limit #{1},10
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from shopcontext
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.ShopContext" >
-    insert into shopcontext (id, modified, sid,
+    insert into <include refid="table"/> (id, modified, sid,
     context, display, uid
     )
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER},
@@ -44,7 +49,7 @@
     )
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.ShopContext" >
-    insert into shopcontext
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -87,7 +92,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.ShopContext" >
-    update shopcontext
+    update <include refid="table"/>
     <set >
       <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
@@ -108,7 +113,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.ShopContext" >
-    update shopcontext
+    update
+    <include refid="table"/>
     set modified = #{modified,jdbcType=TIMESTAMP},
       sid = #{sid,jdbcType=INTEGER},
       context = #{context,jdbcType=VARCHAR},

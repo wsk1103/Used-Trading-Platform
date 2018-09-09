@@ -9,33 +9,38 @@
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="context" property="context" jdbcType="VARCHAR" />
   </resultMap>
+
+  <sql id="table">
+    orderform
+  </sql>
+
   <sql id="all" >
     id, modified, display, uid, address, context
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="all" />
-    from orderform
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="getCounts" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     select count(id)
-    from orderform
+    from <include refid="table"/>
     where uid = #{uid,jdbcType=INTEGER} and display = 1
   </select>
   <select id="selectByUid" resultMap="BaseResultMap">
     select
     <include refid="all"/>
-    from orderform
+    from <include refid="table"/>
     where uid = #{0} and display = 1 order by id DESC
     limit #{1},10
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from orderform
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.OrderForm" >
-    insert into orderform (id, modified, display, 
+    insert into <include refid="table"/> (id, modified, display,
       uid, address, context
       )
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{display,jdbcType=INTEGER}, 
@@ -43,7 +48,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.OrderForm" >
-    insert into orderform
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -86,7 +91,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.OrderForm" >
-    update orderform
+    update <include refid="table"/>
     <set >
       <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
@@ -107,7 +112,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.OrderForm" >
-    update orderform
+    update
+    <include refid="table"/>
     set modified = #{modified,jdbcType=TIMESTAMP},
       display = #{display,jdbcType=INTEGER},
       uid = #{uid,jdbcType=INTEGER},

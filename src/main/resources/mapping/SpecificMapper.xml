@@ -7,33 +7,38 @@
     <result column="modified" property="modified" jdbcType="TIMESTAMP" />
     <result column="cid" property="cid" jdbcType="INTEGER" />
   </resultMap>
+
+  <sql id="table">
+    specifickinds
+  </sql>
+
   <sql id="all" >
     id, name, modified, cid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="all" />
-    from specifickinds
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByCid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="all"/>
-    from specifickinds
+    from <include refid="table"/>
     where cid=#{cid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from specifickinds
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.Specific" >
-    insert into specifickinds (id, name, modified,
+    insert into <include refid="table"/> (id, name, modified,
       cid)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{modified,jdbcType=TIMESTAMP}, 
       #{cid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.Specific" >
-    insert into specifickinds
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -64,7 +69,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.Specific" >
-    update specifickinds
+    update <include refid="table"/>
     <set >
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -79,7 +84,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.Specific" >
-    update specifickinds
+    update
+    <include refid="table"/>
     set name = #{name,jdbcType=VARCHAR},
       modified = #{modified,jdbcType=TIMESTAMP},
       cid = #{cid,jdbcType=INTEGER}

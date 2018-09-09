@@ -22,6 +22,6 @@ public interface UserReleaseMapper {
 
     List<UserRelease> selectByUid(int uid, int start);
 
-    @Select("select * from userRelease where uid=#{uid} and display=1 order by id desc limit 12")
+    @Select("select * from userrelease where uid=#{uid} and display=1 order by id desc limit 12")
     List<UserRelease> selectUserProductByUid(int uid);
 }

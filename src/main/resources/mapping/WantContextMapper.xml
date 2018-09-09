@@ -8,39 +8,44 @@
     <result column="context" property="context" jdbcType="VARCHAR" />
     <result column="display" property="display" jdbcType="INTEGER" />
   </resultMap>
+
+  <sql id="table">
+    wantcontext
+  </sql>
+
   <sql id="all" >
     id, modified, uwid, context, display
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="all" />
-    from wantcontext
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByUWid" resultMap="BaseResultMap">
     select
     <include refid="all"/>
-    from wantcontext
+    from <include refid="table"/>
     where uwid = #{0} order by id DESC
     limit #{1},10
   </select>
   <select id="getCounts" resultType="java.lang.Integer">
     select count(id)
-    from wantcontext
+    from <include refid="table"/>
     where uwid=#{uwid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from wantcontext
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.WantContext" >
-    insert into wantcontext (id, modified, uwid, 
+    insert into <include refid="table"/> (id, modified, uwid,
       context, display)
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{uwid,jdbcType=INTEGER}, 
       #{context,jdbcType=VARCHAR}, #{display,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.WantContext" >
-    insert into wantcontext
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -77,7 +82,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.WantContext" >
-    update wantcontext
+    update <include refid="table"/>
     <set >
       <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
@@ -95,7 +100,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.WantContext" >
-    update wantcontext
+    update
+    <include refid="table"/>
     set modified = #{modified,jdbcType=TIMESTAMP},
       uwid = #{uwid,jdbcType=INTEGER},
       context = #{context,jdbcType=VARCHAR},

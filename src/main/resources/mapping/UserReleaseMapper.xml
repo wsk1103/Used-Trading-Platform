@@ -8,40 +8,45 @@
     <result column="uid" property="uid" jdbcType="INTEGER" />
     <result column="sid" property="sid" jdbcType="INTEGER" />
   </resultMap>
+
+  <sql id="table">
+    userrelease
+  </sql>
+
   <sql id="all" >
     id, modified, display, uid, sid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="all" />
-    from userrelease
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="getCounts" resultType="java.lang.Integer">
     select
     count(id)
-    from userrelease
+    from <include refid="table"/>
     where uid = #{uid,jdbcType=INTEGER} and display = 1
   </select>
   <select id="selectByUid" resultMap="BaseResultMap">
     select
     <include refid="all" />
-    from userrelease
+    from <include refid="table"/>
     where uid =#{0} and display = 1 order by id DESC
     limit #{1},10
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from userrelease
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.UserRelease" >
-    insert into userrelease (id, modified, display, 
+    insert into <include refid="table"/> (id, modified, display,
       uid, sid)
     values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{display,jdbcType=INTEGER}, 
       #{uid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.UserRelease" >
-    insert into userrelease
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -78,7 +83,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.UserRelease" >
-    update userrelease
+    update <include refid="table"/>
     <set >
       <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
@@ -96,7 +101,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.UserRelease" >
-    update userrelease
+    update
+    <include refid="table"/>
     set modified = #{modified,jdbcType=TIMESTAMP},
       display = #{display,jdbcType=INTEGER},
       uid = #{uid,jdbcType=INTEGER},

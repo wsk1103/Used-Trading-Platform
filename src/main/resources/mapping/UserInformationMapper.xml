@@ -14,6 +14,11 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
   </resultMap>
+
+  <sql id="table">
+    userinformation
+  </sql>
+
   <sql id="all" >
     id, modified, username, phone, realname, clazz, sno, dormitory, gender, createtime, 
     avatar
@@ -21,30 +26,30 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="all" />
-    from userinformation
+    from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
     limit 1
   </select>
   <select id="selectIdByPhone" resultType="java.lang.Integer" parameterType="java.lang.String">
     select id
-    FROM userinformation
+    FROM <include refid="table"/>
     where phone = #{phone,jdbcType=VARCHAR}
     limit 1
   </select>
   <select id="getAllForeach" resultMap="BaseResultMap">
     select <include refid="all"/>
-    FROM userinformation
+    FROM <include refid="table"/>
     where id in
     <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
       #{item}
     </foreach>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from userinformation
+    delete from <include refid="table"/>
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wsk.pojo.UserInformation" >
-    insert into userinformation (id, modified, username, 
+    insert into <include refid="table"/> (id, modified, username,
       phone, realname, clazz, 
       sno, dormitory, gender, createtime, 
       avatar)
@@ -54,7 +59,7 @@
       #{avatar,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wsk.pojo.UserInformation" >
-    insert into userinformation
+    insert into <include refid="table"/>
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -127,7 +132,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.UserInformation" >
-    update userinformation
+    update <include refid="table"/>
     <set >
       <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
@@ -163,7 +168,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.UserInformation" >
-    update userinformation
+    update
+    <include refid="table"/>
     set modified = #{modified,jdbcType=TIMESTAMP},
       username = #{username,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
