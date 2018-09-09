@@ -291,3 +291,14 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+
+.placeholder::-webkit-input-placeholder{
+    color: #e60200;
+}
+.placeholder::-moz-placeholder{
+color: #e60200;
+}
+.placeholder:-ms-input-placeholder{
+color: #e60200;
+}

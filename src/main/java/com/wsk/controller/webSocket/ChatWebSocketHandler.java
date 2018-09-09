@@ -19,11 +19,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     //接收文本消息，并发送出去
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) {
-        System.out.println(session.getId()+":send....");
+//        System.out.println(session.getId()+":send....");
 //        chatTextMessageHandler(message.getPayload());
         try {
 //            super.handleTextMessage(session, message);
-            System.out.println(session.getId()+" :"+message.getPayload() + "   " + new Date());
+//            System.out.println(session.getId()+" :"+message.getPayload() + "   " + new Date());
             String m = message.getPayload();
             String[] wsk = m.split(",");
             String phone = wsk[0];

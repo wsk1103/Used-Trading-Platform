@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -87,27 +81,27 @@ public class SendEmail {
         prop.setProperty("mail.transport.protocol", "smtp");//����ѡ��Э��
         prop.setProperty("mail.smtp.auth", "true");//ʹ����ͨ�Ŀͻ���
         prop.setProperty("mail.smtp.port", "25");//�˿ں�Ϊ25����ʵĬ�ϵľ���25�����Ҳ���Բ���
-        Session session = Session.getInstance(prop);//��ȡ�Ự
+//        Session session = Session.getInstance(prop);//��ȡ�Ự
         try {
-            Transport ts = session.getTransport();//��������
-            ts.connect("smtp.139.com", "******@139.com", "*****");
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("******@139.com"));
+//            Transport ts = session.getTransport();//��������
+//            ts.connect("smtp.139.com", "******@139.com", "*****");
+//            Message message = new MimeMessage(session);
+//            message.setFrom(new InternetAddress("******@139.com"));
             String realPhone = phone;
-            phone += "@139.com";
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(phone));
-            message.setSubject("来自WSK的验证码");
-            message.setContent(text, "text/html;charset=UTF-8");
+//            phone += "@139.com";
+//            message.setRecipient(Message.RecipientType.TO, new InternetAddress(phone));
+//            message.setSubject("来自WSK的验证码");
+//            message.setContent(text, "text/html;charset=UTF-8");
             //这里先不发生信息，以后要开启的
-            ts.sendMessage(message, message.getAllRecipients());
-            ts.close();
+//            ts.sendMessage(message, message.getAllRecipients());
+//            ts.close();
             req.getSession().setAttribute("phone", realPhone);
             map.put("result", "1");
-        } catch (MessagingException me) {
+        } catch (Exception me) {
             me.printStackTrace();
 //            sendCodeToken = TokenProccessor.getInstance().makeToken();
 //            map.put("token", sendCodeToken);
-            map.put("result", "0");
+            map.put("result", "1");
         }
         return map;
     }

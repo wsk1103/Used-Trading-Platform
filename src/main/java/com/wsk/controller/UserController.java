@@ -585,7 +585,7 @@ public class UserController {
         goodsCar.setSid(sid);
         goodsCar.setUid(uid);
         try {
-            int result = goodsCarService.updateByPrimaryKey(goodsCar);
+            int result = goodsCarService.updateByPrimaryKeySelective(goodsCar);
             if (result != 1) {
                 map.put("result", result);
                 return map;

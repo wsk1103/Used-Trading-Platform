@@ -33,13 +33,13 @@
                             <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
                         </svg>
                         <input type="hidden" th:value="${token}" class="token" name="token"/>
-                        <input type="text" placeholder="手机号码" class="input_username" name="phone"/>
+                        <input type="text" placeholder="手机号码" class="input_username placeholder" name="phone"/>
                     </div>
                     <div class="login_password">
                         <svg class="password_icon" viewBox="0 0 20 20">
                             <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
                         </svg>
-                        <input type="password" placeholder="密码" class="input_password" name="password"/>
+                        <input type="password" placeholder="密码" class="input_password placeholder" name="password"/>
                     </div>
                     <div class="go_forget_password">
                         <a class="go_to_forget" href="#">忘记密码?</a>
@@ -48,8 +48,9 @@
                         <button class="login_button">登录</button>
                     </div>
                     <div class="register_info">
-                        <span>还没有账号 ? <a class="flip_to_register" href="#">注册</a></span>
+                        <span style="color: #000;">还没有账号 ? <a class="flip_to_register" href="#">注册</a></span>
                     </div>
+
 
             </div>
             </form>
@@ -64,17 +65,17 @@
             <div class="get_vcode">
                 <div class="nickname_div">
                     <span class="n_span">N</span>
-                    <input class="input_nickname" type="text" placeholder="用户名"/>
+                    <input class="input_nickname  placeholder" type="text" placeholder="用户名"/>
                 </div>
                 <div class="register_phone_div">
                     <!--svg就很溜-->
                     <svg class="register_phone_svg" viewBox="0 0 20 20">
                         <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
                     </svg>
-                    <input type="text" placeholder="手机号码" class="register_input_phone"/>
+                    <input type="text" placeholder="手机号码" class="register_input_phone placeholder"/>
                 </div>
                 <div class="register_vcode_div">
-                    <input type="text" placeholder="验证码" class="register_input_vcode"/>
+                    <input type="text" placeholder="12251103" class="register_input_vcode placeholder"/>
                     <button class="get_vcode_button">获取验证码</button>
                 </div>
                 <button class="go_enter_password_button">下一步</button>
@@ -100,13 +101,13 @@
                     <svg class="first_enter_password_icon" viewBox="0 0 20 20">
                         <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
                     </svg>
-                    <input type="password" placeholder="密码" class="first_enter_password_input"/>
+                    <input type="password" placeholder="密码" class="first_enter_password_input placeholder"/>
                 </div>
                 <div class="confirm_password_div">
                     <svg class="confirm_password_icon" viewBox="0 0 20 20">
                         <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
                     </svg>
-                    <input type="password" placeholder="确认密码" class="confirm_password_input"/>
+                    <input type="password" placeholder="确认密码" class="confirm_password_input placeholder"/>
                 </div>
                 <div class="login_button_div">
                     <button class="confirm_register_button" onclick="return false;">注册</button>
@@ -129,10 +130,10 @@
                     <svg class="register_phone_svg" viewBox="0 0 20 20">
                         <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
                     </svg>
-                    <input type="text" placeholder="手机号码" class="forget_input_phone"/>
+                    <input type="text" placeholder="手机号码" class="forget_input_phone placeholder"/>
                 </div>
                 <div class="forget_get_vcode_div">
-                    <input type="text" placeholder="验证码" class="forget_input_vcode"/>
+                    <input type="text" placeholder="12251103" class="forget_input_vcode placeholder"/>
                     <button class="forget_get_vcode_button">获取验证码</button>
                 </div>
                 <button class="forget_password_button">下一步</button>
