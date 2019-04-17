@@ -6,8 +6,8 @@ import com.wsk.bean.UserWantBean;
 import com.wsk.pojo.*;
 import com.wsk.service.*;
 import com.wsk.token.TokenProccessor;
-import com.wsk.tool.OCR;
-import com.wsk.tool.Pornographic;
+/*import com.wsk.tool.OCR;
+import com.wsk.tool.Pornographic;*/
 import com.wsk.tool.SaveSession;
 import com.wsk.tool.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -125,7 +125,7 @@ public class UserController {
     //验证登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request,
-                     @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
+                        @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
         String loginToken = (String) request.getSession().getAttribute("token");
 //        Map<String, Integer> map = new HashMap<>();
         if (StringUtils.getInstance().isNullOrEmpty(phone) || StringUtils.getInstance().isNullOrEmpty(password)) {
@@ -326,7 +326,7 @@ public class UserController {
     }
 
     //getUserWant,查看我的求购
-    @RequestMapping(value = {"/my_require_product","/my_require_product_page"})
+    @RequestMapping(value = {"/my_require_product", "/my_require_product_page"})
     public String getUserWant(HttpServletRequest request, Model model) {
         List<UserWant> list;
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -482,7 +482,7 @@ public class UserController {
 
     //check the shopping cart,查看购物车
     @RequestMapping(value = "/shopping_cart")
-    public String selectShopCar(HttpServletRequest request,Model model) {
+    public String selectShopCar(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             userInformation = new UserInformation();
@@ -571,7 +571,7 @@ public class UserController {
     //删除购物车的商品
     @RequestMapping(value = "/deleteShopCar")
     @ResponseBody
-    public Map deleteShopCar(HttpServletRequest request, @RequestParam int id ,@RequestParam int sid) {
+    public Map deleteShopCar(HttpServletRequest request, @RequestParam int id, @RequestParam int sid) {
         Map<String, Integer> map = new HashMap<>();
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
@@ -642,7 +642,7 @@ public class UserController {
                 return "redirect:publish_product?error=请插入图片";
             }
             String random;
-            String path = "D:\\",save="";
+            String path = "D:\\", save = "";
             random = "image\\" + StringUtils.getInstance().getRandomChar() + new Date().getTime() + ".jpg";
             StringBuilder thumbnails = new StringBuilder();
             thumbnails.append(path);
@@ -660,14 +660,14 @@ public class UserController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            String pornograp = Pornographic.CheckPornograp("D:\\" + random);
+/*            String pornograp = Pornographic.CheckPornograp("D:\\" + random);
             if (pornograp.equals("色情图片")) {
                 return "redirect:publish_product?error=不能使用色情图片";
             }
             if (!OCR.isOk2(pornograp)) {
                 return "redirect:publish_product?error=图片不能含有敏感文字";
-            }
-            if (StringUtils.getInstance().thumbnails(path+random,thumbnails.toString())){
+            }*/
+            if (StringUtils.getInstance().thumbnails(path + random, thumbnails.toString())) {
                 save = "/images/thumbnails/" + wsk.toString();
             } else {
                 return "redirect:publish_product?error=生成缩略图失败";
@@ -769,12 +769,13 @@ public class UserController {
         }
         return "redirect:/my_publish_product_page";
     }
+
     //从发布的商品直接跳转到修改商品
     @RequestMapping(value = "/modifiedMyPublishProduct")
-    public String modifiedMyPublishProduct(HttpServletRequest request,Model model,
-                                           @RequestParam int id){
+    public String modifiedMyPublishProduct(HttpServletRequest request, Model model,
+                                           @RequestParam int id) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-        if (StringUtils.getInstance().isNullOrEmpty(userInformation)){
+        if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             return "redirect:login";
         }
         String goodsToken = TokenProccessor.getInstance().makeToken();
@@ -829,7 +830,7 @@ public class UserController {
 
     //下架商品
     @RequestMapping(value = "/deleteShop")
-    public String deleteShop(HttpServletRequest request,Model model, @RequestParam int id) {
+    public String deleteShop(HttpServletRequest request, Model model, @RequestParam int id) {
 //        Map<String, Integer> map = new HashMap<>();
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
@@ -869,7 +870,7 @@ public class UserController {
 
     //查看我的发布的商品
     @RequestMapping(value = "/my_publish_product_page")
-    public String getReleaseShop(HttpServletRequest request,Model model) {
+    public String getReleaseShop(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             return "redirect:login";
@@ -1091,7 +1092,7 @@ public class UserController {
         //如果密码账号对应正确，将userInformation存储到session中
         request.getSession().setAttribute("userInformation", userInformation);
         request.getSession().setAttribute("uid", uid);
-        SaveSession.getInstance().save(phone,new Date().getTime());
+        SaveSession.getInstance().save(phone, System.currentTimeMillis());
         return true;
     }
 
@@ -1110,7 +1111,7 @@ public class UserController {
         return allKindsService.selectByPrimaryKey(aid);
     }
 
-    public void save(ShopInformation shopInformation,UserRelease userRelease){
+    public void save(ShopInformation shopInformation, UserRelease userRelease) {
         shopInformationService.insertSelective(shopInformation);
         userReleaseService.insertSelective(userRelease);
     }
@@ -1120,7 +1121,7 @@ public class UserController {
     @RequestMapping(value = "/test")
     public String insertGoods() {
 
-            //begin insert the shopInformation to the MySQL
+        //begin insert the shopInformation to the MySQL
 //            ShopInformation shopInformation = new ShopInformation();
 //            shopInformation.setName(name);
 //            shopInformation.setLevel(level);
@@ -1140,16 +1141,16 @@ public class UserController {
         Random random = new Random();
         ShopInformation shopInformation;
         UserRelease userRelease;
-        int level,uid,quantity;
+        int level, uid, quantity;
         double price;
-        for (int i = 1,k=1,j=189;i<1000;i++,j++,k++) {
-            if (k>94){
-                k=1;
+        for (int i = 1, k = 1, j = 189; i < 1000; i++, j++, k++) {
+            if (k > 94) {
+                k = 1;
             }
-            level = random.nextInt(10)+1;
-            price = Math.random()*1000+1;
-            quantity = random.nextInt(10)+1;
-            uid = random.nextInt(100)+1;
+            level = random.nextInt(10) + 1;
+            price = Math.random() * 1000 + 1;
+            quantity = random.nextInt(10) + 1;
+            uid = random.nextInt(100) + 1;
             shopInformation = new ShopInformation();
             shopInformation.setId(j);
             shopInformation.setName("百年孤独");

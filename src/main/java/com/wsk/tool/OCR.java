@@ -1,3 +1,4 @@
+/*
 package com.wsk.tool;
 
 import net.sourceforge.tess4j.Tesseract;
@@ -8,16 +9,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+*/
 /**
  * Created by WSK on 2017/1/6.
- */
+ *//*
+
 public class OCR {
-    /**
+    */
+/**
      *
      * @param srImage 图片路径
      * @param ZH_CN 是否使用中文训练库,true-是
      * @return 识别结果
-     */
+     *//*
+
     private static String FindOCR(String srImage, boolean ZH_CN) {
         try {
             System.out.println("start");
@@ -76,3 +81,4 @@ public class OCR {
 //        System.out.println(result);
     }
 }
+*/

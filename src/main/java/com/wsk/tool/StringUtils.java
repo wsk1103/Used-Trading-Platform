@@ -103,6 +103,7 @@ public class StringUtils {
         }
         return false;
     }
+
     public ArrayList readTxt() throws IOException {
         ArrayList<String> list = new ArrayList<>();
         String encoding = "GBK";
@@ -110,16 +111,17 @@ public class StringUtils {
         InputStreamReader reader = new InputStreamReader(new FileInputStream(file), encoding);
         BufferedReader bufferedReader = new BufferedReader(reader);
         String txt;
-        while ((txt=bufferedReader.readLine())!=null){
+        while ((txt = bufferedReader.readLine()) != null) {
             list.add(txt);
         }
         reader.close();
         return list;
     }
-    public String txtReplace(String test){
+
+    public String txtReplace(String test) {
         try {
-            ArrayList<String> list=readTxt();
-            test=test.replaceAll("\\s*|\t|\r|\n", "");
+            ArrayList<String> list = readTxt();
+            test = test.replaceAll("\\s*|\t|\r|\n", "");
             for (String aList : list) {
                 test = test.replaceAll(aList, "**");
             }
@@ -129,7 +131,8 @@ public class StringUtils {
         }
         return test;
     }
-    public boolean thumbnails(String path,String save) {
+
+    public boolean thumbnails(String path, String save) {
 //        String random = getRandom();
 //        StringBuilder stringBuilder = new StringBuilder();
 //        stringBuilder.append("D:/image/cc/");

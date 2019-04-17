@@ -1,3 +1,4 @@
+/*
 package com.wsk.tool;
 
 import com.alibaba.fastjson.JSON;
@@ -40,3 +41,4 @@ public class Pornographic {
 		return result;
 	}
 }
+*/

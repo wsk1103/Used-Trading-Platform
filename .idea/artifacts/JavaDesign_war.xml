@@ -1,6 +1,12 @@
 <component name="ArtifactManager">
   <artifact type="war" name="JavaDesign:war">
     <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>JavaDesign</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="archive" name="wsk.war">
       <element id="artifact" artifact-name="JavaDesign:war exploded" />
     </root>
