@@ -13,6 +13,10 @@ File Encoding         : 65001
 
 Date: 2018-10-17 09:41:51
 */
+DROP DATABASE IF EXISTS `c2c`;
+CREATE DATABASE `c2c`;
+
+USE `c2c`;
 
 SET FOREIGN_KEY_CHECKS=0;
 
