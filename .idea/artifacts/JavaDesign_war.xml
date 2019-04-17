@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="wsk.war">
+    <root id="archive" name="ROOT.war">
       <element id="artifact" artifact-name="JavaDesign:war exploded" />
     </root>
   </artifact>
