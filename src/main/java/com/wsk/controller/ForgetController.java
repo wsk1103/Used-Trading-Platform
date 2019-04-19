@@ -35,7 +35,6 @@ public class ForgetController {
     public Map checkPhone(HttpServletRequest request, Model model,
                           @RequestParam String code, @RequestParam String token) {
         //get the phone which is saved in the session
-//        String realPhone = (String) request.getSession().getAttribute("phone");
         Map<String, Integer> map = new HashMap<>();
         String name = request.getParameter("name");
         if (!StringUtils.getInstance().isNullOrEmpty(name))
@@ -43,9 +42,6 @@ public class ForgetController {
         //judge the token 防止重复提交
         String checkCodeToken = (String) request.getSession().getAttribute("token");
         if (StringUtils.getInstance().isNullOrEmpty(checkCodeToken) || !checkCodeToken.equals(token)) {
-//            checkCodeToken = TokenProccessor.getInstance().makeToken();
-//            request.getSession().setAttribute("checkCodeToken",checkCodeToken);
-//            model.addAttribute("token",checkCodeToken);
             map.put("result", 0);
             return map;
         }
@@ -56,11 +52,6 @@ public class ForgetController {
 //        checkCodeToken = TokenProccessor.getInstance().makeToken();
         //验证码错误
         if (!checkCodePhone(code, request)) {
-            //check the phone`s code,and it is false;
-//            model.addAttribute("phone", realPhone);
-//            request.getSession().setAttribute("checkCodeToken",checkCodeToken);
-//            model.addAttribute("token",checkCodeToken);
-//            model.addAttribute("error", "验证码错误");
             map.put("result", 0);
             return map;
         }
