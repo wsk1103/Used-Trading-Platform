@@ -5,6 +5,11 @@ http://120.79.21.204:8080/
 **完整的设计报告在后面**
 
 喜欢就点一下star哟，谢谢亲的支持  
+https://github.com/wsk1103/mySSM  
+
+个人主页  
+https://wsk1103.github.io/
+
 
 Java版本：1.8   
 数据库：MySQL  
