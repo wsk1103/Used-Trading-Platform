@@ -28,10 +28,6 @@ import java.util.Map;
 public class GoodsController {
     @Resource
     private ShopInformationService shopInformationService;
-    //    @Resource
-//    private ShopPictureService shopPictureService;
-//    @Resource
-//    private UserReleaseService userReleaseService;
     @Resource
     private ShopContextService shopContextService;
     @Resource
