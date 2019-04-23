@@ -86,7 +86,7 @@ $(function () {
     });
     $('.search_icon').click(function () {
         var name = $('.nav_search_input').val();
-        window.location.href = '/findShopByName?name=' + name;
+        window.location.href = '/findShopByName.do?name=' + name;
     });
 });
 jQuery(document).ready(function ($) {
@@ -107,7 +107,7 @@ jQuery(document).ready(function ($) {
     // }
     //监听关闭事件
     window.onbeforeunload =(function () {
-        window.location.href='/logout';
+        window.location.href='/logout.do';
     });
     var host = window.location.host;
     var me = new Date().getTime();
@@ -122,7 +122,7 @@ jQuery(document).ready(function ($) {
             // console.log(evnt.data);
             var result = evnt.data;
             if (result == "error"){
-                window.location.href='/logout';
+                window.location.href='/logout.do';
                 alert("该账号在其他地方登录了，请检查是否为本人操作，防止密码丢失！！！");
                 return;
             }

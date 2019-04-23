@@ -49,7 +49,7 @@ $(function () {
                 var wsk = $(this).attr('id');
                 var $all_product = $('.all_product');
                 $.ajax({
-                    url: 'selectBySort',
+                    url: 'selectBySort.do',
                     type: 'post',
                     dataType: 'JSON',
                     data: {sort: wsk},
@@ -81,7 +81,7 @@ $(function () {
                         //进入查看商品的详情,通过id
                         $('.detail_product_name').click(function () {
                             var id = $(this).attr('value');
-                            window.location.href='/selectById?id='+id;
+                            window.location.href='/selectById.do?id='+id;
                         });
                         insertShopCar();
                     }
@@ -175,7 +175,7 @@ $(function () {
     function selectByCounts(currentCounts) {
         var $all_product = $('.all_product');
         $.ajax({
-            url: 'selectByCounts',
+            url: 'selectByCounts.do',
             type: 'post',
             dataType: 'JSON',
             data: {counts: currentCounts},
@@ -209,7 +209,7 @@ $(function () {
                 //进入查看商品的详情,通过id
                 $('.detail_product_name').click(function () {
                     var id = $(this).attr('value');
-                    window.location.href='/selectById?id='+id;
+                    window.location.href='/selectById.do?id='+id;
                 });
                 insertShopCar();
             }
@@ -219,13 +219,13 @@ $(function () {
     //进入查看商品的详情,通过id
     $('.detail_product_name').click(function () {
         var id = $(this).attr('value');
-        window.location.href='/selectById?id='+id;
+        window.location.href='/selectById.do?id='+id;
     });
     function insertShopCar() {
         $('.detail_buy').click(function () {
             var id = $(this).attr('value');
             $.ajax({
-                url:'/insertGoodsCar',
+                url:'/insertGoodsCar.do',
                 dataType:'JSON',
                 type:'post',
                 data:{id:id},

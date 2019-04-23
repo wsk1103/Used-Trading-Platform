@@ -13,19 +13,19 @@
             $('.update_publish').click(function () {
                 var id = $(this).attr('value');
 //                alert(id);
-                window.location.href = '/modifiedMyPublishProduct?id=' + id;
+                window.location.href = '/modifiedMyPublishProduct.do?id=' + id;
             });
             $('.delete_publish').click(function () {
                 var r = confirm("确定删除？？？？")
                 if (r == true) {
                     var id = $(this).attr('value');
 //                    alert(id);
-                    window.location.href="/deleteShop?id="+id;
+                    window.location.href="/deleteShop.do?id="+id;
                 }
             });
             $('.detail_product_name').click(function () {
                 var id = $(this).attr('value');
-                window.location.href='/selectById?id='+id;
+                window.location.href='/selectById.do?id='+id;
             });
         });
 

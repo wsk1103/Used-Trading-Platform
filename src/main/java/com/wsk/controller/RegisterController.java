@@ -29,7 +29,7 @@ public class RegisterController {
     private UserInformationService userInformationService;
 
     //开始注册用户
-    @RequestMapping("/insertUser")
+    @RequestMapping("/insertUser.do")
     @ResponseBody
     public Map insertUser(HttpServletRequest request, Model model,
                           @RequestParam String password, @RequestParam String token) {

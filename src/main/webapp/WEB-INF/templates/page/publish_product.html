@@ -19,7 +19,7 @@
 <div style="display: none" th:if="${message}!=null" th:value="${message}" th:text="${message}" class="show_tip"></div>
 <div class="top_content">
     <div class="publish_product_div">
-        <form action="/insertGoods" method="post" enctype="multipart/form-data">
+        <form action="/insertGoods.do" method="post" enctype="multipart/form-data">
             <input type="hidden" th:value="${token}" name="token"/>
             <input type="hidden" th:value="${action}" value="1" name="action" class="action"/>
             <input type="hidden" th:if="${shopInformation.id}!=null" th:value="${shopInformation.id}" name="id"/>

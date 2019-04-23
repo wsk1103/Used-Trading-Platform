@@ -43,7 +43,7 @@ public class GoodsController {
 
 
     //进入到发布商品页面
-    @RequestMapping(value = "/publish_product", method = RequestMethod.GET)
+    @RequestMapping(value = "/publish_product.do", method = RequestMethod.GET)
     public String publish(HttpServletRequest request, Model model) {
         //先判断用户有没有登录
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -79,7 +79,7 @@ public class GoodsController {
     }
 
     //模糊查询商品
-    @RequestMapping(value = "/findShopByName")
+    @RequestMapping(value = "/findShopByName.do")
     public String findByName(HttpServletRequest request, Model model,
                              @RequestParam String name) {
         try {
@@ -118,7 +118,7 @@ public class GoodsController {
     }
 
     //进入查看商品详情
-    @RequestMapping(value = "/selectById")
+    @RequestMapping(value = "/selectById.do")
     public String selectById(@RequestParam int id,
                              HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -156,7 +156,7 @@ public class GoodsController {
     }
 
     //进入到求购商城
-    @RequestMapping(value = "/require_mall")
+    @RequestMapping(value = "/require_mall.do")
     public String requireMall(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
@@ -184,21 +184,21 @@ public class GoodsController {
     }
 
     //通过id查看商品的详情
-    @RequestMapping(value = "/findShopById")
+    @RequestMapping(value = "/findShopById.do")
     @ResponseBody
     public ShopInformation findShopById(@RequestParam int id) {
         return shopInformationService.selectByPrimaryKey(id);
     }
 
     //通过分类选择商品
-    @RequestMapping(value = "/selectBySort")
+    @RequestMapping(value = "/selectBySort.do")
     @ResponseBody
     public List<ShopInformation> selectBySort(@RequestParam int sort) {
         return shopInformationService.selectBySort(sort);
     }
 
     //分页查询
-    @RequestMapping(value = "/selectByCounts")
+    @RequestMapping(value = "/selectByCounts.do")
     @ResponseBody
     public List<ShopInformation> selectByCounts(@RequestParam int counts) {
         Map<String, Integer> map = new HashMap<>();

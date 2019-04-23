@@ -27,7 +27,7 @@ public class ForgetController {
     private UserInformationService userInformationService;
 
     //when the user click next button,check the information
-    @RequestMapping(value = "checkCode", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "checkCode.do", method = {RequestMethod.POST, RequestMethod.GET})
     public Map checkPhone(HttpServletRequest request, Model model,
                           @RequestParam String code, @RequestParam String token) {
         //get the phone which is saved in the session
@@ -52,7 +52,7 @@ public class ForgetController {
     }
 
     //更新密码
-    @RequestMapping("updatePassword")
+    @RequestMapping("updatePassword.do")
     public Map updatePassword(HttpServletRequest request, Model model,
                               @RequestParam String password, @RequestParam String token) {
         //防止重复提交

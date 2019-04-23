@@ -6,7 +6,7 @@ $(function () {
         var id = $(this).find(':selected').val();
         // alert(id);
         $.ajax({
-            url: '/getClassification',
+            url: '/getClassification.do',
             type: 'POST',
             dataType: 'JSON',
             data: {id: id},
@@ -18,7 +18,7 @@ $(function () {
                 }
                 var cid = $('.classification').find(':selected').val();
                 $.ajax({
-                    url:'/getSpecific',
+                    url:'/getSpecific.do',
                     type:'POST',
                     dataType:'JSON',
                     data:{id:cid},
@@ -37,7 +37,7 @@ $(function () {
     $('.classification').change(function () {
         var id = $(this).find(':selected').val();
         $.ajax({
-           url:'/getSpecific',
+           url:'/getSpecific.do',
             type:'POST',
             dataType:'JSON',
             data:{id:id},

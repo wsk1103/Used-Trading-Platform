@@ -19,7 +19,7 @@ $( function() {
                 var value =$(this).siblings(".first_info").children("input").val();
                 var arr =   which_update + "=" + value + "&" + "token=" + token+"" ;
                 $.ajax({
-                    url:'/certification',
+                    url:'/certification.do',
                     type:'post',
                     dataType:'JSON',
                     data:arr,

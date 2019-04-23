@@ -82,7 +82,7 @@ $(function () {
             var sid = $(this).parent().siblings(".show_img").children().attr("value");
             // alert(sid);
             $.ajax({
-                url:'deleteShopCar',
+                url:'deleteShopCar.do',
                 dataType:'JSON',
                 type:'post',
                 data:{id:id,sid:sid},
@@ -92,7 +92,7 @@ $(function () {
                         alert('您还没有登录，请先登录');
                     }  else if (result==1) {
                         alert("删除成功");
-                        window.location.href='shopping_cart?result=删除成功';
+                        window.location.href='shopping_cart.do?result=删除成功';
                     } else if (result==0){
                         alert('删除失败，请检测网络');
                     } else {

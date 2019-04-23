@@ -28,7 +28,7 @@ public class SendEmail {
 //    private static final Log log = LogFactory.getLog(SendEmail.class);
 
     //send the Email to the phone
-    @RequestMapping(value = "sendCode", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "sendCode.do", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public Map sendEmail(HttpServletRequest req, HttpServletResponse res,
                          @RequestParam String phone, @RequestParam String action, @RequestParam String token) {

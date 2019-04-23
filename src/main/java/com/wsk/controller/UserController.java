@@ -6,8 +6,6 @@ import com.wsk.bean.UserWantBean;
 import com.wsk.pojo.*;
 import com.wsk.service.*;
 import com.wsk.token.TokenProccessor;
-/*import com.wsk.tool.OCR;
-import com.wsk.tool.Pornographic;*/
 import com.wsk.tool.SaveSession;
 import com.wsk.tool.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -23,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
+
+/*import com.wsk.tool.OCR;
+import com.wsk.tool.Pornographic;*/
 
 /**
  * Created by wsk1103 on 2017/5/9.
@@ -64,7 +65,7 @@ public class UserController {
     private ShopContextService shopContextService;
 
     //进入登录界面
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login.do", method = RequestMethod.GET)
     public String login(HttpServletRequest request, Model model) {
         String token = TokenProccessor.getInstance().makeToken();
         request.getSession().setAttribute("token", token);
@@ -73,7 +74,7 @@ public class UserController {
     }
 
     //退出
-    @RequestMapping(value = "/logout")
+    @RequestMapping(value = "/logout.do")
     public String logout(HttpServletRequest request) {
         try {
 //            UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -89,7 +90,7 @@ public class UserController {
     }
 
     //用户注册,拥有插入数据而已，没什么用的
-    @RequestMapping(value = "/registered", method = RequestMethod.POST)
+    @RequestMapping(value = "/registered.do", method = RequestMethod.POST)
     public String registered(Model model,
                              @RequestParam String name, @RequestParam String phone, @RequestParam String password) {
         UserInformation userInformation = new UserInformation();
@@ -123,7 +124,7 @@ public class UserController {
 //    }
 
     //验证登录
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public String login(HttpServletRequest request,
                         @RequestParam String phone, @RequestParam String password, @RequestParam String token) {
         String loginToken = (String) request.getSession().getAttribute("token");
@@ -144,7 +145,7 @@ public class UserController {
     }
 
     //查看用户基本信息
-    @RequestMapping(value = "/personal_info")
+    @RequestMapping(value = "/personal_info.do")
     public String personalInfo(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
@@ -159,7 +160,7 @@ public class UserController {
 
 
     //完善用户基本信息，认证
-    @RequestMapping(value = "/certification", method = RequestMethod.POST)
+    @RequestMapping(value = "/certification.do", method = RequestMethod.POST)
     @ResponseBody
     public Map certification(HttpServletRequest request,
                              @RequestParam(required = false) String userName,
@@ -229,8 +230,8 @@ public class UserController {
         return map;
     }
 
-    //enter the publishUserWant.html,进入求购页面
-    @RequestMapping(value = "/require_product")
+    //enter the publishUserWant.do.html,进入求购页面
+    @RequestMapping(value = "/require_product.do")
     public String enterPublishUserWant(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
@@ -248,7 +249,7 @@ public class UserController {
     }
 
     //修改求购商品
-    @RequestMapping(value = "/modified_require_product")
+    @RequestMapping(value = "/modified_require_product.do")
     public String modifiedRequireProduct(HttpServletRequest request, Model model,
                                          @RequestParam int id) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -267,7 +268,7 @@ public class UserController {
     }
 
     //publish userWant,发布求购
-    @RequestMapping(value = "/publishUserWant")
+    @RequestMapping(value = "/publishUserWant.do")
 //    @ResponseBody
     public String publishUserWant(HttpServletRequest request, Model model,
                                   @RequestParam String name,
@@ -326,7 +327,7 @@ public class UserController {
     }
 
     //getUserWant,查看我的求购
-    @RequestMapping(value = {"/my_require_product", "/my_require_product_page"})
+    @RequestMapping(value = {"/my_require_product.do", "/my_require_product_page.do"})
     public String getUserWant(HttpServletRequest request, Model model) {
         List<UserWant> list;
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -359,8 +360,8 @@ public class UserController {
         return "page/personal/my_require_product_page";
     }
 
-    //getUserWantCounts,查看求购总数
-    @RequestMapping(value = "/getUserWantCounts")
+    //getUserWantCounts.do,查看求购总数
+    @RequestMapping(value = "/getUserWantCounts.do")
     @ResponseBody
     public Map getUserWantCounts(HttpServletRequest request, Model model) {
         Map<String, Integer> map = new HashMap<>();
@@ -379,7 +380,7 @@ public class UserController {
     }
 
     //删除求购
-    @RequestMapping(value = "/deleteUserWant")
+    @RequestMapping(value = "/deleteUserWant.do")
     public String deleteUserWant(HttpServletRequest request, @RequestParam int id) {
 //        Map<String, Integer> map = new HashMap<>();
         if (StringUtils.getInstance().isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
@@ -401,7 +402,7 @@ public class UserController {
 
     //收藏
     //add the userCollection
-    @RequestMapping(value = "/addUserCollection")
+    @RequestMapping(value = "/addUserCollection.do")
     @ResponseBody
     public Map addUserCollection(HttpServletRequest request, @RequestParam int sid) {
         Map<String, Integer> map = new HashMap<>();
@@ -434,7 +435,7 @@ public class UserController {
 
 
     // delete the userCollection
-    @RequestMapping(value = "/deleteUserCollection")
+    @RequestMapping(value = "/deleteUserCollection.do")
     @ResponseBody
     public Map deleteUserCollection(HttpServletRequest request, @RequestParam int ucid) {
         Map<String, Integer> map = new HashMap<>();
@@ -465,8 +466,8 @@ public class UserController {
     }
 
     //购物车开始。。。。。。。。。。。
-    //getShopCarCounts
-    @RequestMapping(value = "/getShopCarCounts")
+    //getShopCarCounts.do
+    @RequestMapping(value = "/getShopCarCounts.do")
     @ResponseBody
     public Map getShopCarCounts(HttpServletRequest request) {
         Map<String, Integer> map = new HashMap<>();
@@ -481,7 +482,7 @@ public class UserController {
     }
 
     //check the shopping cart,查看购物车
-    @RequestMapping(value = "/shopping_cart")
+    @RequestMapping(value = "/shopping_cart.do")
     public String selectShopCar(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
@@ -535,7 +536,7 @@ public class UserController {
 //    }
 
     //添加到购物车
-    @RequestMapping(value = "/insertGoodsCar")
+    @RequestMapping(value = "/insertGoodsCar.do")
     @ResponseBody
     public Map insertGoodsCar(HttpServletRequest request, @RequestParam int id) {
         Map<String, Integer> map = new HashMap<>();
@@ -569,7 +570,7 @@ public class UserController {
     }
 
     //删除购物车的商品
-    @RequestMapping(value = "/deleteShopCar")
+    @RequestMapping(value = "/deleteShopCar.do")
     @ResponseBody
     public Map deleteShopCar(HttpServletRequest request, @RequestParam int id, @RequestParam int sid) {
         Map<String, Integer> map = new HashMap<>();
@@ -600,7 +601,7 @@ public class UserController {
     }
 
     //发布商品
-    @RequestMapping(value = "/insertGoods", method = RequestMethod.POST)
+    @RequestMapping(value = "/insertGoods.do", method = RequestMethod.POST)
     public String insertGoods(@RequestParam String name, @RequestParam int level,
                               @RequestParam String remark, @RequestParam double price,
                               @RequestParam int sort, @RequestParam int quantity,
@@ -771,7 +772,7 @@ public class UserController {
     }
 
     //从发布的商品直接跳转到修改商品
-    @RequestMapping(value = "/modifiedMyPublishProduct")
+    @RequestMapping(value = "/modifiedMyPublishProduct.do")
     public String modifiedMyPublishProduct(HttpServletRequest request, Model model,
                                            @RequestParam int id) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -790,7 +791,7 @@ public class UserController {
     }
 
     //发表留言
-    @RequestMapping(value = "/insertShopContext")
+    @RequestMapping(value = "/insertShopContext.do")
     @ResponseBody
     public Map insertShopContext(@RequestParam int id, @RequestParam String context, @RequestParam String token,
                                  HttpServletRequest request) {
@@ -829,7 +830,7 @@ public class UserController {
     }
 
     //下架商品
-    @RequestMapping(value = "/deleteShop")
+    @RequestMapping(value = "/deleteShop.do")
     public String deleteShop(HttpServletRequest request, Model model, @RequestParam int id) {
 //        Map<String, Integer> map = new HashMap<>();
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
@@ -855,7 +856,7 @@ public class UserController {
     }
 
     //查看发布的所有商品总数
-    @RequestMapping(value = "/getReleaseShopCounts")
+    @RequestMapping(value = "/getReleaseShopCounts.do")
     @ResponseBody
     public Map getReleaseShopCounts(HttpServletRequest request) {
         Map<String, Integer> map = new HashMap<>();
@@ -869,7 +870,7 @@ public class UserController {
     }
 
     //查看我的发布的商品
-    @RequestMapping(value = "/my_publish_product_page")
+    @RequestMapping(value = "/my_publish_product_page.do")
     public String getReleaseShop(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
@@ -1156,7 +1157,7 @@ public class UserController {
             shopInformation.setName("百年孤独");
             shopInformation.setModified(new Date());
             shopInformation.setLevel(level);
-            shopInformation.setRemark("看上的请联系我，QQ：1261709167，微信：1261709167");
+            shopInformation.setRemark("看上的请联系我，QQ：test，微信：test");
 //            double price = Math.random()*1000.00+1;
             shopInformation.setPrice(new BigDecimal(price));
             shopInformation.setSort(k);

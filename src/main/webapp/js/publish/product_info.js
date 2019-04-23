@@ -13,7 +13,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: 'insertShopContext',
+            url: 'insertShopContext.do',
             type: 'post',
             dataType:'JSON',
             data:{id:id,context:value,token:token},
@@ -36,7 +36,7 @@ $(function () {
     $('.buy_button').click(function () {
         var id = $(this).attr('value');
         $.ajax({
-            url:'/insertGoodsCar',
+            url:'/insertGoodsCar.do',
             dataType:'JSON',
             type:'post',
             data:{id:id},

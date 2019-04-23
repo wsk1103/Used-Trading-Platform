@@ -40,7 +40,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: 'checkCode',
+            url: 'checkCode.do',
             dataType: 'JSON',
             type: 'post',
             data: {name: name, phone: phone, code: code,token:token},
@@ -74,7 +74,7 @@ $(function () {
         }
         if (from_which === 1) {
             $.ajax({
-                url: 'insertUser',
+                url: 'insertUser.do',
                 dataType: 'JSON',
                 type: 'post',
                 data: {password: password, token: token},
@@ -92,7 +92,7 @@ $(function () {
             });
         } else {
             $.ajax({
-                url: 'updatePassword',
+                url: 'updatePassword.do',
                 dataType: 'JSON',
                 type: 'post',
                 data: {password: password, token: token},
@@ -123,7 +123,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: 'checkCode',
+            url: 'checkCode.do',
             dataType: 'JSON',
             type: 'post',
             data: {phone: phone, code: code,token:token},
@@ -252,7 +252,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: 'sendCode',
+            url: 'sendCode.do',
             dataType: 'JSON',
             type: 'post',
             data: {phone: phone, token: token, action: 'register'},
@@ -280,7 +280,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: 'sendCode',
+            url: 'sendCode.do',
             dataType: 'JSON',
             type: 'post',
             data: {phone: phone, token: token, action: 'forget'},

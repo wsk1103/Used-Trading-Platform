@@ -11,9 +11,9 @@
     <span class="user_icon"></span>
     <span class="login_or_register_string">
         <!--判断是否有登陆，两者相互替换-->
-        <a href="/login" th:if="${userInformation.username}==null" id="user_name_a" th:value="wsk">登录</a>
-        <a href="/login"  th:if="${userInformation.username}==null">注册</a>
-        <a href="/personal_info" class="user_name_a"
+        <a href="/login.do" th:if="${userInformation.username}==null" id="user_name_a" th:value="wsk">登录</a>
+        <a href="/login.do"  th:if="${userInformation.username}==null">注册</a>
+        <a href="/personal_info.do" class="user_name_a"
            th:if="${userInformation.username!=null}" th:text="${userInformation.username}" th:value="${userInformation.phone}" id="user_name_a"></a>
     </span>
 </header>
