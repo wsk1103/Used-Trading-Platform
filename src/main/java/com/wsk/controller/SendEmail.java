@@ -1,6 +1,7 @@
 package com.wsk.controller;
 
 import com.wsk.pojo.UserInformation;
+import com.wsk.response.BaseResponse;
 import com.wsk.service.UserInformationService;
 import com.wsk.tool.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -30,44 +31,29 @@ public class SendEmail {
     //send the Email to the phone
     @RequestMapping(value = "sendCode.do", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
-    public Map sendEmail(HttpServletRequest req, HttpServletResponse res,
-                         @RequestParam String phone, @RequestParam String action, @RequestParam String token) {
-//        log.debug(phone+":开始进入发验证码阶段");
-//返回的数据，会被转换成json
-        Map<String, String> map = new HashMap<>();
-        map.put("result", "-1");
-        res.setContentType("text/html;charset=UTF-8");//编码
+    public BaseResponse sendEmail(HttpServletRequest req, HttpServletResponse res,
+                                  @RequestParam String phone, @RequestParam String action,
+                                  @RequestParam String token) {
+        res.setContentType("text/html;charset=UTF-8");
 //token，防止重复提交
         String sendCodeToken = (String) req.getSession().getAttribute("token");
         if (StringUtils.getInstance().isNullOrEmpty(sendCodeToken) || !sendCodeToken.equals(token)) {
-//            sendCodeToken = TokenProccessor.getInstance().makeToken();
-//            map.put("token", sendCodeToken);
-            return map;
+            return BaseResponse.fail();
         }
-//        else {
-//            req.getSession().removeAttribute("sendCodeToken");
-//        }
         //判断手机号码是否为正确
         if (!StringUtils.getInstance().isPhone(phone)) {
-//            sendCodeToken = TokenProccessor.getInstance().makeToken();
-//            map.put("token", sendCodeToken);
-            return map;
+            return BaseResponse.fail();
         }
         //如果是忘记密码提交的发送短信
-        if (action.equals("forget")) {
+        if ("forget".equals(action)) {
             if (!isUserPhoneExists(phone)) {
                 //失败
-//            map.put("result", "1");
-//                sendCodeToken = TokenProccessor.getInstance().makeToken();
-//                map.put("token", sendCodeToken);
-                return map;
+                return BaseResponse.fail();
             }
-        } else if (action.equals("register")) {
+        } else if ("register".equals(action)) {
             //失败
             if (isUserPhoneExists(phone)) {
-//                sendCodeToken = TokenProccessor.getInstance().makeToken();
-//                map.put("token", sendCodeToken);
-                return map;
+                return BaseResponse.fail();
             }
         }
         //get the random num to phone which should check the phone to judge the phone is belong user
@@ -77,16 +63,11 @@ public class SendEmail {
         String text2 = "，请保护好自己的验证码。";
         String text = text1 + ra + text2;
         Properties prop = new Properties();
-        prop.setProperty("mail.host", "smtp.139.com");//ʹ�����������smtp����
-        prop.setProperty("mail.transport.protocol", "smtp");//����ѡ��Э��
-        prop.setProperty("mail.smtp.auth", "true");//ʹ����ͨ�Ŀͻ���
-        prop.setProperty("mail.smtp.port", "25");//�˿ں�Ϊ25����ʵĬ�ϵľ���25�����Ҳ���Բ���
-//        Session session = Session.getInstance(prop);//��ȡ�Ự
+        prop.setProperty("mail.host", "smtp.139.com");
+        prop.setProperty("mail.transport.protocol", "smtp");
+        prop.setProperty("mail.smtp.auth", "true");
+        prop.setProperty("mail.smtp.port", "25");
         try {
-//            Transport ts = session.getTransport();//��������
-//            ts.connect("smtp.139.com", "******@139.com", "*****");
-//            Message message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress("******@139.com"));
             String realPhone = phone;
 //            phone += "@139.com";
 //            message.setRecipient(Message.RecipientType.TO, new InternetAddress(phone));
@@ -96,20 +77,17 @@ public class SendEmail {
 //            ts.sendMessage(message, message.getAllRecipients());
 //            ts.close();
             req.getSession().setAttribute("phone", realPhone);
-            map.put("result", "1");
+            return BaseResponse.success();
         } catch (Exception me) {
             me.printStackTrace();
-//            sendCodeToken = TokenProccessor.getInstance().makeToken();
-//            map.put("token", sendCodeToken);
-            map.put("result", "1");
+            return BaseResponse.fail();
         }
-        return map;
     }
 
     // get the random phone`s code
     private void getRandomForCodePhone(HttpServletRequest req) {
         Random random = new Random();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             sb.append(random.nextInt(10));
         }
@@ -129,7 +107,7 @@ public class SendEmail {
         boolean result = false;
         try {
             int id = userInformationService.selectIdByPhone(phone);
-            if (id == 0){
+            if (id == 0) {
                 return result;
             }
             UserInformation userInformation = userInformationService.selectByPrimaryKey(id);
