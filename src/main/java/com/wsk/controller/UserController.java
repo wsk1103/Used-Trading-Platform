@@ -4,6 +4,7 @@ import com.wsk.bean.GoodsCarBean;
 import com.wsk.bean.ShopInformationBean;
 import com.wsk.bean.UserWantBean;
 import com.wsk.pojo.*;
+import com.wsk.response.BaseResponse;
 import com.wsk.service.*;
 import com.wsk.token.TokenProccessor;
 import com.wsk.tool.SaveSession;
@@ -404,44 +405,31 @@ public class UserController {
     //add the userCollection
     @RequestMapping(value = "/addUserCollection.do")
     @ResponseBody
-    public Map addUserCollection(HttpServletRequest request, @RequestParam int sid) {
-        Map<String, Integer> map = new HashMap<>();
+    public BaseResponse addUserCollection(HttpServletRequest request, @RequestParam int sid) {
         //determine whether the user exits
         if (StringUtils.getInstance().isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
             //if the user no exits in the session,
-            map.put("result", 0);
-            return map;
+            return BaseResponse.fail();
         }
         UserCollection userCollection = new UserCollection();
         userCollection.setModified(new Date());
         userCollection.setSid(sid);
         userCollection.setUid((Integer) request.getSession().getAttribute("uid"));
-        int result = 0;
-        try {
-            //begin insert the userCollection
-            result = userCollectionService.insertSelective(userCollection);
-        } catch (Exception e) {
-            e.printStackTrace();
-            map.put("result", result);
-            return map;
-        }
+        //begin insert the userCollection
+        int result = userCollectionService.insertSelective(userCollection);
         if (result != 1) {
-            map.put("result", result);
-            return map;
+            return BaseResponse.fail();
         }
-        map.put("result", result);
-        return map;
+        return BaseResponse.success();
     }
 
 
     // delete the userCollection
     @RequestMapping(value = "/deleteUserCollection.do")
     @ResponseBody
-    public Map deleteUserCollection(HttpServletRequest request, @RequestParam int ucid) {
-        Map<String, Integer> map = new HashMap<>();
+    public BaseResponse deleteUserCollection(HttpServletRequest request, @RequestParam int ucid) {
         if (StringUtils.getInstance().isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
-            map.put("result", 0);
-            return map;
+            return BaseResponse.fail();
         }
         UserCollection userCollection = new UserCollection();
 //        userCollection.setUid((Integer) request.getSession().getAttribute("uid"));
@@ -449,36 +437,25 @@ public class UserController {
         userCollection.setId(ucid);
         userCollection.setModified(new Date());
         userCollection.setDisplay(0);
-        int result = 0;
-        try {
-            result = userCollectionService.updateByPrimaryKeySelective(userCollection);
-            if (result != 1) {
-                map.put("result", result);
-                return map;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            map.put("result", result);
-            return map;
+        int result;
+        result = userCollectionService.updateByPrimaryKeySelective(userCollection);
+        if (result != 1) {
+            return BaseResponse.fail();
         }
-        map.put("result", result);
-        return map;
+        return BaseResponse.success();
     }
 
     //购物车开始。。。。。。。。。。。
     //getShopCarCounts.do
     @RequestMapping(value = "/getShopCarCounts.do")
     @ResponseBody
-    public Map getShopCarCounts(HttpServletRequest request) {
-        Map<String, Integer> map = new HashMap<>();
+    public BaseResponse getShopCarCounts(HttpServletRequest request) {
         if (StringUtils.getInstance().isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
-            map.put("counts", -1);
-            return map;
+            return BaseResponse.fail();
         }
         int uid = (int) request.getSession().getAttribute("uid");
         int counts = getShopCarCounts(uid);
-        map.put("counts", counts);
-        return map;
+        return BaseResponse.success();
     }
 
     //check the shopping cart,查看购物车
@@ -538,46 +515,30 @@ public class UserController {
     //添加到购物车
     @RequestMapping(value = "/insertGoodsCar.do")
     @ResponseBody
-    public Map insertGoodsCar(HttpServletRequest request, @RequestParam int id) {
-        Map<String, Integer> map = new HashMap<>();
+    public BaseResponse insertGoodsCar(HttpServletRequest request, @RequestParam int id) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            map.put("result", 2);
-            return map;
+            return BaseResponse.fail();
         }
-        try {
-            int uid = userInformation.getId();
-            GoodsCar goodsCar = new GoodsCar();
-            goodsCar.setDisplay(1);
-            goodsCar.setModified(new Date());
-            goodsCar.setQuantity(1);
-            goodsCar.setUid(uid);
-            goodsCar.setSid(id);
-            try {
-                int result = goodsCarService.insertSelective(goodsCar);
-                map.put("result", result);
-                return map;
-            } catch (Exception e) {
-                e.printStackTrace();
-                map.put("result", 0);
-                return map;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            map.put("result", 0);
-            return map;
-        }
+        int uid = userInformation.getId();
+        GoodsCar goodsCar = new GoodsCar();
+        goodsCar.setDisplay(1);
+        goodsCar.setModified(new Date());
+        goodsCar.setQuantity(1);
+        goodsCar.setUid(uid);
+        goodsCar.setSid(id);
+        int result = goodsCarService.insertSelective(goodsCar);
+        return BaseResponse.success();
     }
+
 
     //删除购物车的商品
     @RequestMapping(value = "/deleteShopCar.do")
     @ResponseBody
-    public Map deleteShopCar(HttpServletRequest request, @RequestParam int id, @RequestParam int sid) {
-        Map<String, Integer> map = new HashMap<>();
+    public BaseResponse deleteShopCar(HttpServletRequest request, @RequestParam int id, @RequestParam int sid) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            map.put("result", 2);
-            return map;
+            return BaseResponse.fail();
         }
         int uid = userInformation.getId();
         GoodsCar goodsCar = new GoodsCar();
@@ -585,19 +546,11 @@ public class UserController {
         goodsCar.setId(id);
         goodsCar.setSid(sid);
         goodsCar.setUid(uid);
-        try {
-            int result = goodsCarService.updateByPrimaryKeySelective(goodsCar);
-            if (result != 1) {
-                map.put("result", result);
-                return map;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            map.put("result", 0);
-            return map;
+        int result = goodsCarService.updateByPrimaryKeySelective(goodsCar);
+        if (result != 1) {
+            return BaseResponse.fail();
         }
-        map.put("result", 1);
-        return map;
+        return BaseResponse.success();
     }
 
     //发布商品
