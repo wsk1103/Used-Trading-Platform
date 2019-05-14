@@ -1,7 +1,7 @@
 package com.wsk.token;
 
 /**
- * Created by Maibenben on 2017/4/28.
+ * Created by wsk1103 on 2017/4/28.
  */
 
 import sun.misc.BASE64Encoder;

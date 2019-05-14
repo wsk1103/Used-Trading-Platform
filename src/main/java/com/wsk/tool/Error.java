@@ -1,7 +1,7 @@
 package com.wsk.tool;
 
 /**
- * Created by Maibenben on 2017/1/2.
+ * Created by wsk1103 on 2017/1/2.
  */
 public class Error {
     private int log_id;

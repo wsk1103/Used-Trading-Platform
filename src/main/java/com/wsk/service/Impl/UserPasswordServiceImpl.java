@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * Created by Maibenben on 2017/4/27.
+ * Created by wsk1103 on 2017/4/27.
  */
 @Service("userPasswordService")
 public class UserPasswordServiceImpl implements UserPasswordService{
