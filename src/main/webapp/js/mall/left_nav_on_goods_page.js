@@ -73,7 +73,7 @@ $(function () {
                                 "<div class='product_img_div'><img class='show_img' src='" + data[i].image + "' title=" + data.name + "'/></div>" +
                                 "<p class='show_tip'>"+data[i].remark+"</p>"+
                                 "<span class='detail_product_name' value='"+data[i].id+"'>" + data[i].name + "</span><br/>" +
-                                "<span class='detail_product_cost'>$" + data[i].price + "</span><br/>" +
+                                "<span class='detail_product_cost'>￥" + data[i].price + "</span><br/>" +
                                 "<span class='detail_buy product_1' value='"+data[i].id+"'>加入购物车</span>" +
                                 "</div>" +
                                 "</div>");
@@ -201,7 +201,7 @@ $(function () {
                         "</div>" +
                         "<p class='show_tip'>"+data[i].remark+"</p>"+
                         "<span class='detail_product_name' value='"+data[i].id+"'>" + data[i].name + "</span><br/>" +
-                        "<span class='detail_product_cost'>$" + data[i].price + "</span><br/>" +
+                        "<span class='detail_product_cost'>￥" + data[i].price + "</span><br/>" +
                         "<span class='detail_buy product_1' value='"+data[i].id+"'>加入购物车</span>" +
                         "</div>" +
                         "</div>");

@@ -85,7 +85,7 @@ public class UserController {
             System.out.println("logout");
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/home";
+            return "redirect:/home.do";
         }
         return "redirect:/";
     }
@@ -131,16 +131,16 @@ public class UserController {
         String loginToken = (String) request.getSession().getAttribute("token");
 //        Map<String, Integer> map = new HashMap<>();
         if (StringUtils.getInstance().isNullOrEmpty(phone) || StringUtils.getInstance().isNullOrEmpty(password)) {
-            return "redirect:/login";
+            return "redirect:/login.do";
         }
         //防止重复提交
         if (StringUtils.getInstance().isNullOrEmpty(token) || !token.equals(loginToken)) {
-            return "redirect:/login";
+            return "redirect:/login.do";
         }
         boolean b = getId(phone, password, request);
         //失败，不存在该手机号码
         if (!b) {
-            return "redirect:/login";
+            return "redirect:/login.do?msg=不存在该手机号码";
         }
         return "redirect:/";
     }
@@ -150,7 +150,7 @@ public class UserController {
     public String personalInfo(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            return "redirect:login";
+            return "redirect:/login.do";
         }
         String personalInfoToken = TokenProccessor.getInstance().makeToken();
         request.getSession().setAttribute("personalInfoToken", personalInfoToken);
@@ -236,7 +236,7 @@ public class UserController {
     public String enterPublishUserWant(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            return "redirect:login";
+            return "redirect:/login.do";
         }
         String error = request.getParameter("error");
         if (!StringUtils.getInstance().isNullOrEmpty(error)) {
@@ -255,7 +255,7 @@ public class UserController {
                                          @RequestParam int id) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            return "redirect:login";
+            return "redirect:/login.do";
         }
         String publishUserWantToken = TokenProccessor.getInstance().makeToken();
         request.getSession().setAttribute("publishUserWantToken", publishUserWantToken);
@@ -282,26 +282,26 @@ public class UserController {
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             //if the user no exits in the session,
 //            map.put("result", 2);
-            return "redirect:login";
+            return "redirect:/login.do";
         }
         String publishUserWantToke = (String) request.getSession().getAttribute("publishUserWantToken");
         if (StringUtils.getInstance().isNullOrEmpty(publishUserWantToke) || !publishUserWantToke.equals(token)) {
 //            map.put("result", 2);
-            return "redirect:require_product?error=3";
+            return "redirect:require_product.do?error=3";
         } else {
             request.getSession().removeAttribute("publishUserWantToken");
         }
 //        name = StringUtils.replaceBlank(name);
 //        remark = StringUtils.replaceBlank(remark);
-        name = StringUtils.getInstance().txtReplace(name);
-        remark = StringUtils.getInstance().txtReplace(remark);
+//        name = StringUtils.getInstance().txtReplace(name);
+//        remark = StringUtils.getInstance().txtReplace(remark);
         try {
             if (name.length() < 1 || remark.length() < 1 || name.length() > 25 || remark.length() > 25) {
-                return "redirect:require_product";
+                return "redirect:require_product.do";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:require_product?error=1";
+            return "redirect:require_product.do?error=1";
         }
         UserWant userWant = new UserWant();
         userWant.setModified(new Date());
@@ -316,15 +316,15 @@ public class UserController {
             result = userWantService.insertSelective(userWant);
             if (result != 1) {
 //                map.put("result", result);
-                return "redirect:require_product?error=2";
+                return "redirect:/require_product.do?error=2";
             }
         } catch (Exception e) {
             e.printStackTrace();
 //            map.put("result", result);
-            return "redirect:require_product?error=2";
+            return "redirect:/require_product.do?error=2";
         }
 //        map.put("result", result);
-        return "redirect:my_require_product";
+        return "redirect:/my_require_product.do";
     }
 
     //getUserWant,查看我的求购
@@ -333,7 +333,7 @@ public class UserController {
         List<UserWant> list;
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            return "redirect:login";
+            return "redirect:/login.do";
         }
         try {
             int uid = (int) request.getSession().getAttribute("uid");
@@ -385,7 +385,7 @@ public class UserController {
     public String deleteUserWant(HttpServletRequest request, @RequestParam int id) {
 //        Map<String, Integer> map = new HashMap<>();
         if (StringUtils.getInstance().isNullOrEmpty(request.getSession().getAttribute("userInformation"))) {
-            return "redirect:login";
+            return "redirect:/login.do";
         }
         UserWant userWant = new UserWant();
         userWant.setId(id);
@@ -393,12 +393,12 @@ public class UserController {
         try {
             int result = userWantService.updateByPrimaryKeySelective(userWant);
             if (result != 1) {
-                return "redirect:my_require_product";
+                return "redirect:my_require_product.do";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:my_require_product";
+        return "redirect:my_require_product.do";
     }
 
     //收藏
@@ -466,7 +466,7 @@ public class UserController {
             userInformation = new UserInformation();
             model.addAttribute("userInformation", userInformation);
 //            list.add(shopCar);
-            return "redirect:login";
+            return "redirect:/login.do";
         } else {
             model.addAttribute("userInformation", userInformation);
         }
@@ -566,7 +566,7 @@ public class UserController {
 //        request.getSession().setAttribute("token",publishProductToken);
         //防止重复提交
         if (StringUtils.getInstance().isNullOrEmpty(goodsToken) || !goodsToken.equals(token)) {
-            return "redirect:publish_product?error=1";
+            return "redirect:publish_product.do?error=1";
         } else {
             request.getSession().removeAttribute("goodsToken");
         }
@@ -575,7 +575,7 @@ public class UserController {
         model.addAttribute("userInformation", userInformation);
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             //如果用户不存在，
-            return "redirect:/login";
+            return "redirect:/login.do";
         }
         name = StringUtils.getInstance().replaceBlank(name);
         remark = StringUtils.getInstance().replaceBlank(remark);
@@ -593,16 +593,16 @@ public class UserController {
                 model.addAttribute("message", "请选择图片!!!");
                 model.addAttribute("token", goodsToken);
                 request.getSession().setAttribute("goodsToken", goodsToken);
-                return "redirect:publish_product?error=请插入图片";
+                return "redirect:publish_product.do?error=请插入图片";
             }
             String random;
             String path = "D:\\", save = "";
-            random = "image\\" + StringUtils.getInstance().getRandomChar() + new Date().getTime() + ".jpg";
+            random = "image\\" + StringUtils.getInstance().getRandomChar() + System.currentTimeMillis() + ".jpg";
             StringBuilder thumbnails = new StringBuilder();
             thumbnails.append(path);
             thumbnails.append("image/thumbnails/");
             StringBuilder wsk = new StringBuilder();
-            wsk.append(StringUtils.getInstance().getRandomChar()).append(new Date().getTime()).append(".jpg");
+            wsk.append(StringUtils.getInstance().getRandomChar()).append(System.currentTimeMillis()).append(".jpg");
             thumbnails.append(wsk);
 //        String fileName = "\\" + random + ".jpg";
             File file = new File(path, random);
@@ -621,10 +621,15 @@ public class UserController {
             if (!OCR.isOk2(pornograp)) {
                 return "redirect:publish_product?error=图片不能含有敏感文字";
             }*/
+            //创建缩略图文件夹
+            File thumbnailsFile = new File(thumbnails.toString());
+            if (!thumbnailsFile.exists()) {
+                thumbnailsFile.mkdir();
+            }
             if (StringUtils.getInstance().thumbnails(path + random, thumbnails.toString())) {
                 save = "/images/thumbnails/" + wsk.toString();
             } else {
-                return "redirect:publish_product?error=生成缩略图失败";
+                return "redirect:publish_product.do?error=生成缩略图失败";
             }
             //begin insert the shopInformation to the MySQL
             ShopInformation shopInformation = new ShopInformation();
@@ -692,7 +697,7 @@ public class UserController {
             String sb = getSort(sort);
             model.addAttribute("sort", sb);
             model.addAttribute("action", 2);
-            return "redirect:/my_publish_product_page";
+            return "redirect:/my_publish_product_page.do";
         } else if (action == 2) {//更新商品
             ShopInformation shopInformation = new ShopInformation();
             shopInformation.setModified(new Date());
@@ -706,11 +711,11 @@ public class UserController {
             try {
                 int result = shopInformationService.updateByPrimaryKeySelective(shopInformation);
                 if (result != 1) {
-                    return "redirect:publish_product";
+                    return "redirect:publish_product.do";
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                return "redirect:publish_product";
+                return "redirect:publish_product.do";
             }
             goodsToken = TokenProccessor.getInstance().makeToken();
             request.getSession().setAttribute("goodsToken", goodsToken);
@@ -721,7 +726,7 @@ public class UserController {
             model.addAttribute("action", 2);
             model.addAttribute("sort", getSort(sort));
         }
-        return "redirect:/my_publish_product_page";
+        return "redirect:/my_publish_product_page.do";
     }
 
     //从发布的商品直接跳转到修改商品
@@ -730,7 +735,7 @@ public class UserController {
                                            @RequestParam int id) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            return "redirect:login";
+            return "redirect:/login.do";
         }
         String goodsToken = TokenProccessor.getInstance().makeToken();
         request.getSession().setAttribute("goodsToken", goodsToken);
@@ -788,7 +793,7 @@ public class UserController {
 //        Map<String, Integer> map = new HashMap<>();
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            return "redirect:login";
+            return "redirect:/login.do";
         } else {
             model.addAttribute("userInformation", userInformation);
         }
@@ -799,12 +804,12 @@ public class UserController {
         try {
             int result = shopInformationService.updateByPrimaryKeySelective(shopInformation);
             if (result != 1) {
-                return "redirect:my_publish_product_page";
+                return "redirect:my_publish_product_page.do";
             }
-            return "redirect:my_publish_product_page";
+            return "redirect:my_publish_product_page.do";
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:my_publish_product_page";
+            return "redirect:my_publish_product_page.do";
         }
     }
 
@@ -827,7 +832,7 @@ public class UserController {
     public String getReleaseShop(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
-            return "redirect:login";
+            return "redirect:/login.do";
         } else {
             model.addAttribute("userInformation", userInformation);
         }
@@ -1034,10 +1039,13 @@ public class UserController {
     //判断该手机号码及其密码是否一一对应
     private boolean getId(String phone, String password, HttpServletRequest request) {
         int uid = userInformationService.selectIdByPhone(phone);
-        if (StringUtils.getInstance().isNullOrEmpty(uid)) {
+        if (uid == 0 || StringUtils.getInstance().isNullOrEmpty(uid)) {
             return false;
         }
         UserInformation userInformation = userInformationService.selectByPrimaryKey(uid);
+        if (null == userInformation) {
+            return false;
+        }
         password = StringUtils.getInstance().getMD5(password);
         String password2 = userPasswordService.selectByUid(userInformation.getId()).getPassword();
         if (!password.equals(password2)) {

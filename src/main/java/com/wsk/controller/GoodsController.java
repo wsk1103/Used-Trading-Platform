@@ -51,24 +51,24 @@ public class GoodsController {
             //如果没有登录
 //            userInformation = new UserInformation();
 //            model.addAttribute("userInformation", userInformation);
-            return "redirect:login";
+            return "redirect:/login.do";
         } else {
             model.addAttribute("userInformation", userInformation);
         }
         //如果登录了，判断该用户有没有经过认证
         try {
             String realName = userInformation.getRealname();
-            String clazz = userInformation.getClazz();
+//            String clazz = userInformation.getClazz();
             String sno = userInformation.getSno();
             String dormitory = userInformation.getDormitory();
-            if (StringUtils.getInstance().isNullOrEmpty(realName) || StringUtils.getInstance().isNullOrEmpty(clazz) || StringUtils.getInstance().isNullOrEmpty(sno) || StringUtils.getInstance().isNullOrEmpty(dormitory)) {
+            if (StringUtils.getInstance().isNullOrEmpty(realName) || StringUtils.getInstance().isNullOrEmpty(sno) || StringUtils.getInstance().isNullOrEmpty(dormitory)) {
                 //没有
                 model.addAttribute("message", "请先认证真实信息");
-                return "redirect:personal_info";
+                return "redirect:personal_info.do";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:login";
+            return "redirect:/login.do";
         }
         String goodsToken = TokenProccessor.getInstance().makeToken();
         request.getSession().setAttribute("goodsToken", goodsToken);
@@ -112,7 +112,7 @@ public class GoodsController {
             model.addAttribute("shopInformationBean", shopInformationBeans);
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:mall_page";
+            return "redirect:mall_page.do";
         }
         return "page/mall_page";
     }
