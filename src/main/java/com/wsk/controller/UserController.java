@@ -9,6 +9,9 @@ import com.wsk.service.*;
 import com.wsk.token.TokenProccessor;
 import com.wsk.tool.SaveSession;
 import com.wsk.tool.StringUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,7 @@ import com.wsk.tool.Pornographic;*/
  * Created by wsk1103 on 2017/5/9.
  */
 @Controller
+@Slf4j
 public class UserController {
 
     @Resource
@@ -69,6 +73,7 @@ public class UserController {
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
     public String login(HttpServletRequest request, Model model) {
         String token = TokenProccessor.getInstance().makeToken();
+        log.info("进入登录界面，token为:" + token);
         request.getSession().setAttribute("token", token);
         model.addAttribute("token", token);
         return "page/login_page";
