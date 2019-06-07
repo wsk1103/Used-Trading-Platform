@@ -182,7 +182,7 @@ public class HomeController {
         map.put("counts", counts);
         return map;
     }
-    //getShops,12
+
     @RequestMapping(value = "/getShops.do")
     @ResponseBody
     public List getShops(@RequestParam int start){
