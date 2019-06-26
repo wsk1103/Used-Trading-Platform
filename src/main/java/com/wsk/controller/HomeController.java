@@ -47,18 +47,12 @@ public class HomeController {
         }
         //一般形式进入首页
         try {
-//            ShopInformation shopInformation = shopInformationService.selectByPrimaryKey(1);
             List<ShopInformation> shopInformations = selectTen(1,5);
             List<ShopInformationBean> list = new ArrayList<>();
             int counts = getShopCounts();
             model.addAttribute("shopInformationCounts", counts);
             String stringBuffer;
-//            int i=0;
             for (ShopInformation shopInformation : shopInformations) {
-//                if (i>=5){
-//                    break;
-//                }
-//                i++;
                 stringBuffer = getSortName(shopInformation.getSort());
                 ShopInformationBean shopInformationBean = new ShopInformationBean();
                 shopInformationBean.setId(shopInformation.getId());
@@ -68,8 +62,8 @@ public class HomeController {
                 shopInformationBean.setRemark(shopInformation.getRemark());
                 shopInformationBean.setSort(stringBuffer);
                 shopInformationBean.setQuantity(shopInformation.getQuantity());
-                shopInformationBean.setTransaction(shopInformation.getTransaction());
                 shopInformationBean.setUid(shopInformation.getUid());
+                shopInformationBean.setTransaction(shopInformation.getTransaction());
                 shopInformationBean.setImage(shopInformation.getImage());
                 list.add(shopInformationBean);
             }
@@ -82,13 +76,6 @@ public class HomeController {
         return "index";
     }
 
-    //    //进入首页获得的商品
-//    @RequestMapping(value = "/home")
-//    @ResponseBody
-//    public List home(){
-//        //        List<ShopInformation> newShops = new ArrayList<>();
-//        return selectTen(1);
-//    }
     //进入商城
     @RequestMapping(value = "/mall_page.do")
     public String mallPage(HttpServletRequest request, Model model) {
