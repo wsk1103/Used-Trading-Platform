@@ -35,7 +35,7 @@ public class HomeController {
     private ShopContextService shopContextService;
 
 
-    @RequestMapping(value = {"/","/home.do"})
+    @RequestMapping(value = {"/", "/home.do"})
     public String home(HttpServletRequest request, Model model) {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         // if user login,the session will have the "userInformation"
@@ -47,7 +47,7 @@ public class HomeController {
         }
         //一般形式进入首页
         try {
-            List<ShopInformation> shopInformations = selectTen(1,5);
+            List<ShopInformation> shopInformations = selectTen(1, 5);
             List<ShopInformationBean> list = new ArrayList<>();
             int counts = getShopCounts();
             model.addAttribute("shopInformationCounts", counts);
@@ -68,7 +68,6 @@ public class HomeController {
                 list.add(shopInformationBean);
             }
             model.addAttribute("shopInformationBean", list);
-//            model.addAttribute("shopInformation", shopInformation);
         } catch (Exception e) {
             e.printStackTrace();
             return "page/login_page";
@@ -87,7 +86,7 @@ public class HomeController {
             model.addAttribute("userInformation", userInformation);
         }
         try {
-            List<ShopInformation> shopInformations = selectTen(1,12);
+            List<ShopInformation> shopInformations = selectTen(1, 12);
             List<ShopInformationBean> list = new ArrayList<>();
             int counts = getShopCounts();
             model.addAttribute("shopInformationCounts", counts);
@@ -117,7 +116,7 @@ public class HomeController {
     }
 
     //通过分类的第三层id获取全名
-    private String getSortName(int sort){
+    private String getSortName(int sort) {
         StringBuilder stringBuffer = new StringBuilder();
         Specific specific = selectSpecificBySort(sort);
         int cid = specific.getCid();
@@ -136,16 +135,17 @@ public class HomeController {
     //获得分类中的第一层
     @RequestMapping(value = "/getAllKinds.do")
     @ResponseBody
-    public List<AllKinds> getAllKind(){
+    public List<AllKinds> getAllKind() {
         return getAllKinds();
     }
 
     //获得分类中的第二层，通过第一层的id
-    @RequestMapping(value = "/getClassification.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/getClassification.do", method = RequestMethod.POST)
     @ResponseBody
-    public List<Classification> getClassificationByAid(@RequestParam int id){
+    public List<Classification> getClassificationByAid(@RequestParam int id) {
         return selectAllClassification(id);
     }
+
     //通过第二层的id获取对应的第三层
     @RequestMapping(value = "/getSpecific.do")
     @ResponseBody
@@ -156,7 +156,7 @@ public class HomeController {
     //get the shops counts
     @RequestMapping(value = "/getShopsCounts.do")
     @ResponseBody
-    public Map getShopsCounts(){
+    public Map getShopsCounts() {
         Map<String, Integer> map = new HashMap<>();
         int counts = 0;
         try {
@@ -172,11 +172,11 @@ public class HomeController {
 
     @RequestMapping(value = "/getShops.do")
     @ResponseBody
-    public List getShops(@RequestParam int start){
+    public List getShops(@RequestParam int start) {
         List<ShopInformation> list = new ArrayList<>();
         try {
             int end = 12;
-            list = selectTen(start,end);
+            list = selectTen(start, end);
         } catch (Exception e) {
             e.printStackTrace();
             return list;
@@ -185,11 +185,10 @@ public class HomeController {
     }
 
 
-
     //获取商品，分页,一次性获取end个
-    private List<ShopInformation> selectTen(int start,int end) {
+    private List<ShopInformation> selectTen(int start, int end) {
         Map map = new HashMap();
-        map.put("start",(start-1)*end);
+        map.put("start", (start - 1) * end);
         map.put("end", end);
         List<ShopInformation> list = shopInformationService.selectTen(map);
         return list;
@@ -211,21 +210,22 @@ public class HomeController {
     }
 
     //获得第一层所有
-    private List<AllKinds> getAllKinds(){
+    private List<AllKinds> getAllKinds() {
         return allKindsService.selectAll();
     }
 
     //根据第一层的id获取该层下的第二层
-    private List<Classification> selectAllClassification(int aid){
+    private List<Classification> selectAllClassification(int aid) {
         return classificationService.selectByAid(aid);
     }
+
     //根据第二层的id获取其对应的第三层所有id
-    private List<Specific> selectAllSpecific(int cid){
+    private List<Specific> selectAllSpecific(int cid) {
         return specificeService.selectByCid(cid);
     }
 
     //获得商品总页数
-    private int getShopCounts(){
+    private int getShopCounts() {
         return shopInformationService.getCounts();
     }
 
@@ -236,6 +236,6 @@ public class HomeController {
 
     //获得商品留言，10条
     private List<ShopContext> selectShopContextBySid(int sid, int start) {
-        return shopContextService.findById(sid, (start-1)*10);
+        return shopContextService.findById(sid, (start - 1) * 10);
     }
 }
