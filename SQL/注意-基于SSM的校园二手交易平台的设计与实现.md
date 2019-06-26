@@ -13,6 +13,10 @@ minIdle=1
 maxWait=60000
 、
 
+c2c.sql使用AES加密，算法模式为ECB，  
+密钥长度为128，密钥为1234567890123456  
+补码方式AES/ECB/PKCS7Padding  
+
 先在数据中创建名为c2c的数据库，使用Navicat for MySQL运行 c2c.sql文件创建表和导入数据
 
 将图片解压到任意一个盘，然后配置Tomcat，将图片路径引用到本地配置的图片路径下。
