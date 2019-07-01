@@ -41,7 +41,6 @@ public class GoodsController {
     @Resource
     private UserWantService userWantService;
 
-
     //进入到发布商品页面
     @RequestMapping(value = "/publish_product.do", method = RequestMethod.GET)
     public String publish(HttpServletRequest request, Model model) {
