@@ -48,8 +48,6 @@ public class GoodsController {
         UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
         if (StringUtils.getInstance().isNullOrEmpty(userInformation)) {
             //如果没有登录
-//            userInformation = new UserInformation();
-//            model.addAttribute("userInformation", userInformation);
             return "redirect:/login.do";
         } else {
             model.addAttribute("userInformation", userInformation);
