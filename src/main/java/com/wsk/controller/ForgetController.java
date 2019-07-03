@@ -26,7 +26,6 @@ public class ForgetController {
     @Resource
     private UserInformationService userInformationService;
 
-    //when the user click next button,check the information
     @RequestMapping(value = "checkCode.do", method = {RequestMethod.POST, RequestMethod.GET})
     public Map checkPhone(HttpServletRequest request, Model model,
                           @RequestParam String code, @RequestParam String token) {
