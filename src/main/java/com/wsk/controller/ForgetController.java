@@ -29,7 +29,6 @@ public class ForgetController {
     @RequestMapping(value = "checkCode.do", method = {RequestMethod.POST, RequestMethod.GET})
     public Map checkPhone(HttpServletRequest request, Model model,
                           @RequestParam String code, @RequestParam String token) {
-        //get the phone which is saved in the session
         Map<String, Integer> map = new HashMap<>();
         String name = request.getParameter("name");
         if (!StringUtils.getInstance().isNullOrEmpty(name)) {
