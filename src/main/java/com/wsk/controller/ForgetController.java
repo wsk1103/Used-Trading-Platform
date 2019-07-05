@@ -34,7 +34,6 @@ public class ForgetController {
         if (!StringUtils.getInstance().isNullOrEmpty(name)) {
             request.getSession().setAttribute("name", name);
         }
-        //judge the token 防止重复提交
         String checkCodeToken = (String) request.getSession().getAttribute("token");
         if (StringUtils.getInstance().isNullOrEmpty(checkCodeToken) || !checkCodeToken.equals(token)) {
             map.put("result", 0);
