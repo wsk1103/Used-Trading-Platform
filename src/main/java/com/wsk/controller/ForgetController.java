@@ -59,9 +59,6 @@ public class ForgetController {
             map.put("result", 0);
             return map;
         }
-//        else {
-//            request.getSession().removeAttribute("updatePasswordToken");
-//        }
         String realPhone = (String) request.getSession().getAttribute("phone");
 //        updatePasswordToken = TokenProccessor.getInstance().makeToken();
         UserPassword userPassword = new UserPassword();
