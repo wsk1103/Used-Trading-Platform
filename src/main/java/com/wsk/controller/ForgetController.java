@@ -2,6 +2,7 @@ package com.wsk.controller;
 
 import com.wsk.pojo.UserInformation;
 import com.wsk.pojo.UserPassword;
+import com.wsk.response.BaseResponse;
 import com.wsk.service.UserInformationService;
 import com.wsk.service.UserPasswordService;
 import com.wsk.tool.StringUtils;
@@ -50,30 +51,25 @@ public class ForgetController {
 
     //更新密码
     @RequestMapping("updatePassword.do")
-    public Map updatePassword(HttpServletRequest request, Model model,
-                              @RequestParam String password, @RequestParam String token) {
+    public BaseResponse updatePassword(HttpServletRequest request, Model model,
+                                       @RequestParam String password, @RequestParam String token) {
         //防止重复提交
         String updatePasswordToken = (String) request.getSession().getAttribute("token");
-        Map<String, Integer> map = new HashMap<>();
         if (StringUtils.getInstance().isNullOrEmpty(updatePasswordToken) || !updatePasswordToken.equals(token)) {
-            map.put("result", 0);
-            return map;
+            return BaseResponse.fail();
         }
         String realPhone = (String) request.getSession().getAttribute("phone");
-//        updatePasswordToken = TokenProccessor.getInstance().makeToken();
         UserPassword userPassword = new UserPassword();
         String newPassword = StringUtils.getInstance().getMD5(password);
         int uid;
         try {
             uid = userInformationService.selectIdByPhone(realPhone);
             if (uid == 0) {
-                map.put("result", 0);
-                return map;
+                return BaseResponse.fail();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("result", 0);
-            return map;
+            return BaseResponse.fail();
         }
         int id = userPasswordService.selectByUid(uid).getId();
         userPassword.setId(id);
@@ -84,19 +80,15 @@ public class ForgetController {
         try {
             result = userPasswordService.updateByPrimaryKeySelective(userPassword);
         } catch (Exception e) {
-            e.printStackTrace();
-            map.put("result", 0);
-            return map;
+            return BaseResponse.fail();
         }
         //更新失败
         if (result != 1) {
-            map.put("result", 0);
-            return map;
+            return BaseResponse.fail();
         }
         UserInformation userInformation = userInformationService.selectByPrimaryKey(uid);
         request.getSession().setAttribute("userInformation", userInformation);
-        map.put("result", 1);
-        return map;
+        return BaseResponse.success();
     }
 
     //check the phone`s code
