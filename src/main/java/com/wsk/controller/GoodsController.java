@@ -55,7 +55,6 @@ public class GoodsController {
         //如果登录了，判断该用户有没有经过认证
         try {
             String realName = userInformation.getRealname();
-//            String clazz = userInformation.getClazz();
             String sno = userInformation.getSno();
             String dormitory = userInformation.getDormitory();
             if (StringUtils.getInstance().isNullOrEmpty(realName) || StringUtils.getInstance().isNullOrEmpty(sno) || StringUtils.getInstance().isNullOrEmpty(dormitory)) {
