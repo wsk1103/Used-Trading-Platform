@@ -22,7 +22,7 @@ import java.util.Random;
  * Created by wsk1103 on 2017/4/30.
  */
 @Controller
-public class SendEmail {
+public class SendEmailController {
 
     @Resource
     private UserInformationService userInformationService;
