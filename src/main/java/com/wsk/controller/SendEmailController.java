@@ -35,7 +35,7 @@ public class SendEmailController {
                                   @RequestParam String phone, @RequestParam String action,
                                   @RequestParam String token) {
         res.setContentType("text/html;charset=UTF-8");
-//token，防止重复提交
+        //token，防止重复提交
         String sendCodeToken = (String) req.getSession().getAttribute("token");
         if (StringUtils.getInstance().isNullOrEmpty(sendCodeToken) || !sendCodeToken.equals(token)) {
             return BaseResponse.fail();
