@@ -4,6 +4,8 @@ import com.wsk.pojo.UserInformation;
 import com.wsk.response.BaseResponse;
 import com.wsk.service.UserInformationService;
 import com.wsk.tool.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +28,7 @@ public class SendEmailController {
 
     @Resource
     private UserInformationService userInformationService;
-//    private static final Log log = LogFactory.getLog(SendEmail.class);
+    private static final Logger log = LoggerFactory.getLogger(SendEmailController.class);
 
     //send the Email to the phone
     @RequestMapping(value = "sendCode.do", method = {RequestMethod.POST, RequestMethod.GET})
