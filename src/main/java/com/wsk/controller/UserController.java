@@ -83,8 +83,6 @@ public class UserController {
     @RequestMapping(value = "/logout.do")
     public String logout(HttpServletRequest request) {
         try {
-//            UserInformation userInformation = (UserInformation) request.getSession().getAttribute("userInformation");
-//        SaveSession.getInstance().remove(userInformation.getPhone());
             request.getSession().removeAttribute("userInformation");
             request.getSession().removeAttribute("uid");
             System.out.println("logout");
