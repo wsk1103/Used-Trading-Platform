@@ -1,6 +1,6 @@
 # 基于SSM的校园二手交易平台
 
-http://120.79.21.204:8080/
+## 另外一个 spring boot 一键式启动项目地址： https://github.com/wsk1103/Used-Trading-Platform2
 
 **完整的设计报告在后面**
 
