@@ -171,7 +171,7 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
-            <version>8.5.11</version>
+            <version>8.5.86</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
         <dependency>
